@@ -1,4 +1,4 @@
-import type { Education } from '../../types/resume.js'
+import type { Education } from '../types/resume.js'
 
 export const education = {
   softwareDevelopment: {

@@ -1,4 +1,4 @@
-import type { Project } from '../../types/resume.js'
+import type { Project } from '../types/resume.js'
 
 export const projects = {
   interactiveCv: {

@@ -1,4 +1,4 @@
-import type { Experience } from '../../types/resume.js'
+import type { Experience } from '../types/resume.js'
 
 export const experience = {
   exampleCompany: {

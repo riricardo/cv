@@ -1,4 +1,4 @@
-import type { Language } from '../../types/resume.js'
+import type { Language } from '../types/resume.js'
 
 export const languages = {
   english: { name: 'English', level: 'Professional' },

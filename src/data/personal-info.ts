@@ -1,4 +1,4 @@
-import type { PersonalInfo } from '../../types/resume.js'
+import type { PersonalInfo } from '../types/resume.js'
 
 export const personalInfo = {
   info: {

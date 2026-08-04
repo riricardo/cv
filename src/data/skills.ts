@@ -1,4 +1,4 @@
-import type { Skill } from '../../types/resume.js'
+import type { Skill } from '../types/resume.js'
 
 export const skills = {
   react: { name: 'React', category: 'Frontend', level: 'Advanced' },

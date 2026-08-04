@@ -1,4 +1,4 @@
-import type { ContactLink } from '../../types/resume.js'
+import type { ContactLink } from '../types/resume.js'
 
 export const contactLinks = {
   github: {

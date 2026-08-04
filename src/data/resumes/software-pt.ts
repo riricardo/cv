@@ -1,8 +1,8 @@
 import type { Resume } from '../../types/resume.js'
-import { education } from '../education/education.js'
-import { experience } from '../experience/experience.js'
-import { projects } from '../projects/projects.js'
-import { skills } from '../skills/skills.js'
+import { education } from '../education.js'
+import { experience } from '../experience.js'
+import { projects } from '../projects.js'
+import { skills } from '../skills.js'
 
 export const softwarePtResume: Resume = {
   id: 'software-pt',
