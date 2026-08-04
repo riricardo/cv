@@ -4,6 +4,7 @@ export interface PersonalInfo {
   location: string
   email?: string
   phone?: string
+  nationality?: string
 }
 
 export interface Experience {
@@ -63,15 +64,11 @@ export interface Resume {
   language: string
   company?: string
   targetRole: string
-  personalInfo?: PersonalInfo
   professionalSummary: string
   experience: Experience[]
   projects: Project[]
   skills: Skill[]
   education: Education[]
-  languages?: Language[]
-  contactLinks?: ContactLink[]
-  portfolioUrl?: string
   whyText: string[]
   settings?: ResumeSettings
 }
