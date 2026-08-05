@@ -9,14 +9,23 @@
 }
 
 html,
-body {
-  background: var(--resume-page-background);
+body,
+#root {
   min-height: 100%;
-  overscroll-behavior-y: none;
+}
+
+html {
+  background: var(--resume-page-background);
+  overflow-y: auto;
 }
 
 body {
-  min-height: 100dvh;
+  background: var(--resume-page-background);
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: visible;
+  overscroll-behavior-y: auto;
   position: relative;
 }
 
@@ -32,13 +41,12 @@ body::before {
 #root {
   background: var(--resume-page-background);
   isolation: isolate;
-  min-height: 100dvh;
   position: relative;
 }
 
 .resume-page {
   background: var(--resume-page-background);
-  min-height: 100dvh;
+  min-height: 100vh;
 }
 
 .resume-section-title {

@@ -11,7 +11,7 @@ type WhyMeDialogProps = {
 function WhyMeDialog({ dialogRef, faviconUrl, text, whyText }: WhyMeDialogProps) {
   return (
     <dialog className="modal" ref={dialogRef}>
-      <div className="modal-box relative w-[calc(100vw-1.5rem)] max-w-none lg:max-w-2xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain bg-base-100/90 p-0 shadow-2xl ring-1 ring-base-300 backdrop-blur">
+      <div className="modal-box relative max-h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-none overflow-y-auto bg-base-100/90 p-0 shadow-2xl ring-1 ring-base-300 backdrop-blur lg:max-w-2xl">
         <form method="dialog">
           <button
             aria-label={text.closeWhyDialog}

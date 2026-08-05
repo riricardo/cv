@@ -1,32 +1,31 @@
-import { useEffect } from 'react'
+import { Redirect, Route, Switch, useParams } from 'react-router-dom'
 import { defaultResumeId, resumes } from './data/resumes/index.ts'
 import ResumePage from './pages/ResumePage.tsx'
 
-const basename = '/cv'
+function ResumeRoute() {
+  const { resumeId } = useParams<{ resumeId?: string }>()
 
-function getResumeIdFromPath(pathname: string) {
-  const routePath = pathname.startsWith(`${basename}/`)
-    ? pathname.slice(basename.length)
-    : pathname === basename
-      ? '/'
-      : pathname
-  const resumeId = decodeURIComponent(routePath.split('/').filter(Boolean)[0] ?? '')
+  if (!resumeId || !(resumeId in resumes)) {
+    return <Redirect to={`/${defaultResumeId}`} />
+  }
 
-  return resumeId in resumes ? resumeId : defaultResumeId
+  return <ResumePage resumeId={resumeId} />
 }
 
 function App() {
-  const resumeId = getResumeIdFromPath(window.location.pathname)
-
-  useEffect(() => {
-    const expectedPath = `${basename}/${resumeId}`
-
-    if (window.location.pathname !== expectedPath) {
-      window.history.replaceState(null, '', expectedPath)
-    }
-  }, [resumeId])
-
-  return <ResumePage resumeId={resumeId} />
+  return (
+    <Switch>
+      <Route exact path="/">
+        <Redirect to={`/${defaultResumeId}`} />
+      </Route>
+      <Route path="/:resumeId">
+        <ResumeRoute />
+      </Route>
+      <Route path="*">
+        <Redirect to={`/${defaultResumeId}`} />
+      </Route>
+    </Switch>
+  )
 }
 
 export default App
