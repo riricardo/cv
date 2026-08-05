@@ -1,48 +1,40 @@
-import type { Skill } from '../types/resume.js'
+import type { Localized, Skill } from '../types/index.ts'
+
+const skillDefinitions = {
+  react: { name: 'React', level: 'Advanced' },
+  typescript: { name: 'TypeScript', level: 'Advanced' },
+  javascript: { name: 'JavaScript', level: 'Advanced' },
+  html: { name: 'HTML', level: 'Advanced' },
+  css: { name: 'CSS', level: 'Advanced' },
+  tailwindCss: { name: 'Tailwind CSS', level: 'Advanced' },
+  daisyui: { name: 'DaisyUI', level: 'Intermediate' },
+  vite: { name: 'Vite', level: 'Intermediate' },
+  git: { name: 'Git', level: 'Advanced' },
+  githubActions: { name: 'GitHub Actions', level: 'Intermediate' },
+  nodejs: { name: 'Node.js', level: 'Intermediate' },
+  restApis: { name: 'REST APIs', level: 'Intermediate' },
+} satisfies Record<string, Skill>
+
+function translateSkillLevelToPt(level: string) {
+  return level
+    .replace('Advanced', 'Avançado')
+    .replace('Intermediate', 'Intermediário')
+    .replace('Beginner', 'Iniciante')
+}
+
+function translateSkillsToPt() {
+  return Object.fromEntries(
+    Object.entries(skillDefinitions).map(([skillId, skill]) => [
+      skillId,
+      {
+        name: skill.name,
+        level: skill.level ? translateSkillLevelToPt(skill.level) : undefined,
+      },
+    ]),
+  )
+}
 
 export const skills = {
-  react: { name: 'React', category: 'Frontend', level: 'Advanced' },
-  reactPt: { name: 'React', category: 'Frontend', level: 'Avançado' },
-  typescript: { name: 'TypeScript', category: 'Language', level: 'Advanced' },
-  typescriptPt: { name: 'TypeScript', category: 'Linguagem', level: 'Avançado' },
-  javascript: { name: 'JavaScript', category: 'Language', level: 'Advanced' },
-  javascriptPt: { name: 'JavaScript', category: 'Linguagem', level: 'Avançado' },
-  html: { name: 'HTML', category: 'Frontend', level: 'Advanced' },
-  htmlPt: { name: 'HTML', category: 'Frontend', level: 'Avançado' },
-  css: { name: 'CSS', category: 'Frontend', level: 'Advanced' },
-  cssPt: { name: 'CSS', category: 'Frontend', level: 'Avançado' },
-  tailwindCss: { name: 'Tailwind CSS', category: 'Styling', level: 'Advanced' },
-  tailwindCssPt: {
-    name: 'Tailwind CSS',
-    category: 'Estilização',
-    level: 'Avançado',
-  },
-  daisyui: { name: 'DaisyUI', category: 'Styling', level: 'Intermediate' },
-  daisyuiPt: {
-    name: 'DaisyUI',
-    category: 'Estilização',
-    level: 'Intermediário',
-  },
-  vite: { name: 'Vite', category: 'Tooling', level: 'Intermediate' },
-  vitePt: { name: 'Vite', category: 'Ferramentas', level: 'Intermediário' },
-  git: { name: 'Git', category: 'Tooling', level: 'Advanced' },
-  gitPt: { name: 'Git', category: 'Ferramentas', level: 'Avançado' },
-  githubActions: {
-    name: 'GitHub Actions',
-    category: 'DevOps',
-    level: 'Intermediate',
-  },
-  githubActionsPt: {
-    name: 'GitHub Actions',
-    category: 'DevOps',
-    level: 'Intermediário',
-  },
-  nodejs: { name: 'Node.js', category: 'Backend', level: 'Intermediate' },
-  nodejsPt: { name: 'Node.js', category: 'Backend', level: 'Intermediário' },
-  restApis: { name: 'REST APIs', category: 'Backend', level: 'Intermediate' },
-  restApisPt: {
-    name: 'REST APIs',
-    category: 'Backend',
-    level: 'Intermediário',
-  },
-} satisfies Record<string, Skill>
+  en: skillDefinitions,
+  pt: translateSkillsToPt(),
+} satisfies Localized<Record<string, Skill>>

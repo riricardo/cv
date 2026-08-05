@@ -1,18 +1,22 @@
-import type { Education } from '../types/resume.js'
+import type { Education, Localized } from '../types/index.ts'
 
 export const education = {
-  softwareDevelopment: {
-    institution: 'Example University',
-    degree: 'Software Development',
-    location: 'Dublin, Ireland',
-    startDate: '2018-09',
-    endDate: '2021-06',
+  en: {
+    softwareDevelopment: {
+      institution: 'Example University',
+      degree: 'Software Development',
+      location: 'Dublin, Ireland',
+      startDate: '2018-09',
+      endDate: '2021-06',
+    },
   },
-  softwareDevelopmentPt: {
-    institution: 'Universidade Exemplo',
-    degree: 'Desenvolvimento de Software',
-    location: 'Dublin, Irlanda',
-    startDate: '2018-09',
-    endDate: '2021-06',
+  pt: {
+    softwareDevelopment: {
+      institution: 'Universidade Exemplo',
+      degree: 'Desenvolvimento de Software',
+      location: 'Dublin, Irlanda',
+      startDate: '2018-09',
+      endDate: '2021-06',
+    },
   },
-} satisfies Record<string, Education>
+} satisfies Localized<Record<string, Education>>

@@ -2,13 +2,13 @@
 
 An interactive online resume built with React, TypeScript and Vite.
 
-The goal of this project is to provide a modern, responsive and reusable résumé platform where multiple résumé versions can be generated from JSON files while sharing the same layout and components.
+The goal of this project is to provide a modern, responsive and reusable resume platform where multiple versions can be generated from files while sharing the same layout and components.
 
 ---
 
 ## ✨ Features
 
-- 📄 Multiple résumé versions
+- 📄 Multiple resume versions
 - 🌎 Multi-language support
 - ⚡ Fast loading with Vite
 - 🎨 Tailwind CSS + DaisyUI

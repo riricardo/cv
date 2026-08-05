@@ -1,0 +1,8 @@
+export { default as EducationSection } from './EducationSection.tsx'
+export { default as ExperienceSection } from './ExperienceSection.tsx'
+export { default as ProjectsSection } from './ProjectsSection.tsx'
+export { default as ResumeActionBar } from './ResumeActionBar.tsx'
+export { default as ResumeHeader } from './ResumeHeader.tsx'
+export { default as SectionTitle } from './SectionTitle.tsx'
+export { default as SkillsLanguagesSection } from './SkillsLanguagesSection.tsx'
+export { default as WhyMeDialog } from './WhyMeDialog.tsx'

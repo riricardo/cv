@@ -1,8 +1,8 @@
-import type { Resume } from '../../types/resume.js'
-import { education } from '../education.js'
-import { experience } from '../experience.js'
-import { projects } from '../projects.js'
-import { skills } from '../skills.js'
+import type { Resume } from '../../types/index.ts'
+import { education } from '../education.ts'
+import { experience } from '../experience.ts'
+import { projects } from '../projects.ts'
+import { skills } from '../skills.ts'
 
 export const softwareEnResume: Resume = {
   id: 'software-en',
@@ -10,30 +10,25 @@ export const softwareEnResume: Resume = {
   targetRole: 'Software Engineer',
   professionalSummary:
     'Software engineer focused on building reliable, maintainable and user-friendly web applications with React, TypeScript and modern frontend tooling.',
-  experience: [experience.exampleCompany],
-  projects: [projects.interactiveCv],
+  experience: [experience.en.exampleCompany],
+  projects: [projects.en.interactiveCv],
   skills: [
-    skills.react,
-    skills.typescript,
-    skills.javascript,
-    skills.html,
-    skills.css,
-    skills.tailwindCss,
-    skills.daisyui,
-    skills.vite,
-    skills.git,
-    skills.githubActions,
-    skills.nodejs,
-    skills.restApis,
+    skills.en.react,
+    skills.en.typescript,
+    skills.en.javascript,
+    skills.en.html,
+    skills.en.css,
+    skills.en.tailwindCss,
+    skills.en.daisyui,
+    skills.en.vite,
+    skills.en.git,
+    skills.en.githubActions,
+    skills.en.nodejs,
+    skills.en.restApis,
   ],
-  education: [education.softwareDevelopment],
+  education: [education.en.softwareDevelopment],
   whyText: [
     'I enjoy turning practical product needs into clear, maintainable interfaces.',
     'I value thoughtful collaboration, incremental delivery and code that is easy to evolve.',
   ],
-  settings: {
-    showProjects: true,
-    showPortfolio: true,
-    showInteractiveBar: true,
-  },
 }

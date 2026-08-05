@@ -1,10 +1,14 @@
+import type { Language } from './localization.ts'
+
 export interface PersonalInfo {
   name: string
-  professionalTitle: string
   location: string
   email?: string
   phone?: string
   nationality?: string
+  githubUrl: string
+  linkedInUrl: string
+  portfolioUrl: string
 }
 
 export interface Experience {
@@ -13,7 +17,6 @@ export interface Experience {
   location?: string
   startDate: string
   endDate?: string
-  current?: boolean
   description: string
   highlights?: string[]
   technologies?: string[]
@@ -29,7 +32,6 @@ export interface Project {
 
 export interface Skill {
   name: string
-  category?: string
   level?: string
 }
 
@@ -39,30 +41,16 @@ export interface Education {
   location?: string
   startDate: string
   endDate?: string
-  description?: string
 }
 
-export interface Language {
+export interface SpokenLanguage {
   name: string
   level: string
 }
 
-export interface ContactLink {
-  label: string
-  url: string
-  icon?: string
-}
-
-export interface ResumeSettings {
-  showProjects?: boolean
-  showPortfolio?: boolean
-  showInteractiveBar?: boolean
-}
-
 export interface Resume {
   id: string
-  language: string
-  company?: string
+  language: Language
   targetRole: string
   professionalSummary: string
   experience: Experience[]
@@ -70,5 +58,4 @@ export interface Resume {
   skills: Skill[]
   education: Education[]
   whyText: string[]
-  settings?: ResumeSettings
 }

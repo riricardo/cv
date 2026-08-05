@@ -1,0 +1,46 @@
+import type { Language, Localized } from '../types/index.ts'
+
+export const resumeTranslations = {
+  en: {
+    actionsLabel: 'Interactive resume actions',
+    interactiveMessage: 'This resume has an interactive version!',
+    whyTitle: 'Why Ric?',
+    portfolio: 'Portfolio',
+    download: 'Download CV',
+    downloadAriaLabel: 'Download CV by opening the print dialog',
+    downloadTitle: 'Open print dialog without interactive elements',
+    summary: 'Professional Summary',
+    experience: 'Experience',
+    projects: 'Projects',
+    skills: 'Skills',
+    languages: 'Languages',
+    education: 'Education',
+    closeWhyDialog: 'Close Why Ric dialog',
+    close: 'close',
+    present: 'Present',
+    repository: 'Repository',
+    demo: 'Demo',
+  },
+  pt: {
+    actionsLabel: 'Ações interativas do currículo',
+    interactiveMessage: 'Este currículo possui uma versão interativa!',
+    whyTitle: 'Por que Ric?',
+    portfolio: 'Portfólio',
+    download: 'Baixar CV',
+    downloadAriaLabel: 'Baixar CV abrindo a janela de impressão',
+    downloadTitle: 'Abrir janela de impressão sem elementos interativos',
+    summary: 'Resumo Profissional',
+    experience: 'Experiência',
+    projects: 'Projetos',
+    skills: 'Competências',
+    languages: 'Idiomas',
+    education: 'Formação',
+    closeWhyDialog: 'Fechar diálogo Por que Ric',
+    close: 'fechar',
+    present: 'Atual',
+    repository: 'Repositório',
+    demo: 'Demo',
+  },
+} satisfies Localized<Record<string, string>>
+
+export type ResumeText = (typeof resumeTranslations)[Language]
