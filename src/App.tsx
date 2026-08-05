@@ -18,7 +18,7 @@ function App() {
       <Route exact path="/">
         <Redirect to={`/${defaultResumeId}`} />
       </Route>
-      <Route path="/:resumeId">
+      <Route path="/:resumeId" exact>
         <ResumeRoute />
       </Route>
       <Route path="*">

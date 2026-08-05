@@ -127,6 +127,30 @@ body::before {
   box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
 }
 
+.skill-category {
+  break-inside: avoid;
+}
+
+.skill-category-title {
+  align-items: center;
+  color: var(--color-slate-800);
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 800;
+  gap: 0.55rem;
+  letter-spacing: 0;
+}
+
+.skill-category-title::before {
+  background: linear-gradient(180deg, var(--color-blue-700), #64748b);
+  border-radius: 9999px;
+  content: '';
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 0.9rem;
+  width: 0.22rem;
+}
+
 .role-tag {
   align-items: center;
   background: linear-gradient(135deg, var(--color-blue-700), #475569);
@@ -327,6 +351,10 @@ body::before {
     line-height: 1.2;
     padding: 0.4rem 0.7rem;
   }
+
+  .skill-category-title {
+    font-size: 0.8125rem;
+  }
 }
 
 @media print {
@@ -429,6 +457,19 @@ body::before {
     color: var(--color-blue-800) !important;
     min-height: 1.6rem !important;
     padding: 0.28rem 0.65rem !important;
+  }
+
+  .skill-category {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .skill-category-title {
+    color: var(--color-slate-900) !important;
+  }
+
+  .skill-category-title::before {
+    background: rgb(37 99 235 / 0.45) !important;
   }
 
   .role-tag,

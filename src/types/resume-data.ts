@@ -30,10 +30,9 @@ export interface Project {
   demoUrl?: string
 }
 
-export interface Skill {
-  name: string
-  level?: string
-}
+export type SkillAreaId = 'backend' | 'frontend' | 'databases' | 'architecture' | 'tools'
+
+export type SkillAreas = Record<SkillAreaId, string[]>
 
 export interface Education {
   institution: string
@@ -55,7 +54,7 @@ export interface Resume {
   professionalSummary: string
   experience: Experience[]
   projects: Project[]
-  skills: Skill[]
+  skills: SkillAreas
   education: Education[]
   whyText: string[]
 }

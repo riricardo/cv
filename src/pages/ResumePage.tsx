@@ -6,7 +6,8 @@ import {
   ResumeActionBar,
   ResumeHeader,
   SectionTitle,
-  SkillsLanguagesSection,
+  LanguagesSection,
+  SkillsSection,
   WhyMeDialog,
 } from '../components/resume/index.ts'
 import { getRandomProfilePhotoUrl, resumeAssets } from '../constants/assets.ts'
@@ -65,7 +66,10 @@ function ResumePage({ resumeId }: ResumePageProps) {
 
           <ProjectsSection projects={resume.projects} text={text} />
 
-          <SkillsLanguagesSection languages={spokenLanguages} skills={resume.skills} text={text} />
+          <div className="resume-section mt-8 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
+            <SkillsSection skills={resume.skills} text={text} />
+            <LanguagesSection languages={spokenLanguages} text={text} />
+          </div>
 
           <EducationSection
             education={resume.education}

@@ -5,6 +5,7 @@ export type {
   PersonalInfo,
   Project,
   Resume,
-  Skill,
+  SkillAreaId,
+  SkillAreas,
   SpokenLanguage,
 } from './resume-data.ts'
