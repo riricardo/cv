@@ -40,6 +40,9 @@ export interface Education {
   location?: string
   startDate: string
   endDate?: string
+  description: string
+  highlights: string[]
+  technologies: string[]
 }
 
 export interface SpokenLanguage {

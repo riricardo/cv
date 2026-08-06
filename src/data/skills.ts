@@ -2,37 +2,63 @@ import type { SkillAreas } from '../types/index.ts'
 
 const backendSkills = {
   csharp: 'C#',
-  aspNetCore: 'ASP.NET Core',
+  dotnet: '.NET',
+  aspNet: 'ASP.NET',
+  delphiDataSnap: 'Delphi DataSnap',
   restApis: 'REST APIs',
-  nodejs: 'Node.js',
+  http: 'HTTP',
+  mailKit: 'MailKit',
+  polly: 'Polly',
 }
 
 const frontendSkills = {
   react: 'React',
+  aspNetMvc: 'ASP.NET MVC',
+  aspNetWebForms: 'ASP.NET Web Forms',
   typescript: 'TypeScript',
   javascript: 'JavaScript',
   html: 'HTML',
   css: 'CSS',
   tailwindCss: 'Tailwind CSS',
   daisyui: 'DaisyUI',
+  xaml: 'XAML',
+  xamarin: 'Xamarin',
+  reactNative: 'React Native',
+  windowsForms: 'Windows Forms',
 }
 
 const databaseSkills = {
   sqlServer: 'SQL Server',
-  postgresql: 'PostgreSQL',
-  mongodb: 'MongoDB',
+  sql: 'SQL',
+  dapper: 'Dapper',
+  entityFramework: 'Entity Framework',
+  adoNet: 'ADO.NET',
+  sqlClient: 'SqlClient',
+  linq: 'LINQ',
+  paradox: 'Paradox',
 }
 
 const architectureSkills = {
+  objectOrientedProgramming: 'Object-Oriented Programming',
   dependencyInjection: 'Dependency Injection',
+  interfaceBasedDesign: 'Interface-Based Design',
   cqrs: 'CQRS',
   mediatr: 'MediatR',
+  mvvm: 'MVVM',
+  mvc: 'MVC',
+  caching: 'Caching',
 }
 
 const toolSkills = {
+  delphi: 'Delphi',
   git: 'Git',
-  githubActions: 'GitHub Actions',
-  vite: 'Vite',
+  azureDevOps: 'Azure DevOps',
+  jira: 'Jira',
+  scrum: 'Scrum',
+  firebaseCloudMessaging: 'Firebase Cloud Messaging',
+  googlePlay: 'Google Play',
+  chromiumWebView: 'Chromium WebView',
+  unmanagedExports: 'UnmanagedExports',
 }
 
 export const skills = {
