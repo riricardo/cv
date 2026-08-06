@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react'
 import {
   EducationSection,
-  ExperienceSection,
   ProjectsSection,
   ResumeActionBar,
   ResumeHeader,
   SectionTitle,
   LanguagesSection,
   SkillsSection,
+  WorkSection,
   WhyMeDialog,
 } from '../components/resume/index.ts'
 import { getRandomProfilePhotoUrl, resumeAssets } from '../constants/assets.ts'
@@ -58,9 +58,10 @@ function ResumePage({ resumeId }: ResumePageProps) {
             </p>
           </section>
 
-          <ExperienceSection
+          <WorkSection
             experiences={resume.experience}
             language={language}
+            text={text}
             title={text.experience}
           />
 
@@ -74,6 +75,7 @@ function ResumePage({ resumeId }: ResumePageProps) {
           <EducationSection
             education={resume.education}
             language={language}
+            text={text}
             title={text.education}
           />
         </div>

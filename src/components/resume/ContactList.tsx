@@ -4,6 +4,7 @@ type ContactItem = {
   href?: string
   icon: string
   label: string
+  printLabel?: string
 }
 
 type ContactListProps = {
@@ -15,40 +16,42 @@ function isContactItem(item: ContactItem | undefined): item is ContactItem {
 }
 
 function getContactItems(personalInfo: PersonalInfo) {
-  return (
-    [
-      personalInfo.email
-        ? {
-            href: `mailto:${personalInfo.email}`,
-            icon: 'fa-solid fa-envelope',
-            label: personalInfo.email,
-          }
-        : undefined,
-      personalInfo.phone
-        ? {
-            href: `tel:${personalInfo.phone.replaceAll(' ', '')}`,
-            icon: 'fa-solid fa-phone',
-            label: personalInfo.phone,
-          }
-        : undefined,
-      {
-        href: personalInfo.githubUrl,
-        icon: 'fa-brands fa-github',
-        label: 'GitHub',
-      },
-      {
-        href: personalInfo.linkedInUrl,
-        icon: 'fa-brands fa-linkedin',
-        label: 'LinkedIn',
-      },
-      personalInfo.nationality
-        ? {
-            icon: 'fa-solid fa-passport',
-            label: personalInfo.nationality,
-          }
-        : undefined,
-    ] satisfies Array<ContactItem | undefined>
-  ).filter(isContactItem)
+  const contactItems: Array<ContactItem | undefined> = [
+    personalInfo.email
+      ? {
+          href: `mailto:${personalInfo.email}`,
+          icon: 'fa-solid fa-envelope',
+          label: personalInfo.email,
+        }
+      : undefined,
+    personalInfo.phone
+      ? {
+          href: `tel:${personalInfo.phone.replaceAll(' ', '')}`,
+          icon: 'fa-solid fa-phone',
+          label: personalInfo.phone,
+        }
+      : undefined,
+    {
+      href: personalInfo.githubUrl,
+      icon: 'fa-brands fa-github',
+      label: 'GitHub',
+      printLabel: personalInfo.githubUrl,
+    },
+    {
+      href: personalInfo.linkedInUrl,
+      icon: 'fa-brands fa-linkedin',
+      label: 'LinkedIn',
+      printLabel: personalInfo.linkedInUrl,
+    },
+    personalInfo.nationality
+      ? {
+          icon: 'fa-solid fa-passport',
+          label: personalInfo.nationality,
+        }
+      : undefined,
+  ]
+
+  return contactItems.filter(isContactItem)
 }
 
 function ContactList({ personalInfo }: ContactListProps) {
@@ -66,12 +69,22 @@ function ContactList({ personalInfo }: ContactListProps) {
               target={item.href.startsWith('http') ? '_blank' : undefined}
             >
               <span aria-hidden="true" className={`${item.icon} text-center text-blue-800`} />
-              <span className="min-w-0 break-anywhere">{item.label}</span>
+              <span className="contact-label min-w-0 break-anywhere">{item.label}</span>
+              {item.printLabel ? (
+                <span className="contact-print-label min-w-0 break-anywhere">
+                  {item.printLabel}
+                </span>
+              ) : null}
             </a>
           ) : (
             <div className="grid grid-cols-[1.5rem_minmax(0,1fr)] items-center gap-2 rounded-2xl border border-base-300/70 bg-base-100/65 px-3 py-2 text-slate-700 shadow-sm">
               <span aria-hidden="true" className={`${item.icon} text-center text-blue-800`} />
-              <span className="min-w-0 break-anywhere">{item.label}</span>
+              <span className="contact-label min-w-0 break-anywhere">{item.label}</span>
+              {item.printLabel ? (
+                <span className="contact-print-label min-w-0 break-anywhere">
+                  {item.printLabel}
+                </span>
+              ) : null}
             </div>
           )}
         </li>

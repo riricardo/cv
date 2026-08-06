@@ -8,7 +8,7 @@ export const softwareEnResume: Resume = {
   id: 'software-en',
   language: 'en',
 
-  targetRole: 'Software Engineer | C# | .NET | Backend & Full-Stack Development',
+  targetRole: 'Software Developer',
 
   professionalSummary:
     'Software Developer with nearly five years of professional experience working across desktop, web, mobile and backend applications. Experienced with C#, .NET, Delphi, ASP.NET, SQL Server, APIs, reporting systems and integrations between modern services and legacy software. Strong background in debugging, database optimisation, reusable components, technical documentation and delivering features across database, backend and presentation layers. I enjoy understanding complex systems, improving existing solutions and building software that is simple, maintainable and practical. Currently deepening my knowledge of software design, SOLID principles and software architecture. EU citizen authorised to work across the European Union without sponsorship.',

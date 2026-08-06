@@ -1,6 +1,7 @@
 import type { SkillAreaId, SkillAreas } from '../../types/index.ts'
 import type { ResumeText } from '../../data/resume-translations.ts'
 import SectionTitle from './SectionTitle.tsx'
+import SkillTags from './SkillTags.tsx'
 
 type SkillsSectionProps = {
   skills: SkillAreas
@@ -30,13 +31,7 @@ function SkillsSection({ skills, text }: SkillsSectionProps) {
               <span aria-hidden="true" className={`fa-solid ${skillAreaIcons[skillArea]}`} />
               {text.skillAreaTitles[skillArea]}
             </h3>
-            <ul className="skill-tags">
-              {skillNames.map((skillName) => (
-                <li className="skill-tag" key={skillName}>
-                  {skillName}
-                </li>
-              ))}
-            </ul>
+            <SkillTags items={skillNames} />
           </section>
         ))}
       </div>

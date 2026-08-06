@@ -9,7 +9,7 @@ export const softwarePtResume: Resume = {
   id: 'software-pt',
   language: 'pt',
 
-  targetRole: 'Engenheiro de Software | C# | .NET | Desenvolvimento Backend e Full Stack',
+  targetRole: 'Software Developer',
 
   professionalSummary:
     'Desenvolvedor de Software com quase cinco anos de experiência profissional em aplicações desktop, web, mobile e backend. Possuo experiência com C#, .NET, Delphi, ASP.NET, SQL Server, APIs, sistemas de relatórios e integrações entre serviços modernos e sistemas legados. Tenho forte atuação em debugging, otimização de bancos de dados, desenvolvimento de componentes reutilizáveis, documentação técnica e entrega de funcionalidades envolvendo banco de dados, backend e interface. Gosto de compreender sistemas complexos, melhorar soluções existentes e desenvolver software simples, prático e de fácil manutenção. Atualmente estou aprofundando meus conhecimentos em design de software, princípios SOLID e arquitetura. Sou cidadão da União Europeia e posso trabalhar em qualquer país da UE sem necessidade de patrocínio.',

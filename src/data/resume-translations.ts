@@ -18,6 +18,8 @@ type ResumeTranslation = {
   education: string
   closeWhyDialog: string
   close: string
+  seeLess: string
+  seeMore: string
   present: string
   repository: string
   demo: string
@@ -47,6 +49,8 @@ export const resumeTranslations = {
     education: 'Education',
     closeWhyDialog: 'Close Why Ric dialog',
     close: 'close',
+    seeLess: 'See less',
+    seeMore: 'See more',
     present: 'Present',
     repository: 'Repository',
     demo: 'Demo',
@@ -74,6 +78,8 @@ export const resumeTranslations = {
     education: 'Formação',
     closeWhyDialog: 'Fechar diálogo Por que Ric',
     close: 'fechar',
+    seeLess: 'Ver menos',
+    seeMore: 'Ver mais',
     present: 'Atual',
     repository: 'Repositório',
     demo: 'Demo',

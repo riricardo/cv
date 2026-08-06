@@ -2,7 +2,9 @@ import type { Language } from './localization.ts'
 
 export interface PersonalInfo {
   name: string
+  fullName?: string
   location: string
+  displayLocation?: string
   email?: string
   phone?: string
   nationality?: string

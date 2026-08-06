@@ -30,7 +30,7 @@ function formatPeriod(startDate: string, endDate: string | undefined, language: 
 
 function PeriodText({ endDate, language, startDate }: PeriodTextProps) {
   return (
-    <p className="text-sm font-medium text-slate-500">
+    <p className="text-sm font-medium whitespace-nowrap text-slate-500 sm:ml-4 sm:min-w-36 sm:text-right">
       {formatPeriod(startDate, endDate, language)}
     </p>
   )
