@@ -8,6 +8,7 @@ import SkillTags from './SkillTags.tsx'
 export type ExperienceSectionItem = {
   description: string
   endDate?: string
+  extraHighlights?: string[]
   highlights?: string[]
   id: string
   location?: string
@@ -59,7 +60,9 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const detailsId = useId()
   const cardRef = useRef<HTMLElement>(null)
-  const hasDetails = Boolean(item.location || item.highlights?.length || item.skills?.length)
+  const hasDetails = Boolean(
+    item.location || item.highlights?.length || item.extraHighlights?.length || item.skills?.length,
+  )
 
   function handleToggle() {
     if (isExpanded) {
@@ -109,6 +112,13 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
             {item.highlights?.length ? (
               <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
                 {item.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            ) : null}
+            {item.extraHighlights?.length ? (
+              <ul className="extra-highlights mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
+                {item.extraHighlights.map((highlight) => (
                   <li key={highlight}>{highlight}</li>
                 ))}
               </ul>

@@ -13,6 +13,7 @@ function mapExperienceToSectionItem(experience: Experience): ExperienceSectionIt
   return {
     description: experience.description,
     endDate: experience.endDate,
+    extraHighlights: experience.extraHighlights,
     highlights: experience.highlights,
     id: `${experience.company}-${experience.startDate}`,
     location: experience.location,

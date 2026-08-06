@@ -751,6 +751,10 @@ body::before {
     display: none !important;
   }
 
+  .extra-highlights {
+    display: none !important;
+  }
+
   .resume-document a {
     color: inherit !important;
     text-decoration: none !important;

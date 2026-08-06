@@ -21,6 +21,7 @@ export interface Experience {
   endDate?: string
   description: string
   highlights?: string[]
+  extraHighlights?: string[]
   technologies?: string[]
 }
 
