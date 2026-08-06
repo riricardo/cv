@@ -1,11 +1,12 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
+  # Push trigger disabled while publishing GitHub Pages from the gh-pages branch.
+  # Re-enable this block if switching back to GitHub Actions deployment:
+  # push:
+  #   branches:
+  #     - main
 
 permissions:
   contents: read
