@@ -15,12 +15,9 @@ function LanguagesSection({ languages, text }: LanguagesSectionProps) {
   return (
     <section aria-labelledby="languages-heading">
       <SectionTitle id="languages-heading">{text.languages}</SectionTitle>
-      <ul className="mt-4 space-y-2 text-sm text-slate-700">
+      <ul className="language-list">
         {languages.map((spokenLanguage) => (
-          <li
-            className="flex items-center gap-2 rounded-2xl border border-base-300/80 bg-base-100/75 px-3 py-2 shadow-sm"
-            key={spokenLanguage.name}
-          >
+          <li className="language-item" key={spokenLanguage.name}>
             <span aria-hidden="true" className="language-marker">
               •
             </span>

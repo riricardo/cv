@@ -22,31 +22,31 @@ function ProjectsSection({ projects, text }: ProjectsSectionProps) {
               <p className="mt-2 text-sm leading-6 text-slate-700 break-anywhere">
                 {project.description}
               </p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-blue-800 break-anywhere">
-                {project.technologies.join(' / ')}
-              </p>
+              <p className="project-technologies">{project.technologies.join(' / ')}</p>
               {project.repositoryUrl || project.demoUrl ? (
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="project-links">
                   {project.repositoryUrl ? (
                     <a
-                      className="toolbar-button"
+                      className="project-link toolbar-button"
                       href={project.repositoryUrl}
                       rel="noreferrer"
                       target="_blank"
                     >
                       <span aria-hidden="true" className="fa-brands fa-github" />
-                      {text.repository}
+                      <span className="project-link-label">{text.repository}</span>
+                      <span className="project-link-print-label">{project.repositoryUrl}</span>
                     </a>
                   ) : null}
                   {project.demoUrl ? (
                     <a
-                      className="toolbar-button"
+                      className="project-link toolbar-button"
                       href={project.demoUrl}
                       rel="noreferrer"
                       target="_blank"
                     >
                       <span aria-hidden="true" className="fa-solid fa-arrow-up-right-from-square" />
-                      {text.demo}
+                      <span className="project-link-label">{text.demo}</span>
+                      <span className="project-link-print-label">{project.demoUrl}</span>
                     </a>
                   ) : null}
                 </div>

@@ -87,9 +87,12 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
       ref={cardRef}
     >
       <div className="card-body min-w-0 p-4 sm:p-5">
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-          <div>
+        <div className="grid gap-1 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="min-w-0">
             <h3 className="text-lg font-bold text-slate-950">{item.title}</h3>
+          </div>
+          <PeriodText endDate={item.endDate} language={language} startDate={item.startDate} />
+          <div className="min-w-0 sm:col-start-1">
             <p className="font-semibold text-blue-800">{item.subtitle}</p>
             {item.location ? (
               <p
@@ -99,7 +102,6 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
               </p>
             ) : null}
           </div>
-          <PeriodText endDate={item.endDate} language={language} startDate={item.startDate} />
         </div>
         <p className="mt-2 leading-7 text-slate-700 break-anywhere">{item.description}</p>
         {hasDetails ? (

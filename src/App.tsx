@@ -9,7 +9,7 @@ function ResumeRoute() {
     return <Redirect to={`/${defaultResumeId}`} />
   }
 
-  return <ResumePage resumeId={resumeId} />
+  return <ResumePage key={resumeId} resumeId={resumeId} />
 }
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <Route exact path="/">
         <Redirect to={`/${defaultResumeId}`} />
       </Route>
-      <Route path="/:resumeId" exact>
+      <Route path="/:resumeId">
         <ResumeRoute />
       </Route>
       <Route path="*">

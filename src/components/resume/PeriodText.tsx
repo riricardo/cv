@@ -8,12 +8,21 @@ type PeriodTextProps = {
 }
 
 function formatMonthYear(value: string, language: Language) {
-  if (value.toLowerCase() === 'present') {
+  const normalizedValue = value.toLowerCase()
+
+  if (
+    normalizedValue === 'present' ||
+    normalizedValue === resumeTranslations[language].present.toLowerCase()
+  ) {
     return resumeTranslations[language].present
   }
 
   const [year, month = '01'] = value.split('-')
   const date = new Date(Number(year), Number(month) - 1, 1)
+
+  if (Number.isNaN(date.getTime())) {
+    return value
+  }
 
   return new Intl.DateTimeFormat(language === 'pt' ? 'pt-BR' : 'en-US', {
     month: 'short',
