@@ -11,7 +11,7 @@ export const softwareEnResume: Resume = {
   targetRole: 'Software Developer',
 
   professionalSummary:
-    'Software Developer with nearly five years of professional experience working across desktop, web, mobile and backend applications. Experienced with C#, .NET, Delphi, ASP.NET, SQL Server, APIs, reporting systems and integrations between modern services and legacy software. Strong background in debugging, database optimisation, reusable components, technical documentation and delivering features across database, backend and presentation layers. I enjoy understanding complex systems, improving existing solutions and building software that is simple, maintainable and practical. Currently deepening my knowledge of software design, SOLID principles and software architecture. EU citizen authorised to work across the European Union without sponsorship.',
+    'Software Developer focused on building maintainable business applications and improving complex existing systems. I bring a practical background across legacy and modern software, with a strong interest in clean design, reliable integrations and solutions that are simple for teams to understand and evolve. EU citizen authorised to work across the European Union without sponsorship.',
 
   experience: [
     experience.en.bidvestNoonan,
@@ -28,15 +28,9 @@ export const softwareEnResume: Resume = {
   education: [education.en.usp, education.en.linkoping, education.en.senac],
 
   whyText: [
-    'Nearly five years of professional software-development experience across desktop, web, mobile and backend systems.',
-    'Practical experience with C#, .NET, ASP.NET, Delphi, SQL Server, REST APIs and enterprise applications.',
-    'Able to investigate unfamiliar systems, understand how their components interact and implement maintainable improvements.',
-    'Experienced in connecting modern web and backend services with legacy desktop applications.',
-    'Strong debugging and problem-solving background involving application code, databases, integrations, environments and deployments.',
-    'Comfortable contributing across database, backend and presentation layers.',
-    'Experienced with Dependency Injection, CQRS, MediatR, Dapper, Entity Framework, LINQ and Scrum-based development.',
-    'Careful with documentation, implementation planning, testing and long-term maintainability.',
-    'International experience and current professional experience in Ireland.',
-    'Portuguese and Brazilian citizen with full authorisation to work throughout the European Union.',
+    'Thanks for asking. I think I can be a strong fit for teams that need a developer who is comfortable entering an existing system, understanding how it works and making practical improvements without adding unnecessary complexity.',
+    'I bring nearly five years of professional software-development experience across desktop, web, mobile and backend systems, with hands-on work in C#, .NET, ASP.NET, Delphi, SQL Server, REST APIs and enterprise applications.',
+    'A lot of my experience has been around debugging, business rules, database work, integrations and connecting modern services with legacy applications. That has made me careful about maintainability, testing, documentation and how changes affect real users.',
+    'I am also used to working across database, backend and presentation layers, and I am actively deepening my understanding of software design, SOLID principles and architecture. I am a Portuguese and Brazilian citizen with full authorisation to work throughout the European Union.',
   ],
 }

@@ -1,7 +1,9 @@
+import { finnEnResume } from './finn-en.ts'
 import { softwareEnResume } from './software-en.ts'
 import { softwarePtResume } from './software-pt.ts'
 
 export const resumes = {
+  [finnEnResume.id]: finnEnResume,
   [softwareEnResume.id]: softwareEnResume,
   [softwarePtResume.id]: softwarePtResume,
 }
