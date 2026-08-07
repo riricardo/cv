@@ -9,8 +9,6 @@ export const softwarePtResume: Resume = {
   id: 'software-pt',
   language: 'pt',
 
-  targetRole: 'Software Developer',
-
   professionalSummary:
     'Desenvolvedor de Software com foco em construir aplicações de negócio de fácil manutenção e melhorar sistemas complexos já existentes. Tenho uma base prática em software legado e moderno, com forte interesse por design limpo, integrações confiáveis e soluções simples para equipes entenderem e evoluírem. Sou cidadão da União Europeia e posso trabalhar em qualquer país da UE sem necessidade de patrocínio.',
 

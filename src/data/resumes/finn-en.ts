@@ -8,8 +8,6 @@ export const finnEnResume: Resume = {
   id: 'finn',
   language: 'en',
 
-  targetRole: 'Associate SAP Software Engineer',
-
   professionalSummary:
     'Software Engineer interested in applying my enterprise-software and ERP background to the modern SAP ecosystem. I enjoy understanding how business processes, data and application layers fit together, then turning that understanding into maintainable improvements for real users and teams. EU citizen authorised to work across the European Union without sponsorship.',
 

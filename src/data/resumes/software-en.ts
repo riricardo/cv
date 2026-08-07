@@ -8,8 +8,6 @@ export const softwareEnResume: Resume = {
   id: 'software-en',
   language: 'en',
 
-  targetRole: 'Software Developer',
-
   professionalSummary:
     'Software Developer focused on building maintainable business applications and improving complex existing systems. I bring a practical background across legacy and modern software, with a strong interest in clean design, reliable integrations and solutions that are simple for teams to understand and evolve. EU citizen authorised to work across the European Union without sponsorship.',
 

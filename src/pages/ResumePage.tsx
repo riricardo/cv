@@ -45,11 +45,7 @@ function ResumePage({ resumeId }: ResumePageProps) {
 
       <main className="resume-document card mx-auto w-full max-w-5xl min-w-0 rounded-2xl border border-base-300/80 bg-base-100/80 shadow-xl ring-1 ring-base-300/70 backdrop-blur-xl sm:rounded-4xl">
         <div className="resume-document-content min-w-0 px-4 py-5 sm:px-8 md:px-10 md:py-8">
-          <ResumeHeader
-            personalInfo={personalInfo}
-            profilePhotoUrl={profilePhotoUrlRef.current}
-            resume={resume}
-          />
+          <ResumeHeader personalInfo={personalInfo} profilePhotoUrl={profilePhotoUrlRef.current} />
 
           <section aria-labelledby="summary-heading" className="resume-section mt-7">
             <SectionTitle id="summary-heading">{text.summary}</SectionTitle>

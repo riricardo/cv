@@ -1,17 +1,16 @@
-import type { PersonalInfo, Resume } from '../../types/index.ts'
+import type { PersonalInfo } from '../../types/index.ts'
 import ContactList from './ContactList.tsx'
 
 type ResumeHeaderProps = {
   personalInfo: PersonalInfo
   profilePhotoUrl: string
-  resume: Resume
 }
 
 function getMapUrl(location: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
 }
 
-function ResumeHeader({ personalInfo, profilePhotoUrl, resume }: ResumeHeaderProps) {
+function ResumeHeader({ personalInfo, profilePhotoUrl }: ResumeHeaderProps) {
   const [firstName, ...remainingNameParts] = personalInfo.name.split(' ')
   const lastName = remainingNameParts.join(' ')
 
@@ -22,7 +21,7 @@ function ResumeHeader({ personalInfo, profilePhotoUrl, resume }: ResumeHeaderPro
           <div className="flex flex-wrap items-center gap-2">
             <span className="role-tag">
               <span aria-hidden="true" className="fa-solid fa-briefcase" />
-              {resume.targetRole}
+              {personalInfo.professionalDescription}
             </span>
             <a
               className="info-pill"

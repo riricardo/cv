@@ -8,6 +8,7 @@ export interface PersonalInfo {
   email?: string
   phone?: string
   nationality?: string
+  professionalDescription: string
   githubUrl: string
   linkedInUrl: string
   portfolioUrl: string
@@ -56,7 +57,6 @@ export interface SpokenLanguage {
 export interface Resume {
   id: string
   language: Language
-  targetRole: string
   professionalSummary: string
   experience: Experience[]
   projects: Project[]
