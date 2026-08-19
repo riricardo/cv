@@ -3,6 +3,7 @@ import { education } from '../education.ts'
 import { experience } from '../experience.ts'
 import { projects } from '../projects.ts'
 import { skills } from '../skills.ts'
+import { getExperience } from './utils.ts'
 
 export const softwareEnResume: Resume = {
   id: 'software-en',
@@ -12,11 +13,11 @@ export const softwareEnResume: Resume = {
     'Software Developer focused on building maintainable business applications and improving complex existing systems. I bring a practical background across legacy and modern software, with a strong interest in clean design, reliable integrations and solutions that are simple for teams to understand and evolve. EU citizen authorised to work across the European Union without sponsorship.',
 
   experience: [
-    experience.en.bidvestNoonan,
-    experience.en.linx,
-    experience.en.syshouse,
-    experience.en.japi,
-    experience.en.numericalAnalysisTutor,
+    getExperience(experience.en, 'bidvestNoonan'),
+    getExperience(experience.en, 'linx'),
+    getExperience(experience.en, 'syshouse'),
+    getExperience(experience.en, 'japi'),
+    getExperience(experience.en, 'numericalAnalysisTutor'),
   ],
 
   projects: [projects.en.cvWebsite, projects.en.warthogRobotics],

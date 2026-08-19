@@ -1,15 +1,16 @@
 import { useId, useRef, useState } from 'react'
-import type { Language } from '../../types/index.ts'
+import type { Language, ResumeHighlight } from '../../types/index.ts'
 import type { ResumeText } from '../../data/resume-translations.ts'
 import PeriodText from './PeriodText.tsx'
 import SectionTitle from './SectionTitle.tsx'
 import SkillTags from './SkillTags.tsx'
 
+type SectionHighlight = string | ResumeHighlight
+
 export type ExperienceSectionItem = {
   description: string
   endDate?: string
-  extraHighlights?: string[]
-  highlights?: string[]
+  highlights?: SectionHighlight[]
   id: string
   location?: string
   skills?: string[]
@@ -30,6 +31,33 @@ type ExperienceCardProps = {
   item: ExperienceSectionItem
   language: Language
   text: ResumeText
+}
+
+function hasHighlights(highlights?: SectionHighlight[]) {
+  return Boolean(highlights?.length)
+}
+
+function HighlightList({ highlights }: { highlights?: SectionHighlight[] }) {
+  if (!highlights?.length) {
+    return null
+  }
+
+  return (
+    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
+      {highlights.map((highlight) => (
+        <li
+          className={
+            typeof highlight === 'string' || highlight.includeInDownload
+              ? undefined
+              : 'download-hidden'
+          }
+          key={typeof highlight === 'string' ? highlight : highlight.value}
+        >
+          {typeof highlight === 'string' ? highlight : highlight.value}
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 function scrollToPosition(top: number) {
@@ -60,9 +88,7 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const detailsId = useId()
   const cardRef = useRef<HTMLElement>(null)
-  const hasDetails = Boolean(
-    item.location || item.highlights?.length || item.extraHighlights?.length || item.skills?.length,
-  )
+  const hasDetails = Boolean(item.location || hasHighlights(item.highlights) || item.skills?.length)
 
   function handleToggle() {
     if (isExpanded) {
@@ -109,19 +135,8 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
         <p className="mt-2 leading-7 text-slate-700 break-anywhere">{item.description}</p>
         {hasDetails ? (
           <div className={`expandable-content ${isExpanded ? 'is-expanded' : ''}`} id={detailsId}>
-            {item.highlights?.length ? (
-              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
-                {item.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
-            ) : null}
-            {item.extraHighlights?.length ? (
-              <ul className="extra-highlights mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
-                {item.extraHighlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
+            {hasHighlights(item.highlights) ? (
+              <HighlightList highlights={item.highlights!} />
             ) : null}
             {item.skills?.length ? (
               <div className="mt-4">

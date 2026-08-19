@@ -14,16 +14,42 @@ export interface PersonalInfo {
   portfolioUrl: string
 }
 
-export interface Experience {
+export interface Highlight {
+  category: string
+  value: string
+}
+
+export interface ResumeHighlight {
+  includeInDownload: boolean
+  value: string
+}
+
+export interface ExperienceProfileHighlight {
+  includeInDownload: boolean
+  index: number
+}
+
+export interface ExperienceProfile {
+  [experienceId: string]: ExperienceProfileHighlight[]
+}
+
+interface ExperienceBase {
+  id: string
   company: string
   role: string
   location?: string
   startDate: string
   endDate?: string
   description: string
-  highlights?: string[]
-  extraHighlights?: string[]
   technologies?: string[]
+}
+
+export interface CatalogExperience extends ExperienceBase {
+  highlights?: Highlight[]
+}
+
+export interface Experience extends ExperienceBase {
+  highlights?: ResumeHighlight[]
 }
 
 export interface Project {

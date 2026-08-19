@@ -1,9 +1,9 @@
 import type { Resume } from '../../types/index.ts'
-
 import { education } from '../education.ts'
 import { experience } from '../experience.ts'
 import { projects } from '../projects.ts'
 import { skills } from '../skills.ts'
+import { getExperience } from './utils.ts'
 
 export const softwarePtResume: Resume = {
   id: 'software-pt',
@@ -13,11 +13,11 @@ export const softwarePtResume: Resume = {
     'Desenvolvedor de Software com foco em construir aplicações de negócio de fácil manutenção e melhorar sistemas complexos já existentes. Tenho uma base prática em software legado e moderno, com forte interesse por design limpo, integrações confiáveis e soluções simples para equipes entenderem e evoluírem. Sou cidadão da União Europeia e posso trabalhar em qualquer país da UE sem necessidade de patrocínio.',
 
   experience: [
-    experience.pt.bidvestNoonan,
-    experience.pt.linx,
-    experience.pt.syshouse,
-    experience.pt.japi,
-    experience.pt.numericalAnalysisTutor,
+    getExperience(experience.pt, 'bidvestNoonan'),
+    getExperience(experience.pt, 'linx'),
+    getExperience(experience.pt, 'syshouse'),
+    getExperience(experience.pt, 'japi'),
+    getExperience(experience.pt, 'numericalAnalysisTutor'),
   ],
 
   projects: [projects.pt.cvWebsite, projects.pt.warthogRobotics],

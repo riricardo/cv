@@ -1,8 +1,10 @@
 import type { Resume } from '../../types/index.ts'
 import { education } from '../education.ts'
 import { experience } from '../experience.ts'
+import { erpBackendEnProfile } from '../profiles/erp-backend-en.ts'
 import { projects } from '../projects.ts'
 import { skills } from '../skills.ts'
+import { getExperience } from './utils.ts'
 
 export const finnEnResume: Resume = {
   id: 'finn',
@@ -12,11 +14,11 @@ export const finnEnResume: Resume = {
     'Software Developer interested in applying my enterprise-software and ERP background to the modern SAP ecosystem. I like understanding processes across all layers and using that context to improve quality, cost efficiency, security and maintainability. EU citizen authorised to work across the European Union without sponsorship.',
 
   experience: [
-    experience.en.bidvestNoonan,
-    experience.en.linx,
-    experience.en.syshouse,
-    experience.en.japi,
-    experience.en.numericalAnalysisTutor,
+    getExperience(experience.en, 'bidvestNoonan'),
+    getExperience(experience.en, 'linx', erpBackendEnProfile.linx),
+    getExperience(experience.en, 'syshouse', erpBackendEnProfile.syshouse),
+    getExperience(experience.en, 'japi'),
+    getExperience(experience.en, 'numericalAnalysisTutor'),
   ],
 
   projects: [projects.en.cvWebsite, projects.en.warthogRobotics],
