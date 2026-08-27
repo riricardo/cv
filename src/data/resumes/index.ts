@@ -92,7 +92,12 @@ function resolveExperience(
   return {
     ...experience,
     includeInDownload: profileExperience.print,
-    highlights: resolveHighlights(profileId, experience, profileExperience.highlightIds),
+    highlights: resolveHighlights(
+      profileId,
+      experience,
+      profileExperience.highlightIds,
+      profileExperience.downloadHighlightIds ?? profileExperience.highlightIds,
+    ),
     technologies: resolveSkillNames(experience.skillIds, `Experience "${experience.id}" skillIds`),
   }
 }
@@ -101,8 +106,10 @@ function resolveHighlights(
   profileId: Id,
   experience: ExperienceDocument,
   highlightIds: Id[],
+  downloadHighlightIds: Id[],
 ): ResumeHighlight[] {
   const highlightsById = mapById(experience.highlights)
+  const downloadHighlightIdSet = new Set(downloadHighlightIds)
 
   return highlightIds.map((highlightId) => {
     const highlight = getRequired(
@@ -112,7 +119,7 @@ function resolveHighlights(
     )
 
     return {
-      includeInDownload: true,
+      includeInDownload: downloadHighlightIdSet.has(highlightId),
       value: highlight.value,
     }
   })
@@ -183,11 +190,26 @@ function validateCollections() {
         `Profile "${profile.id}" experiences`,
       )
       const highlightIds = new Set(experience.highlights.map((highlight) => highlight.id))
+      const profileHighlightIds = new Set(profileExperience.highlightIds)
 
       for (const highlightId of profileExperience.highlightIds) {
         if (!highlightIds.has(highlightId)) {
           throw new Error(
             `Profile "${profile.id}" references missing highlight "${highlightId}" on experience "${experience.id}".`,
+          )
+        }
+      }
+
+      for (const highlightId of profileExperience.downloadHighlightIds ?? []) {
+        if (!highlightIds.has(highlightId)) {
+          throw new Error(
+            `Profile "${profile.id}" references missing download highlight "${highlightId}" on experience "${experience.id}".`,
+          )
+        }
+
+        if (!profileHighlightIds.has(highlightId)) {
+          throw new Error(
+            `Profile "${profile.id}" download highlight "${highlightId}" must also be selected on experience "${experience.id}".`,
           )
         }
       }

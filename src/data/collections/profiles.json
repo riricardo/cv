@@ -12,7 +12,7 @@
     "experiences": [
       {
         "experienceId": "bidvestNoonan-en",
-        "print": true,
+        "print": false,
         "highlightIds": ["bidvestNoonan-en-highlight-01"]
       },
       {
@@ -40,6 +40,19 @@
           "linx-en-highlight-19",
           "linx-en-highlight-20",
           "linx-en-highlight-21"
+        ],
+        "downloadHighlightIds": [
+          "linx-en-highlight-01",
+          "linx-en-highlight-02",
+          "linx-en-highlight-03",
+          "linx-en-highlight-04",
+          "linx-en-highlight-07",
+          "linx-en-highlight-08",
+          "linx-en-highlight-13",
+          "linx-en-highlight-16",
+          "linx-en-highlight-17",
+          "linx-en-highlight-18",
+          "linx-en-highlight-21"
         ]
       },
       {
@@ -61,11 +74,21 @@
           "syshouse-en-highlight-13",
           "syshouse-en-highlight-14",
           "syshouse-en-highlight-15"
+        ],
+        "downloadHighlightIds": [
+          "syshouse-en-highlight-01",
+          "syshouse-en-highlight-03",
+          "syshouse-en-highlight-07",
+          "syshouse-en-highlight-08",
+          "syshouse-en-highlight-09",
+          "syshouse-en-highlight-10",
+          "syshouse-en-highlight-11",
+          "syshouse-en-highlight-14"
         ]
       },
       {
         "experienceId": "japi-en",
-        "print": true,
+        "print": false,
         "highlightIds": ["japi-en-highlight-01", "japi-en-highlight-02", "japi-en-highlight-03"]
       },
       {
@@ -73,6 +96,10 @@
         "print": true,
         "highlightIds": [
           "numericalAnalysisTutor-en-highlight-01",
+          "numericalAnalysisTutor-en-highlight-02",
+          "numericalAnalysisTutor-en-highlight-03"
+        ],
+        "downloadHighlightIds": [
           "numericalAnalysisTutor-en-highlight-02",
           "numericalAnalysisTutor-en-highlight-03"
         ]
@@ -102,7 +129,7 @@
     "experiences": [
       {
         "experienceId": "bidvestNoonan-pt",
-        "print": true,
+        "print": false,
         "highlightIds": ["bidvestNoonan-pt-highlight-01"]
       },
       {
@@ -130,6 +157,19 @@
           "linx-pt-highlight-19",
           "linx-pt-highlight-20",
           "linx-pt-highlight-21"
+        ],
+        "downloadHighlightIds": [
+          "linx-pt-highlight-01",
+          "linx-pt-highlight-02",
+          "linx-pt-highlight-03",
+          "linx-pt-highlight-04",
+          "linx-pt-highlight-07",
+          "linx-pt-highlight-08",
+          "linx-pt-highlight-13",
+          "linx-pt-highlight-16",
+          "linx-pt-highlight-17",
+          "linx-pt-highlight-18",
+          "linx-pt-highlight-21"
         ]
       },
       {
@@ -151,11 +191,21 @@
           "syshouse-pt-highlight-13",
           "syshouse-pt-highlight-14",
           "syshouse-pt-highlight-15"
+        ],
+        "downloadHighlightIds": [
+          "syshouse-pt-highlight-01",
+          "syshouse-pt-highlight-03",
+          "syshouse-pt-highlight-07",
+          "syshouse-pt-highlight-08",
+          "syshouse-pt-highlight-09",
+          "syshouse-pt-highlight-10",
+          "syshouse-pt-highlight-11",
+          "syshouse-pt-highlight-14"
         ]
       },
       {
         "experienceId": "japi-pt",
-        "print": true,
+        "print": false,
         "highlightIds": ["japi-pt-highlight-01", "japi-pt-highlight-02", "japi-pt-highlight-03"]
       },
       {
@@ -163,6 +213,10 @@
         "print": true,
         "highlightIds": [
           "numericalAnalysisTutor-pt-highlight-01",
+          "numericalAnalysisTutor-pt-highlight-02",
+          "numericalAnalysisTutor-pt-highlight-03"
+        ],
+        "downloadHighlightIds": [
           "numericalAnalysisTutor-pt-highlight-02",
           "numericalAnalysisTutor-pt-highlight-03"
         ]
@@ -192,7 +246,7 @@
     "experiences": [
       {
         "experienceId": "bidvestNoonan-en",
-        "print": true,
+        "print": false,
         "highlightIds": ["bidvestNoonan-en-highlight-01"]
       },
       {
@@ -214,6 +268,19 @@
           "linx-en-highlight-19",
           "linx-en-highlight-20",
           "linx-en-highlight-21"
+        ],
+        "downloadHighlightIds": [
+          "linx-en-highlight-01",
+          "linx-en-highlight-02",
+          "linx-en-highlight-03",
+          "linx-en-highlight-04",
+          "linx-en-highlight-13",
+          "linx-en-highlight-14",
+          "linx-en-highlight-15",
+          "linx-en-highlight-16",
+          "linx-en-highlight-17",
+          "linx-en-highlight-18",
+          "linx-en-highlight-21"
         ]
       },
       {
@@ -229,16 +296,26 @@
           "syshouse-en-highlight-11",
           "syshouse-en-highlight-12",
           "syshouse-en-highlight-13"
+        ],
+        "downloadHighlightIds": [
+          "syshouse-en-highlight-01",
+          "syshouse-en-highlight-07",
+          "syshouse-en-highlight-08",
+          "syshouse-en-highlight-09",
+          "syshouse-en-highlight-10",
+          "syshouse-en-highlight-11",
+          "syshouse-en-highlight-12",
+          "syshouse-en-highlight-13"
         ]
       },
       {
         "experienceId": "japi-en",
-        "print": true,
+        "print": false,
         "highlightIds": ["japi-en-highlight-01", "japi-en-highlight-02", "japi-en-highlight-03"]
       },
       {
         "experienceId": "numericalAnalysisTutor-en",
-        "print": true,
+        "print": false,
         "highlightIds": [
           "numericalAnalysisTutor-en-highlight-01",
           "numericalAnalysisTutor-en-highlight-02",

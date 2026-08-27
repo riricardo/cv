@@ -42,6 +42,7 @@ export interface ProfileExperience {
   experienceId: Id
   print: boolean
   highlightIds: Id[]
+  downloadHighlightIds?: Id[]
 }
 
 export interface ExperienceDocument extends TranslatedDocument {
