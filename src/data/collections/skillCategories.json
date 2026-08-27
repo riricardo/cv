@@ -1,0 +1,214 @@
+[
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-backend-en",
+    "translationGroupId": "skill-category-backend",
+    "language": "en",
+    "name": "Backend",
+    "icon": "fa-code",
+    "skillIds": [
+      "skill-csharp",
+      "skill-dot-net",
+      "skill-asp-dot-net",
+      "skill-delphi-datasnap",
+      "skill-rest-apis",
+      "skill-http",
+      "skill-mailkit",
+      "skill-polly"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-backend-pt",
+    "translationGroupId": "skill-category-backend",
+    "language": "pt",
+    "name": "Backend",
+    "icon": "fa-code",
+    "skillIds": [
+      "skill-csharp",
+      "skill-dot-net",
+      "skill-asp-dot-net",
+      "skill-delphi-datasnap",
+      "skill-rest-apis",
+      "skill-http",
+      "skill-mailkit",
+      "skill-polly"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-frontend-en",
+    "translationGroupId": "skill-category-frontend",
+    "language": "en",
+    "name": "Frontend",
+    "icon": "fa-display",
+    "skillIds": [
+      "skill-react",
+      "skill-asp-dot-net-mvc",
+      "skill-asp-dot-net-web-forms",
+      "skill-typescript",
+      "skill-javascript",
+      "skill-html",
+      "skill-css",
+      "skill-tailwind-css",
+      "skill-daisyui",
+      "skill-xaml",
+      "skill-xamarin",
+      "skill-react-native",
+      "skill-windows-forms"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-frontend-pt",
+    "translationGroupId": "skill-category-frontend",
+    "language": "pt",
+    "name": "Frontend",
+    "icon": "fa-display",
+    "skillIds": [
+      "skill-react",
+      "skill-asp-dot-net-mvc",
+      "skill-asp-dot-net-web-forms",
+      "skill-typescript",
+      "skill-javascript",
+      "skill-html",
+      "skill-css",
+      "skill-tailwind-css",
+      "skill-daisyui",
+      "skill-xaml",
+      "skill-xamarin",
+      "skill-react-native",
+      "skill-windows-forms"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-databases-en",
+    "translationGroupId": "skill-category-databases",
+    "language": "en",
+    "name": "Databases",
+    "icon": "fa-database",
+    "skillIds": [
+      "skill-sql-server",
+      "skill-sql",
+      "skill-dapper",
+      "skill-entity-framework",
+      "skill-ado-dot-net",
+      "skill-sqlclient",
+      "skill-linq",
+      "skill-paradox"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-databases-pt",
+    "translationGroupId": "skill-category-databases",
+    "language": "pt",
+    "name": "Bancos de Dados",
+    "icon": "fa-database",
+    "skillIds": [
+      "skill-sql-server",
+      "skill-sql",
+      "skill-dapper",
+      "skill-entity-framework",
+      "skill-ado-dot-net",
+      "skill-sqlclient",
+      "skill-linq",
+      "skill-paradox"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-architecture-en",
+    "translationGroupId": "skill-category-architecture",
+    "language": "en",
+    "name": "Architecture & Practices",
+    "icon": "fa-layer-group",
+    "skillIds": [
+      "skill-object-oriented-programming",
+      "skill-dependency-injection",
+      "skill-interface-based-design",
+      "skill-cqrs",
+      "skill-mediatr",
+      "skill-mvvm",
+      "skill-mvc",
+      "skill-caching"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-architecture-pt",
+    "translationGroupId": "skill-category-architecture",
+    "language": "pt",
+    "name": "Arquitetura e Práticas",
+    "icon": "fa-layer-group",
+    "skillIds": [
+      "skill-object-oriented-programming",
+      "skill-dependency-injection",
+      "skill-interface-based-design",
+      "skill-cqrs",
+      "skill-mediatr",
+      "skill-mvvm",
+      "skill-mvc",
+      "skill-caching"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-tools-en",
+    "translationGroupId": "skill-category-tools",
+    "language": "en",
+    "name": "Tools",
+    "icon": "fa-wrench",
+    "skillIds": [
+      "skill-delphi",
+      "skill-git",
+      "skill-azure-devops",
+      "skill-jira",
+      "skill-scrum",
+      "skill-firebase-cloud-messaging",
+      "skill-google-play",
+      "skill-chromium-webview",
+      "skill-unmanagedexports"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-category-tools-pt",
+    "translationGroupId": "skill-category-tools",
+    "language": "pt",
+    "name": "Ferramentas",
+    "icon": "fa-wrench",
+    "skillIds": [
+      "skill-delphi",
+      "skill-git",
+      "skill-azure-devops",
+      "skill-jira",
+      "skill-scrum",
+      "skill-firebase-cloud-messaging",
+      "skill-google-play",
+      "skill-chromium-webview",
+      "skill-unmanagedexports"
+    ]
+  }
+]

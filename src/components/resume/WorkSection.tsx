@@ -1,5 +1,5 @@
 import type { Experience, Language } from '../../types/index.ts'
-import type { ResumeText } from '../../data/resume-translations.ts'
+import type { ResumeText } from '../../locales/index.ts'
 import ExperienceSection, { type ExperienceSectionItem } from './ExperienceSection.tsx'
 
 type WorkSectionProps = {
@@ -15,6 +15,7 @@ function mapExperienceToSectionItem(experience: Experience): ExperienceSectionIt
     endDate: experience.endDate,
     highlights: experience.highlights,
     id: experience.id,
+    includeInDownload: experience.includeInDownload,
     location: experience.location,
     skills: experience.technologies,
     startDate: experience.startDate,

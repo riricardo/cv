@@ -1,5 +1,5 @@
 import type { SpokenLanguage } from '../../types/index.ts'
-import type { ResumeText } from '../../data/resume-translations.ts'
+import type { ResumeText } from '../../locales/index.ts'
 import SectionTitle from './SectionTitle.tsx'
 
 type LanguagesSectionProps = {
@@ -21,7 +21,7 @@ function LanguagesSection({ languages, text }: LanguagesSectionProps) {
             <span aria-hidden="true" className="language-marker">
               •
             </span>
-            {spokenLanguage.name} - {spokenLanguage.level}
+            {spokenLanguage.name} - {spokenLanguage.proficiency}
           </li>
         ))}
       </ul>

@@ -1,0 +1,40 @@
+[
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "personal-info-ricardo-en",
+    "translationGroupId": "personal-info-ricardo",
+    "language": "en",
+    "name": "Ricardo Cardona",
+    "fullName": "Ricardo Augusto Cardona",
+    "location": "Leixlip, Ireland",
+    "displayLocation": "Ireland",
+    "email": "ricardo.augusto.cardona@gmail.com",
+    "phone": "+353 83 189 4310",
+    "nationality": "Portuguese & Brazilian | EU Citizen",
+    "professionalDescription": "Software Developer",
+    "githubUrl": "https://github.com/riricardo",
+    "linkedInUrl": "https://www.linkedin.com/in/ricardo-augusto-cardona",
+    "portfolioUrl": "https://riricardo.github.io/portfolio"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "personal-info-ricardo-pt",
+    "translationGroupId": "personal-info-ricardo",
+    "language": "pt",
+    "name": "Ricardo Cardona",
+    "fullName": "Ricardo Augusto Cardona",
+    "location": "Leixlip, Irlanda",
+    "displayLocation": "Irlanda",
+    "email": "ricardo.augusto.cardona@gmail.com",
+    "phone": "+353 83 189 4310",
+    "nationality": "Português e Brasileiro | Cidadão da União Europeia",
+    "professionalDescription": "Desenvolvedor de Software",
+    "githubUrl": "https://github.com/riricardo",
+    "linkedInUrl": "https://www.linkedin.com/in/ricardo-augusto-cardona",
+    "portfolioUrl": "https://riricardo.github.io/portfolio"
+  }
+]

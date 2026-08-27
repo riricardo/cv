@@ -1,0 +1,922 @@
+[
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-csharp",
+    "name": "C#",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-dot-net",
+    "name": ".NET",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-asp-dot-net",
+    "name": "ASP.NET",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-delphi-datasnap",
+    "name": "Delphi DataSnap",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-rest-apis",
+    "name": "REST APIs",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-http",
+    "name": "HTTP",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mailkit",
+    "name": "MailKit",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-polly",
+    "name": "Polly",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-react",
+    "name": "React",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-asp-dot-net-mvc",
+    "name": "ASP.NET MVC",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-asp-dot-net-web-forms",
+    "name": "ASP.NET Web Forms",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-typescript",
+    "name": "TypeScript",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-javascript",
+    "name": "JavaScript",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-html",
+    "name": "HTML",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-css",
+    "name": "CSS",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-tailwind-css",
+    "name": "Tailwind CSS",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-daisyui",
+    "name": "DaisyUI",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-xaml",
+    "name": "XAML",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-xamarin",
+    "name": "Xamarin",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-react-native",
+    "name": "React Native",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-windows-forms",
+    "name": "Windows Forms",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-sql-server",
+    "name": "SQL Server",
+    "type": "database"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-sql",
+    "name": "SQL",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-dapper",
+    "name": "Dapper",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-entity-framework",
+    "name": "Entity Framework",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-ado-dot-net",
+    "name": "ADO.NET",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-sqlclient",
+    "name": "SqlClient",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-linq",
+    "name": "LINQ",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-paradox",
+    "name": "Paradox",
+    "type": "database"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-object-oriented-programming",
+    "name": "Object-Oriented Programming",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-dependency-injection",
+    "name": "Dependency Injection",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-interface-based-design",
+    "name": "Interface-Based Design",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-cqrs",
+    "name": "CQRS",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mediatr",
+    "name": "MediatR",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mvvm",
+    "name": "MVVM",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mvc",
+    "name": "MVC",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-caching",
+    "name": "Caching",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-delphi",
+    "name": "Delphi",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-git",
+    "name": "Git",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-azure-devops",
+    "name": "Azure DevOps",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-jira",
+    "name": "Jira",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-scrum",
+    "name": "Scrum",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-firebase-cloud-messaging",
+    "name": "Firebase Cloud Messaging",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-google-play",
+    "name": "Google Play",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-chromium-webview",
+    "name": "Chromium WebView",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-unmanagedexports",
+    "name": "UnmanagedExports",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-workplace-safety",
+    "name": "Workplace Safety",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-manual-handling",
+    "name": "Manual Handling",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-teamwork",
+    "name": "Teamwork",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-delphi-7",
+    "name": "Delphi 7",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-webview",
+    "name": "WebView",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-chromium",
+    "name": "Chromium",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mutex",
+    "name": "Mutex",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-svg",
+    "name": "SVG",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-inventory-control",
+    "name": "Inventory Control",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-stock-management",
+    "name": "Stock Management",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-quality-inspection",
+    "name": "Quality Inspection",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-attention-to-detail",
+    "name": "Attention to Detail",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-numerical-analysis",
+    "name": "Numerical Analysis",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mathematics",
+    "name": "Mathematics",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-problem-solving",
+    "name": "Problem Solving",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-technical-communication",
+    "name": "Technical Communication",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-analytical-thinking",
+    "name": "Analytical Thinking",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mentoring",
+    "name": "Mentoring",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-seguranca-no-trabalho",
+    "name": "Segurança no Trabalho",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-trabalho-em-equipe",
+    "name": "Trabalho em Equipe",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-controle-de-estoque",
+    "name": "Controle de Estoque",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-gestao-de-estoque",
+    "name": "Gestão de Estoque",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-inspecao-de-qualidade",
+    "name": "Inspeção de Qualidade",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-atencao-aos-detalhes",
+    "name": "Atenção aos Detalhes",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-calculo-numerico",
+    "name": "Cálculo Numérico",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-matematica",
+    "name": "Matemática",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-resolucao-de-problemas",
+    "name": "Resolução de Problemas",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-comunicacao-tecnica",
+    "name": "Comunicação Técnica",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-pensamento-analitico",
+    "name": "Pensamento Analítico",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mentoria",
+    "name": "Mentoria",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-c",
+    "name": "C",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-assembly",
+    "name": "Assembly",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-8051-microcontroller",
+    "name": "8051 Microcontroller",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-digital-systems",
+    "name": "Digital Systems",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-microprocessors",
+    "name": "Microprocessors",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mathematical-modelling",
+    "name": "Mathematical Modelling",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-automation",
+    "name": "Automation",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-electronic-circuits",
+    "name": "Electronic Circuits",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-engineering-analysis",
+    "name": "Engineering Analysis",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-cross-cultural-communication",
+    "name": "Cross-Cultural Communication",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-english",
+    "name": "English",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-node-dot-js",
+    "name": "Node.js",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-mobile-development",
+    "name": "Mobile Development",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-client-server-communication",
+    "name": "Client-Server Communication",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-microcontrolador-8051",
+    "name": "Microcontrolador 8051",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-sistemas-digitais",
+    "name": "Sistemas Digitais",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-microprocessadores",
+    "name": "Microprocessadores",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-modelagem-matematica",
+    "name": "Modelagem Matemática",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-automacao",
+    "name": "Automação",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-circuitos-eletronicos",
+    "name": "Circuitos Eletrônicos",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-analise-de-engenharia",
+    "name": "Análise de Engenharia",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-comunicacao-intercultural",
+    "name": "Comunicação Intercultural",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-ingles",
+    "name": "Inglês",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-desenvolvimento-mobile",
+    "name": "Desenvolvimento Mobile",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-comunicacao-cliente-servidor",
+    "name": "Comunicação Cliente-Servidor",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-vite",
+    "name": "Vite",
+    "type": "framework"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-responsive-design",
+    "name": "Responsive Design",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-data-driven-ui",
+    "name": "Data-Driven UI",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-internationalisation",
+    "name": "Internationalisation",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-print-css",
+    "name": "Print CSS",
+    "type": "language"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-github-pages",
+    "name": "GitHub Pages",
+    "type": "tool"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-pcb-design",
+    "name": "PCB Design",
+    "type": "concept"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-robotics",
+    "name": "Robotics",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-hardware-testing",
+    "name": "Hardware Testing",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-embedded-systems",
+    "name": "Embedded Systems",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-projeto-de-pcb",
+    "name": "Projeto de PCB",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-robotica",
+    "name": "Robótica",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-testes-de-hardware",
+    "name": "Testes de Hardware",
+    "type": "skill"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "skill-sistemas-embarcados",
+    "name": "Sistemas Embarcados",
+    "type": "skill"
+  }
+]

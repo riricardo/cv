@@ -11,10 +11,8 @@ import {
   WhyMeDialog,
 } from '../components/resume/index.ts'
 import { getRandomProfilePhotoUrl, resumeAssets } from '../constants/assets.ts'
-import { languages } from '../data/languages.ts'
-import { personalInfo as personalInfoData } from '../data/personal-info.ts'
-import { resumeTranslations } from '../data/resume-translations.ts'
 import { getResume } from '../data/resumes/index.ts'
+import { defaultLocale, locales } from '../locales/index.ts'
 
 type ResumePageProps = {
   resumeId?: string
@@ -30,9 +28,8 @@ function ResumePage({ resumeId }: ResumePageProps) {
     document.documentElement.lang = language
   }, [language])
 
-  const text = resumeTranslations[language]
-  const personalInfo = personalInfoData[language]
-  const spokenLanguages = languages[language]
+  const text = locales[language] ?? defaultLocale
+  const personalInfo = resume.personalInfo
 
   return (
     <div className="resume-page min-h-screen overflow-x-hidden bg-[linear-gradient(135deg,#f8fafc_0%,#eef4ff_42%,#f7f8fb_100%)] px-2 py-3 text-slate-900 sm:px-6 sm:py-4 lg:px-8">
@@ -64,8 +61,8 @@ function ResumePage({ resumeId }: ResumePageProps) {
           <ProjectsSection projects={resume.projects} text={text} />
 
           <div className="resume-section mt-8 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-            <SkillsSection skills={resume.skills} text={text} />
-            <LanguagesSection languages={spokenLanguages} text={text} />
+            <SkillsSection skillCategories={resume.skillCategories} text={text} />
+            <LanguagesSection languages={resume.spokenLanguages} text={text} />
           </div>
 
           <EducationSection

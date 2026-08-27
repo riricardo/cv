@@ -1,0 +1,50 @@
+[
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "software-en",
+    "name": "Software resume EN",
+    "language": "en",
+    "profileId": "profile-software-en",
+    "whyText": [
+      "Thanks for asking. I think I can be a strong fit for teams that need a developer who is comfortable entering an existing system, understanding how it works and making practical improvements without adding unnecessary complexity.",
+      "I bring nearly five years of professional software-development experience across desktop, web, mobile and backend systems, with hands-on work in C#, .NET, ASP.NET, Delphi, SQL Server, REST APIs and enterprise applications.",
+      "A lot of my experience has been around debugging, business rules, database work, integrations and connecting modern services with legacy applications. That has made me careful about maintainability, testing, documentation and how changes affect real users.",
+      "I am also used to working across database, backend and presentation layers, and I am actively deepening my understanding of software design, SOLID principles and architecture. I am a Portuguese and Brazilian citizen with full authorisation to work throughout the European Union."
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "software-pt",
+    "name": "Software resume PT",
+    "language": "pt",
+    "profileId": "profile-software-pt",
+    "whyText": [
+      "Obrigado pelo interesse. Acredito que posso ser uma boa escolha para equipes que precisam de alguém confortável em entrar em sistemas já existentes, entender como eles funcionam e fazer melhorias práticas sem adicionar complexidade desnecessária.",
+      "Tenho quase cinco anos de experiência profissional em desenvolvimento de software para sistemas desktop, web, mobile e backend, com experiência prática em C#, .NET, ASP.NET, Delphi, SQL Server, APIs REST e aplicações corporativas.",
+      "Boa parte da minha experiência envolve debugging, regras de negócio, banco de dados, integrações e conexão entre serviços modernos e aplicações legadas. Isso me tornou cuidadoso com manutenção, testes, documentação e impacto real das mudanças para os usuários.",
+      "Também estou acostumado a contribuir entre banco de dados, backend e interface, e sigo aprofundando meus conhecimentos em design de software, princípios SOLID e arquitetura. Sou cidadão português e brasileiro, com autorização para trabalhar em toda a União Europeia."
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "finn",
+    "name": "FINN ERP/backend resume",
+    "language": "en",
+    "profileId": "profile-erp-backend-en",
+    "whyText": [
+      "Thanks for your interest. I see a strong fit with FINN because my background is in enterprise and ERP-related software, where understanding business rules, data flow and existing systems is essential.",
+      "I bring nearly five years of experience with C#, .NET, Delphi, SQL Server, APIs and integrations, including work connecting modern services with legacy applications and debugging issues across multiple layers.",
+      "I am especially interested in growing into the modern SAP ecosystem at FINN, while bringing a practical software-development mindset: ask good questions, understand the process, take ownership and deliver maintainable solutions."
+    ],
+    "details": {
+      "company": "FINN",
+      "position": "Software Developer"
+    }
+  }
+]

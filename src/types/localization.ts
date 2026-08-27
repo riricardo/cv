@@ -1,3 +1,1 @@
-export type Language = 'en' | 'pt'
-
-export type Localized<T> = Record<Language, T>
+export type Language = string

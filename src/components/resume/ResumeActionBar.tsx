@@ -1,4 +1,4 @@
-import type { ResumeText } from '../../data/resume-translations.ts'
+import type { ResumeText } from '../../locales/index.ts'
 
 type ResumeActionBarProps = {
   faviconUrl: string

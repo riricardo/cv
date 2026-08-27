@@ -1,6 +1,6 @@
 import { useId, useRef, useState } from 'react'
 import type { Language, ResumeHighlight } from '../../types/index.ts'
-import type { ResumeText } from '../../data/resume-translations.ts'
+import type { ResumeText } from '../../locales/index.ts'
 import PeriodText from './PeriodText.tsx'
 import SectionTitle from './SectionTitle.tsx'
 import SkillTags from './SkillTags.tsx'
@@ -12,6 +12,7 @@ export type ExperienceSectionItem = {
   endDate?: string
   highlights?: SectionHighlight[]
   id: string
+  includeInDownload?: boolean
   location?: string
   skills?: string[]
   startDate: string
@@ -112,7 +113,9 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
 
   return (
     <article
-      className="card w-full min-w-0 break-inside-avoid rounded-2xl border border-base-300/80 bg-base-100/75 shadow-sm backdrop-blur transition hover:-translate-y-px hover:shadow-md"
+      className={`card w-full min-w-0 break-inside-avoid rounded-2xl border border-base-300/80 bg-base-100/75 shadow-sm backdrop-blur transition hover:-translate-y-px hover:shadow-md ${
+        item.includeInDownload === false ? 'download-hidden' : ''
+      }`}
       ref={cardRef}
     >
       <div className="card-body min-w-0 p-4 sm:p-5">
@@ -120,7 +123,12 @@ function ExperienceCard({ item, language, text }: ExperienceCardProps) {
           <div className="min-w-0">
             <h3 className="text-lg font-bold text-slate-950">{item.title}</h3>
           </div>
-          <PeriodText endDate={item.endDate} language={language} startDate={item.startDate} />
+          <PeriodText
+            endDate={item.endDate}
+            language={language}
+            presentText={text.present}
+            startDate={item.startDate}
+          />
           <div className="min-w-0 sm:col-start-1">
             <p className="font-semibold text-blue-800">{item.subtitle}</p>
             {item.location ? (

@@ -1,6 +1,19 @@
-import type { Language } from './localization.ts'
+export type Id = string
+export type Language = string
 
-export interface PersonalInfo {
+export interface DocumentMetadata {
+  id: Id
+  version: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface TranslatedDocument extends DocumentMetadata {
+  translationGroupId?: Id
+  language: Language
+}
+
+export interface PersonalInfo extends TranslatedDocument {
   name: string
   fullName?: string
   location: string
@@ -15,6 +28,7 @@ export interface PersonalInfo {
 }
 
 export interface Highlight {
+  id: Id
   category: string
   value: string
 }
@@ -24,47 +38,57 @@ export interface ResumeHighlight {
   value: string
 }
 
-export interface ExperienceProfileHighlight {
-  includeInDownload: boolean
-  index: number
+export interface ProfileExperience {
+  experienceId: Id
+  print: boolean
+  highlightIds: Id[]
 }
 
-export interface ExperienceProfile {
-  [experienceId: string]: ExperienceProfileHighlight[]
-}
-
-interface ExperienceBase {
-  id: string
+export interface ExperienceDocument extends TranslatedDocument {
   company: string
   role: string
   location?: string
   startDate: string
   endDate?: string
   description: string
-  technologies?: string[]
+  skillIds: Id[]
+  highlights: Highlight[]
 }
 
-export interface CatalogExperience extends ExperienceBase {
-  highlights?: Highlight[]
+export interface Experience extends Omit<ExperienceDocument, 'highlights' | 'skillIds'> {
+  includeInDownload: boolean
+  highlights: ResumeHighlight[]
+  technologies: string[]
 }
 
-export interface Experience extends ExperienceBase {
-  highlights?: ResumeHighlight[]
-}
-
-export interface Project {
+export interface ProjectDocument extends TranslatedDocument {
   name: string
   description: string
-  technologies: string[]
+  skillIds: Id[]
   repositoryUrl?: string
   demoUrl?: string
 }
 
-export type SkillAreaId = 'backend' | 'frontend' | 'databases' | 'architecture' | 'tools'
+export interface Project extends Omit<ProjectDocument, 'skillIds'> {
+  technologies: string[]
+}
 
-export type SkillAreas = Record<SkillAreaId, string[]>
+export interface Skill extends DocumentMetadata {
+  name: string
+  type?: string
+}
 
-export interface Education {
+export interface SkillCategoryDocument extends TranslatedDocument {
+  name: string
+  icon?: string
+  skillIds: Id[]
+}
+
+export interface SkillCategory extends Omit<SkillCategoryDocument, 'skillIds'> {
+  skills: string[]
+}
+
+export interface EducationDocument extends TranslatedDocument {
   institution: string
   degree: string
   location?: string
@@ -72,21 +96,44 @@ export interface Education {
   endDate?: string
   description: string
   highlights: string[]
+  skillIds: Id[]
+}
+
+export interface Education extends Omit<EducationDocument, 'skillIds'> {
   technologies: string[]
 }
 
-export interface SpokenLanguage {
+export interface SpokenLanguage extends TranslatedDocument {
   name: string
-  level: string
+  proficiency: string
 }
 
-export interface Resume {
-  id: string
+export interface ProfileDocument extends TranslatedDocument {
+  name: string
+  personalInfoId: Id
+  professionalSummary: string
+  experiences: ProfileExperience[]
+  educationIds: Id[]
+  projectIds: Id[]
+  skillCategoryIds: Id[]
+  spokenLanguageIds: Id[]
+}
+
+export interface ResumeDocument extends DocumentMetadata {
+  name: string
   language: Language
+  profileId: Id
+  whyText: string[]
+  details?: Record<string, string>
+}
+
+export interface Resume extends ResumeDocument {
+  profile: ProfileDocument
+  personalInfo: PersonalInfo
   professionalSummary: string
   experience: Experience[]
   projects: Project[]
-  skills: SkillAreas
+  skillCategories: SkillCategory[]
   education: Education[]
-  whyText: string[]
+  spokenLanguages: SpokenLanguage[]
 }

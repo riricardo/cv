@@ -1,5 +1,5 @@
 import type { Project } from '../../types/index.ts'
-import type { ResumeText } from '../../data/resume-translations.ts'
+import type { ResumeText } from '../../locales/index.ts'
 import SectionTitle from './SectionTitle.tsx'
 
 type ProjectsSectionProps = {
@@ -15,7 +15,7 @@ function ProjectsSection({ projects, text }: ProjectsSectionProps) {
         {projects.map((project) => (
           <article
             className="card w-full min-w-0 break-inside-avoid rounded-2xl border border-base-300/80 bg-base-100/75 shadow-sm backdrop-blur transition hover:-translate-y-px hover:shadow-md"
-            key={project.name}
+            key={project.id}
           >
             <div className="card-body min-w-0 p-4 sm:p-5">
               <h3 className="font-bold text-slate-950">{project.name}</h3>

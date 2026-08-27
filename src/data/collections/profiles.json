@@ -1,0 +1,260 @@
+[
+  {
+    "id": "profile-software-en",
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "translationGroupId": "profile-software",
+    "language": "en",
+    "name": "Software Developer EN",
+    "personalInfoId": "personal-info-ricardo-en",
+    "professionalSummary": "Software Developer focused on building maintainable business applications and improving complex existing systems. I bring a practical background across legacy and modern software, with a strong interest in clean design, reliable integrations and solutions that are simple for teams to understand and evolve. EU citizen authorised to work across the European Union without sponsorship.",
+    "experiences": [
+      {
+        "experienceId": "bidvestNoonan-en",
+        "print": true,
+        "highlightIds": ["bidvestNoonan-en-highlight-01"]
+      },
+      {
+        "experienceId": "linx-en",
+        "print": true,
+        "highlightIds": [
+          "linx-en-highlight-01",
+          "linx-en-highlight-02",
+          "linx-en-highlight-03",
+          "linx-en-highlight-04",
+          "linx-en-highlight-05",
+          "linx-en-highlight-06",
+          "linx-en-highlight-07",
+          "linx-en-highlight-08",
+          "linx-en-highlight-09",
+          "linx-en-highlight-10",
+          "linx-en-highlight-11",
+          "linx-en-highlight-12",
+          "linx-en-highlight-13",
+          "linx-en-highlight-14",
+          "linx-en-highlight-15",
+          "linx-en-highlight-16",
+          "linx-en-highlight-17",
+          "linx-en-highlight-18",
+          "linx-en-highlight-19",
+          "linx-en-highlight-20",
+          "linx-en-highlight-21"
+        ]
+      },
+      {
+        "experienceId": "syshouse-en",
+        "print": true,
+        "highlightIds": [
+          "syshouse-en-highlight-01",
+          "syshouse-en-highlight-02",
+          "syshouse-en-highlight-03",
+          "syshouse-en-highlight-04",
+          "syshouse-en-highlight-05",
+          "syshouse-en-highlight-06",
+          "syshouse-en-highlight-07",
+          "syshouse-en-highlight-08",
+          "syshouse-en-highlight-09",
+          "syshouse-en-highlight-10",
+          "syshouse-en-highlight-11",
+          "syshouse-en-highlight-12",
+          "syshouse-en-highlight-13",
+          "syshouse-en-highlight-14",
+          "syshouse-en-highlight-15"
+        ]
+      },
+      {
+        "experienceId": "japi-en",
+        "print": true,
+        "highlightIds": ["japi-en-highlight-01", "japi-en-highlight-02", "japi-en-highlight-03"]
+      },
+      {
+        "experienceId": "numericalAnalysisTutor-en",
+        "print": true,
+        "highlightIds": [
+          "numericalAnalysisTutor-en-highlight-01",
+          "numericalAnalysisTutor-en-highlight-02",
+          "numericalAnalysisTutor-en-highlight-03"
+        ]
+      }
+    ],
+    "educationIds": ["education-usp-en", "education-linkoping-en", "education-senac-en"],
+    "projectIds": ["project-cvwebsite-en", "project-warthogrobotics-en"],
+    "skillCategoryIds": [
+      "skill-category-backend-en",
+      "skill-category-frontend-en",
+      "skill-category-databases-en",
+      "skill-category-architecture-en",
+      "skill-category-tools-en"
+    ],
+    "spokenLanguageIds": ["spoken-language-english-en", "spoken-language-portuguese-en"]
+  },
+  {
+    "id": "profile-software-pt",
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "translationGroupId": "profile-software",
+    "language": "pt",
+    "name": "Software Developer PT",
+    "personalInfoId": "personal-info-ricardo-pt",
+    "professionalSummary": "Desenvolvedor de Software com foco em construir aplicações de negócio de fácil manutenção e melhorar sistemas complexos já existentes. Tenho uma base prática em software legado e moderno, com forte interesse por design limpo, integrações confiáveis e soluções simples para equipes entenderem e evoluírem. Sou cidadão da União Europeia e posso trabalhar em qualquer país da UE sem necessidade de patrocínio.",
+    "experiences": [
+      {
+        "experienceId": "bidvestNoonan-pt",
+        "print": true,
+        "highlightIds": ["bidvestNoonan-pt-highlight-01"]
+      },
+      {
+        "experienceId": "linx-pt",
+        "print": true,
+        "highlightIds": [
+          "linx-pt-highlight-01",
+          "linx-pt-highlight-02",
+          "linx-pt-highlight-03",
+          "linx-pt-highlight-04",
+          "linx-pt-highlight-05",
+          "linx-pt-highlight-06",
+          "linx-pt-highlight-07",
+          "linx-pt-highlight-08",
+          "linx-pt-highlight-09",
+          "linx-pt-highlight-10",
+          "linx-pt-highlight-11",
+          "linx-pt-highlight-12",
+          "linx-pt-highlight-13",
+          "linx-pt-highlight-14",
+          "linx-pt-highlight-15",
+          "linx-pt-highlight-16",
+          "linx-pt-highlight-17",
+          "linx-pt-highlight-18",
+          "linx-pt-highlight-19",
+          "linx-pt-highlight-20",
+          "linx-pt-highlight-21"
+        ]
+      },
+      {
+        "experienceId": "syshouse-pt",
+        "print": true,
+        "highlightIds": [
+          "syshouse-pt-highlight-01",
+          "syshouse-pt-highlight-02",
+          "syshouse-pt-highlight-03",
+          "syshouse-pt-highlight-04",
+          "syshouse-pt-highlight-05",
+          "syshouse-pt-highlight-06",
+          "syshouse-pt-highlight-07",
+          "syshouse-pt-highlight-08",
+          "syshouse-pt-highlight-09",
+          "syshouse-pt-highlight-10",
+          "syshouse-pt-highlight-11",
+          "syshouse-pt-highlight-12",
+          "syshouse-pt-highlight-13",
+          "syshouse-pt-highlight-14",
+          "syshouse-pt-highlight-15"
+        ]
+      },
+      {
+        "experienceId": "japi-pt",
+        "print": true,
+        "highlightIds": ["japi-pt-highlight-01", "japi-pt-highlight-02", "japi-pt-highlight-03"]
+      },
+      {
+        "experienceId": "numericalAnalysisTutor-pt",
+        "print": true,
+        "highlightIds": [
+          "numericalAnalysisTutor-pt-highlight-01",
+          "numericalAnalysisTutor-pt-highlight-02",
+          "numericalAnalysisTutor-pt-highlight-03"
+        ]
+      }
+    ],
+    "educationIds": ["education-usp-pt", "education-linkoping-pt", "education-senac-pt"],
+    "projectIds": ["project-cvwebsite-pt", "project-warthogrobotics-pt"],
+    "skillCategoryIds": [
+      "skill-category-backend-pt",
+      "skill-category-frontend-pt",
+      "skill-category-databases-pt",
+      "skill-category-architecture-pt",
+      "skill-category-tools-pt"
+    ],
+    "spokenLanguageIds": ["spoken-language-ingles-pt", "spoken-language-portugues-pt"]
+  },
+  {
+    "id": "profile-erp-backend-en",
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "translationGroupId": "profile-erp-backend",
+    "language": "en",
+    "name": "ERP/backend Developer EN",
+    "personalInfoId": "personal-info-ricardo-en",
+    "professionalSummary": "Software Developer interested in applying my enterprise-software and ERP background to the modern SAP ecosystem. I like understanding processes across all layers and using that context to improve quality, cost efficiency, security and maintainability. EU citizen authorised to work across the European Union without sponsorship.",
+    "experiences": [
+      {
+        "experienceId": "bidvestNoonan-en",
+        "print": true,
+        "highlightIds": ["bidvestNoonan-en-highlight-01"]
+      },
+      {
+        "experienceId": "linx-en",
+        "print": true,
+        "highlightIds": [
+          "linx-en-highlight-01",
+          "linx-en-highlight-02",
+          "linx-en-highlight-03",
+          "linx-en-highlight-04",
+          "linx-en-highlight-05",
+          "linx-en-highlight-06",
+          "linx-en-highlight-13",
+          "linx-en-highlight-14",
+          "linx-en-highlight-15",
+          "linx-en-highlight-16",
+          "linx-en-highlight-17",
+          "linx-en-highlight-18",
+          "linx-en-highlight-19",
+          "linx-en-highlight-20",
+          "linx-en-highlight-21"
+        ]
+      },
+      {
+        "experienceId": "syshouse-en",
+        "print": true,
+        "highlightIds": [
+          "syshouse-en-highlight-01",
+          "syshouse-en-highlight-02",
+          "syshouse-en-highlight-07",
+          "syshouse-en-highlight-08",
+          "syshouse-en-highlight-09",
+          "syshouse-en-highlight-10",
+          "syshouse-en-highlight-11",
+          "syshouse-en-highlight-12",
+          "syshouse-en-highlight-13"
+        ]
+      },
+      {
+        "experienceId": "japi-en",
+        "print": true,
+        "highlightIds": ["japi-en-highlight-01", "japi-en-highlight-02", "japi-en-highlight-03"]
+      },
+      {
+        "experienceId": "numericalAnalysisTutor-en",
+        "print": true,
+        "highlightIds": [
+          "numericalAnalysisTutor-en-highlight-01",
+          "numericalAnalysisTutor-en-highlight-02",
+          "numericalAnalysisTutor-en-highlight-03"
+        ]
+      }
+    ],
+    "educationIds": ["education-usp-en", "education-linkoping-en", "education-senac-en"],
+    "projectIds": ["project-cvwebsite-en", "project-warthogrobotics-en"],
+    "skillCategoryIds": [
+      "skill-category-backend-en",
+      "skill-category-frontend-en",
+      "skill-category-databases-en",
+      "skill-category-architecture-en",
+      "skill-category-tools-en"
+    ],
+    "spokenLanguageIds": ["spoken-language-english-en", "spoken-language-portuguese-en"]
+  }
+]
