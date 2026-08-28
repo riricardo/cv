@@ -22,9 +22,6 @@ function EditHome({ sections }: { sections: EditSection[] }) {
                 className="fa-solid fa-chevron-right mt-1 text-sm text-slate-400 transition group-hover:text-blue-700"
               />
             </div>
-            <p className="mt-4 text-xs font-bold uppercase tracking-normal text-slate-500">
-              {section.documents.length} items
-            </p>
           </Link>
         ))}
       </div>

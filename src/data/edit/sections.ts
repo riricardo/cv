@@ -4,7 +4,6 @@ import personalInfoJson from '../collections/personalInfo.json' with { type: 'js
 import profilesJson from '../collections/profiles.json' with { type: 'json' }
 import projectsJson from '../collections/projects.json' with { type: 'json' }
 import resumesJson from '../collections/resumes.json' with { type: 'json' }
-import skillCategoriesJson from '../collections/skillCategories.json' with { type: 'json' }
 import skillsJson from '../collections/skills.json' with { type: 'json' }
 import spokenLanguagesJson from '../collections/spokenLanguages.json' with { type: 'json' }
 import type { EditableRecord, EditSection } from '../../types/edit.ts'
@@ -45,12 +44,6 @@ export const editSections: EditSection[] = [
     title: 'Skills',
     description: 'Individual skills used across resumes.',
     documents: skillsJson as unknown as EditableRecord[],
-  },
-  {
-    id: 'skill-categories',
-    title: 'Skill categories',
-    description: 'Skill groups shown in the resume.',
-    documents: skillCategoriesJson as unknown as EditableRecord[],
   },
   {
     id: 'languages',

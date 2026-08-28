@@ -1,7 +1,6 @@
 {
   "actionsLabel": "Interactive resume actions",
   "interactiveMessage": "This resume includes interactive features!",
-  "whyTitle": "Why Ric?",
   "portfolio": "Portfolio",
   "download": "Download CV",
   "downloadAriaLabel": "Download CV by opening the print dialog",
@@ -12,7 +11,6 @@
   "skills": "Skills",
   "languages": "Languages",
   "education": "Education",
-  "closeWhyDialog": "Close Why Ric dialog",
   "close": "close",
   "seeLess": "See less",
   "seeMore": "See more",

@@ -31,6 +31,10 @@ function ResumePage({ resumeId }: ResumePageProps) {
   const text = locales[language] ?? defaultLocale
   const personalInfo = resume.personalInfo
 
+  useEffect(() => {
+    document.title = personalInfo.pageTitle
+  }, [personalInfo.pageTitle])
+
   return (
     <div className="resume-page min-h-screen overflow-x-hidden bg-[linear-gradient(135deg,#f8fafc_0%,#eef4ff_42%,#f7f8fb_100%)] px-2 py-3 text-slate-900 sm:px-6 sm:py-4 lg:px-8">
       <ResumeActionBar
@@ -38,6 +42,7 @@ function ResumePage({ resumeId }: ResumePageProps) {
         onWhyClick={() => whyMeDialogRef.current?.showModal()}
         portfolioUrl={personalInfo.portfolioUrl}
         text={text}
+        whyTitle={personalInfo.whyTitle}
       />
 
       <main className="resume-document card mx-auto w-full max-w-5xl min-w-0 rounded-2xl border border-base-300/80 bg-base-100/80 shadow-xl ring-1 ring-base-300/70 backdrop-blur-xl sm:rounded-4xl">
@@ -78,6 +83,7 @@ function ResumePage({ resumeId }: ResumePageProps) {
         dialogRef={whyMeDialogRef}
         faviconUrl={resumeAssets.faviconUrl}
         text={text}
+        title={personalInfo.whyTitle}
         whyText={resume.whyText}
       />
     </div>

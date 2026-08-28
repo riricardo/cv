@@ -1,7 +1,6 @@
 {
   "actionsLabel": "Ações interativas do currículo",
   "interactiveMessage": "Este currículo inclui recursos interativos!",
-  "whyTitle": "Por que Ric?",
   "portfolio": "Portfólio",
   "download": "Baixar CV",
   "downloadAriaLabel": "Baixar CV abrindo a janela de impressão",
@@ -12,7 +11,6 @@
   "skills": "Competências",
   "languages": "Idiomas",
   "education": "Formação",
-  "closeWhyDialog": "Fechar diálogo Por que Ric",
   "close": "fechar",
   "seeLess": "Ver menos",
   "seeMore": "Ver mais",

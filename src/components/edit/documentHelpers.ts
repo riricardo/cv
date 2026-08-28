@@ -35,6 +35,14 @@ export function getDocumentSubtitle(document: EditableRecord) {
 }
 
 export function formatKey(key: string) {
+  if (key === 'linkId') {
+    return 'Link ID'
+  }
+
+  if (key === 'publicLink') {
+    return 'Public link'
+  }
+
   return key
     .replace(/Ids$/, 's')
     .replace(/Id$/, '')
@@ -43,7 +51,7 @@ export function formatKey(key: string) {
 }
 
 export function isReferenceField(key?: string) {
-  return Boolean(key && /Id(s)?$/.test(key))
+  return Boolean(key && key !== 'linkId' && /Id(s)?$/.test(key))
 }
 
 export function shouldDisplayField(key: string) {

@@ -4,7 +4,6 @@ import ptJson from './pt.json' with { type: 'json' }
 export type Locale = {
   actionsLabel: string
   interactiveMessage: string
-  whyTitle: string
   portfolio: string
   download: string
   downloadAriaLabel: string
@@ -15,7 +14,6 @@ export type Locale = {
   skills: string
   languages: string
   education: string
-  closeWhyDialog: string
   close: string
   seeLess: string
   seeMore: string

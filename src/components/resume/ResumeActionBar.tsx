@@ -5,9 +5,16 @@ type ResumeActionBarProps = {
   onWhyClick: () => void
   portfolioUrl: string
   text: ResumeText
+  whyTitle: string
 }
 
-function ResumeActionBar({ faviconUrl, onWhyClick, portfolioUrl, text }: ResumeActionBarProps) {
+function ResumeActionBar({
+  faviconUrl,
+  onWhyClick,
+  portfolioUrl,
+  text,
+  whyTitle,
+}: ResumeActionBarProps) {
   return (
     <aside
       aria-label={text.actionsLabel}
@@ -18,7 +25,7 @@ function ResumeActionBar({ faviconUrl, onWhyClick, portfolioUrl, text }: ResumeA
       <div className="grid w-full min-w-0 grid-cols-1 gap-2 sm:w-auto sm:grid-cols-3">
         <button className="toolbar-button" onClick={onWhyClick} type="button">
           <img alt="" className="h-4 w-4" src={faviconUrl} />
-          {text.whyTitle}
+          {whyTitle}
         </button>
         <a className="toolbar-button" href={portfolioUrl} rel="noreferrer" target="_blank">
           <span aria-hidden="true" className="fa-solid fa-code" />

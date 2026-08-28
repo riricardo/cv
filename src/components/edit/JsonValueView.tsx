@@ -1,10 +1,12 @@
 import type React from 'react'
+import { Link } from 'react-router-dom'
 import type { JsonValue } from '../../types/edit.ts'
 import {
   getReferencedRecord,
   getReferenceSubtitle,
   getReferenceTitle,
 } from '../../data/edit/references.ts'
+import { formatEditDate } from './dateFormatting.ts'
 import { formatKey, isReferenceField, shouldDisplayField } from './documentHelpers.ts'
 
 function JsonValueView({
@@ -55,6 +57,25 @@ function JsonValueView({
     return value ? 'true' : 'false'
   }
 
+  if (typeof value === 'string') {
+    if (fieldKey === 'publicLink') {
+      return (
+        <Link
+          className="break-anywhere font-bold text-blue-800 hover:text-blue-950"
+          to={`/${value}`}
+        >
+          /#/{value}
+        </Link>
+      )
+    }
+
+    const formattedDate = formatEditDate(fieldKey, value)
+
+    if (formattedDate) {
+      return <span className="break-anywhere">{formattedDate}</span>
+    }
+  }
+
   if (typeof value === 'string' && isReferenceField(fieldKey)) {
     const referencedRecord = getReferencedRecord(value)
 
@@ -74,7 +95,7 @@ function ReferenceCard({ record }: { record: ReturnType<typeof getReferencedReco
   const subtitle = getReferenceSubtitle(record)
 
   return (
-    <div className="rounded-md border border-slate-200 bg-white px-3 py-2 shadow-sm">
+    <div className="rounded-md bg-slate-50 px-3 py-2">
       <p className="break-anywhere font-bold text-slate-900">{getReferenceTitle(record)}</p>
       {subtitle ? (
         <p className="break-anywhere mt-1 text-xs leading-5 text-slate-600">{subtitle}</p>

@@ -48,7 +48,10 @@ const spokenLanguagesById = mapById(spokenLanguageDocuments)
 export const defaultResumeId = 'software-en'
 
 export const resumes: Record<string, ResumeDocument> = Object.fromEntries(
-  resumeDocuments.map((resume) => [resume.id, resume]),
+  resumeDocuments.flatMap((resume) => [
+    [resume.id, resume],
+    [resume.linkId, resume],
+  ]),
 )
 
 export function getResume(resumeId: string = defaultResumeId): Resume {
@@ -176,7 +179,14 @@ function getRequired<T>(documents: Map<Id, T>, id: Id, context: string): T {
 validateCollections()
 
 function validateCollections() {
+  const resumeLinkIds = new Set<Id>()
+
   for (const resume of resumeDocuments) {
+    if (resumeLinkIds.has(resume.linkId)) {
+      throw new Error(`Resume linkId "${resume.linkId}" is used by more than one resume.`)
+    }
+
+    resumeLinkIds.add(resume.linkId)
     getRequired(profilesById, resume.profileId, `Resume "${resume.id}" profileId`)
   }
 

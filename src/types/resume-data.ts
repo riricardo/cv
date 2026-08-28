@@ -22,6 +22,8 @@ export interface PersonalInfo extends TranslatedDocument {
   phone?: string
   nationality?: string
   professionalDescription: string
+  pageTitle: string
+  whyTitle: string
   githubUrl: string
   linkedInUrl: string
   portfolioUrl: string
@@ -122,6 +124,7 @@ export interface ProfileDocument extends TranslatedDocument {
 
 export interface ResumeDocument extends DocumentMetadata {
   name: string
+  linkId: string
   language: Language
   profileId: Id
   whyText: string[]

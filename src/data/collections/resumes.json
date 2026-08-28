@@ -5,6 +5,7 @@
     "updatedAt": "2026-08-20T00:00:00.000Z",
     "id": "software-en",
     "name": "Software resume EN",
+    "linkId": "software-en",
     "language": "en",
     "profileId": "profile-software-en",
     "whyText": [
@@ -20,6 +21,7 @@
     "updatedAt": "2026-08-20T00:00:00.000Z",
     "id": "software-pt",
     "name": "Software resume PT",
+    "linkId": "software-pt",
     "language": "pt",
     "profileId": "profile-software-pt",
     "whyText": [
@@ -35,6 +37,7 @@
     "updatedAt": "2026-08-20T00:00:00.000Z",
     "id": "finn",
     "name": "FINN ERP/backend resume",
+    "linkId": "finn",
     "language": "en",
     "profileId": "profile-erp-backend-en",
     "whyText": [
