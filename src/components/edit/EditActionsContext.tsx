@@ -1,5 +1,5 @@
 import type React from 'react'
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { editSectionDefinitions } from '../../data/edit/sections.ts'
 import {
@@ -85,6 +85,20 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       runConfirmedDelete: () => {
         try {
           if (confirmTarget) {
+            const authValidation = validateMasterKey(loginValue)
+
+            if (!authValidation.ok) {
+              showToast('error', authValidation.message)
+              return
+            }
+
+            const validation = validateDeleteTarget(collections, confirmTarget)
+
+            if (!validation.ok) {
+              showToast('error', validation.message)
+              return
+            }
+
             updateCollections((draft) => deleteTarget(draft, confirmTarget))
           }
           setConfirmTarget(undefined)
@@ -96,6 +110,20 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       runEditSave: (nextValue) => {
         try {
           if (editTarget) {
+            const authValidation = validateMasterKey(loginValue)
+
+            if (!authValidation.ok) {
+              showToast('error', authValidation.message)
+              return
+            }
+
+            const validation = validateSaveTarget(collections, editTarget, nextValue)
+
+            if (!validation.ok) {
+              showToast('error', validation.message)
+              return
+            }
+
             updateCollections((draft) => saveTarget(draft, editTarget, nextValue))
           }
           setEditTarget(undefined)
@@ -117,7 +145,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       sections,
       toast,
     }),
-    [activeTarget, confirmTarget, editTarget, loginValue, sections, toast],
+    [activeTarget, collections, confirmTarget, editTarget, loginValue, sections, toast],
   )
 
   function updateCollections(applyChange: (draft: EditableCollections) => void) {
@@ -188,10 +216,50 @@ function ItemActionModal() {
 function EditValueModal() {
   const { closeEditModal, editTarget, runEditSave } = useEditActions()
   const initialValue = useMemo(() => buildEditableValue(editTarget), [editTarget])
+  const formRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useState<JsonValue>(() => initialValue)
 
   if (!editTarget) {
     return null
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key !== 'Enter') {
+      return
+    }
+
+    const targetElement = event.target as HTMLElement
+    const fieldElement = targetElement.closest('input, select, textarea') as HTMLElement | null
+
+    if (!fieldElement) {
+      return
+    }
+
+    if (fieldElement.tagName === 'TEXTAREA' && !event.metaKey && !event.ctrlKey) {
+      return
+    }
+
+    event.preventDefault()
+
+    if (fieldElement.tagName === 'TEXTAREA') {
+      runEditSave(value)
+      return
+    }
+
+    const fields = Array.from(
+      formRef.current?.querySelectorAll<HTMLElement>(
+        'input:not([disabled]), select:not([disabled]), textarea:not([disabled])',
+      ) ?? [],
+    ).filter((element) => element.tabIndex !== -1)
+    const currentIndex = fields.indexOf(fieldElement)
+    const nextField = currentIndex >= 0 ? fields[currentIndex + 1] : undefined
+
+    if (nextField) {
+      nextField.focus()
+      return
+    }
+
+    runEditSave(value)
   }
 
   return (
@@ -199,15 +267,17 @@ function EditValueModal() {
       onClose={closeEditModal}
       title={editTarget.action === 'add' ? editTarget.label : `Edit ${editTarget.label}`}
     >
-      <FieldEditor target={editTarget} value={value} onChange={setValue} />
-      <div className="mt-4 flex justify-end">
-        <button
-          className="edit-modal-button edit-modal-button-primary"
-          onClick={() => runEditSave(value)}
-          type="button"
-        >
-          Save
-        </button>
+      <div onKeyDown={handleKeyDown} ref={formRef}>
+        <FieldEditor target={editTarget} value={value} onChange={setValue} />
+        <div className="mt-4 flex justify-end">
+          <button
+            className="edit-modal-button edit-modal-button-primary"
+            onClick={() => runEditSave(value)}
+            type="button"
+          >
+            Save
+          </button>
+        </div>
       </div>
     </EditModal>
   )
@@ -788,6 +858,325 @@ function formatEditableValue(value: JsonValue | undefined) {
   }
 
   return JSON.stringify(value, null, 2)
+}
+
+type ValidationResult = { ok: true; message: string } | { ok: false; message: string }
+
+function validateMasterKey(loginValue: string): ValidationResult {
+  const masterKey = String(import.meta.env.VITE_MASTER_KEY ?? '')
+
+  if (!masterKey) {
+    return invalid('Invalid access.')
+  }
+
+  if (loginValue !== masterKey) {
+    return invalid('Invalid access.')
+  }
+
+  return valid('Master key accepted.')
+}
+
+function validateSaveTarget(
+  collections: EditableCollections,
+  target: EditActionTarget,
+  rawValue: JsonValue,
+): ValidationResult {
+  const documents = getEditableDocuments(collections, target.sectionId)
+
+  if (!documents) {
+    return invalid(`Collection "${target.sectionId}" is not editable.`)
+  }
+
+  if (target.sectionId === 'skills' && !target.fieldKey) {
+    return validateSkillRecord(rawValue)
+  }
+
+  const document = getTargetDocument(documents, target)
+
+  if (!document && target.documentId) {
+    return invalid(`Document "${target.documentId}" was not found.`)
+  }
+
+  if (!document) {
+    const record = normalizeRecordValue(rawValue)
+
+    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+      return invalid('New records must be structured objects.')
+    }
+
+    return valid('New record is compatible.')
+  }
+
+  if (!target.fieldKey) {
+    const record = normalizeRecordValue(rawValue)
+
+    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+      return invalid('The record edit must be a structured object.')
+    }
+
+    return valid('Record shape is compatible.')
+  }
+
+  const currentValue = document[target.fieldKey]
+
+  if (target.action === 'add' && !Array.isArray(currentValue)) {
+    return invalid(`${formatKey(target.fieldKey)} is not a list.`)
+  }
+
+  if (target.itemIndex !== undefined) {
+    if (!Array.isArray(currentValue)) {
+      return invalid(`${formatKey(target.fieldKey)} is not a list.`)
+    }
+
+    if (target.itemIndex < 0 || target.itemIndex >= currentValue.length) {
+      return invalid(`${formatKey(target.fieldKey)} item was not found.`)
+    }
+  }
+
+  return validateFieldValue(collections, target, rawValue, currentValue)
+}
+
+function validateDeleteTarget(
+  collections: EditableCollections,
+  target: EditActionTarget,
+): ValidationResult {
+  const documents = getEditableDocuments(collections, target.sectionId)
+
+  if (!documents) {
+    return invalid(`Collection "${target.sectionId}" is not editable.`)
+  }
+
+  const document = getTargetDocument(documents, target)
+
+  if (!document) {
+    return invalid(`Document "${target.documentId ?? target.label}" was not found.`)
+  }
+
+  if (!target.fieldKey) {
+    return valid('Document can be cleared or removed.')
+  }
+
+  const currentValue = document[target.fieldKey]
+
+  if (currentValue === undefined) {
+    return invalid(`${formatKey(target.fieldKey)} was not found.`)
+  }
+
+  if (target.itemIndex !== undefined) {
+    if (!Array.isArray(currentValue)) {
+      return invalid(`${formatKey(target.fieldKey)} is not a list.`)
+    }
+
+    if (target.itemIndex < 0 || target.itemIndex >= currentValue.length) {
+      return invalid(`${formatKey(target.fieldKey)} item was not found.`)
+    }
+  }
+
+  return valid('Delete target is compatible.')
+}
+
+function validateFieldValue(
+  collections: EditableCollections,
+  target: EditActionTarget,
+  rawValue: JsonValue,
+  currentValue: JsonValue | undefined,
+): ValidationResult {
+  switch (target.fieldKey) {
+    case 'language':
+      return languageOptions.includes(String(rawValue))
+        ? valid('Language is compatible.')
+        : invalid('Language must be selected from the supported list.')
+    case 'startDate':
+      return validateMonthValue(rawValue, false)
+    case 'endDate':
+      return validateMonthValue(rawValue, true)
+    case 'profileId':
+      return collections.profiles.some((profile) => profile.id === rawValue)
+        ? valid('Profile reference is compatible.')
+        : invalid('Selected profile does not exist.')
+    case 'type':
+      return isValidSkillType(rawValue)
+        ? valid('Skill type is compatible.')
+        : invalid('Skill type must be selected from the supported list.')
+    case 'skillIds':
+      return validateSkillReference(collections, rawValue, currentValue)
+    case 'highlights':
+      return validateHighlight(rawValue)
+    case 'details':
+      return validateResumeDetails(rawValue)
+    case 'whyText':
+      return typeof rawValue === 'string' || Array.isArray(rawValue)
+        ? valid('Why text is compatible.')
+        : invalid('Why text must be text.')
+    default:
+      return validateGenericCompatibility(currentValue, rawValue)
+  }
+}
+
+function validateMonthValue(value: JsonValue, allowPresent: boolean): ValidationResult {
+  if (value === '' || value === undefined) {
+    return valid('Date can be empty.')
+  }
+
+  if (allowPresent && value === 'Present') {
+    return valid('Date is compatible.')
+  }
+
+  return typeof value === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(value)
+    ? valid('Date is compatible.')
+    : invalid('Date must use a valid month and year.')
+}
+
+function validateSkillReference(
+  collections: EditableCollections,
+  rawValue: JsonValue,
+  currentValue: JsonValue | undefined,
+): ValidationResult {
+  if (Array.isArray(rawValue)) {
+    const missingSkillId = rawValue.find(
+      (skillId) =>
+        typeof skillId !== 'string' || !collections.skills.some((skill) => skill.id === skillId),
+    )
+
+    return missingSkillId
+      ? invalid(`Skill reference "${String(missingSkillId)}" does not exist.`)
+      : valid('Skill references are compatible.')
+  }
+
+  if (!rawValue || typeof rawValue !== 'object') {
+    return invalid('Skill changes must choose an existing skill or create a new one.')
+  }
+
+  const selectedIds = Array.isArray(currentValue)
+    ? currentValue.filter((item): item is string => typeof item === 'string')
+    : []
+  const mode = typeof rawValue.mode === 'string' ? rawValue.mode : 'existing'
+
+  if (mode === 'existing') {
+    if (typeof rawValue.skillId !== 'string' || !rawValue.skillId) {
+      return invalid('Choose an existing skill before saving.')
+    }
+
+    if (!collections.skills.some((skill) => skill.id === rawValue.skillId)) {
+      return invalid('Selected skill does not exist.')
+    }
+
+    if (selectedIds.includes(rawValue.skillId)) {
+      return invalid('This skill is already linked here.')
+    }
+
+    return valid('Skill reference is compatible.')
+  }
+
+  if (mode === 'new') {
+    if (typeof rawValue.newSkillName !== 'string' || !rawValue.newSkillName.trim()) {
+      return invalid('New skill needs a name.')
+    }
+
+    if (!isValidSkillType(rawValue.newSkillType)) {
+      return invalid('New skill type must be selected from the supported list.')
+    }
+
+    return valid('New skill is compatible.')
+  }
+
+  return invalid('Choose whether to link an existing skill or create a new one.')
+}
+
+function validateSkillRecord(value: JsonValue): ValidationResult {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return invalid('Skill must be a structured object.')
+  }
+
+  if (typeof value.name !== 'string' || !value.name.trim()) {
+    return invalid('Skill needs a name.')
+  }
+
+  if (!isValidSkillType(value.type)) {
+    return invalid('Skill type must be selected from the supported list.')
+  }
+
+  return valid('Skill record is compatible.')
+}
+
+function validateHighlight(value: JsonValue): ValidationResult {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return invalid('Highlight must have category and description.')
+  }
+
+  if (!highlightCategoryOptions.includes(String(value.category ?? ''))) {
+    return invalid('Highlight category must be selected from the supported list.')
+  }
+
+  if (typeof value.value !== 'string') {
+    return invalid('Highlight description must be text.')
+  }
+
+  return valid('Highlight is compatible.')
+}
+
+function validateResumeDetails(value: JsonValue): ValidationResult {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return invalid('Details must include company and position fields.')
+  }
+
+  if (
+    (value.company !== undefined && typeof value.company !== 'string') ||
+    (value.position !== undefined && typeof value.position !== 'string')
+  ) {
+    return invalid('Company and position must be text.')
+  }
+
+  return valid('Resume details are compatible.')
+}
+
+function validateGenericCompatibility(
+  currentValue: JsonValue | undefined,
+  rawValue: JsonValue,
+): ValidationResult {
+  if (currentValue === undefined || currentValue === null) {
+    return valid('Value is compatible.')
+  }
+
+  const normalizedValue = normalizeFieldValue(rawValue)
+
+  if (Array.isArray(currentValue)) {
+    return Array.isArray(normalizedValue)
+      ? valid('List value is compatible.')
+      : invalid('This field expects a list.')
+  }
+
+  if (typeof currentValue === 'object') {
+    return normalizedValue && typeof normalizedValue === 'object' && !Array.isArray(normalizedValue)
+      ? valid('Object value is compatible.')
+      : invalid('This field expects an object.')
+  }
+
+  return typeof normalizedValue === typeof currentValue
+    ? valid('Value type is compatible.')
+    : invalid(`${formatKey('value')} must stay compatible with the current field type.`)
+}
+
+function getEditableDocuments(collections: EditableCollections, sectionId: string) {
+  return collections[sectionId as CollectionKey] as unknown as JsonObject[] | undefined
+}
+
+function getTargetDocument(documents: JsonObject[], target: EditActionTarget) {
+  return target.documentId
+    ? documents.find((document) => document.id === target.documentId)
+    : undefined
+}
+
+function isValidSkillType(value: JsonValue | undefined) {
+  return fixedSkillTypes.some((skillType) => skillType.id === value)
+}
+
+function valid(message: string): ValidationResult {
+  return { message, ok: true }
+}
+
+function invalid(message: string): ValidationResult {
+  return { message, ok: false }
 }
 
 function saveTarget(

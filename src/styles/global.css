@@ -104,6 +104,18 @@ body::before {
   color: var(--color-blue-800);
 }
 
+.toolbar-button:focus-visible,
+.edit-modal-button:focus-visible,
+.edit-icon-button:focus-visible,
+.expandable-toggle:focus-visible {
+  border-color: rgb(37 99 235 / 0.85);
+  box-shadow:
+    0 0 0 3px rgb(59 130 246 / 0.24),
+    0 8px 18px rgb(37 99 235 / 0.12);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .toolbar-button-primary {
   background: linear-gradient(135deg, var(--color-blue-700), #475569);
   border-color: rgb(37 99 235 / 0.35);
@@ -176,6 +188,16 @@ body::before {
 .edit-input:focus,
 .edit-textarea:focus {
   border-color: rgb(147 197 253);
+}
+
+.edit-input:focus-visible,
+.edit-textarea:focus-visible {
+  border-color: rgb(37 99 235 / 0.85);
+  box-shadow:
+    0 0 0 3px rgb(59 130 246 / 0.2),
+    0 1px 2px rgb(15 23 42 / 0.05);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .edit-textarea {
