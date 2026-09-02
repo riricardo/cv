@@ -98,7 +98,7 @@ export interface EducationDocument extends TranslatedDocument {
   startDate: string
   endDate?: string
   description: string
-  highlights: string[]
+  highlights: Highlight[]
   skillIds: Id[]
 }
 
@@ -127,7 +127,7 @@ export interface ResumeDocument extends DocumentMetadata {
   linkId: string
   language: Language
   profileId: Id
-  whyText: string[]
+  whyText: string | string[]
   details?: Record<string, string>
 }
 

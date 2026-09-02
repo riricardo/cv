@@ -9,8 +9,8 @@ export function findDocument(section: EditSection, routeId: string) {
   )
 }
 
-export function getDocumentRouteId(section: EditSection, document: EditableRecord) {
-  return hasUniqueLanguageRoute(section, document) ? document.language! : document.id
+export function getDocumentRouteId(_section: EditSection, document: EditableRecord) {
+  return document.id
 }
 
 export function getDocumentTitle(document: EditableRecord) {
@@ -56,6 +56,12 @@ export function isReferenceField(key?: string) {
 
 export function shouldDisplayField(key: string) {
   return !['id', 'translationGroupId'].includes(key)
+}
+
+export function canEditField(sectionId: string, key: string) {
+  return (
+    sectionId !== 'profiles' && !['version', 'createdAt', 'updatedAt', 'publicLink'].includes(key)
+  )
 }
 
 function hasUniqueLanguageRoute(section: EditSection, document: EditableRecord) {

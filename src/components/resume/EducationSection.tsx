@@ -13,7 +13,10 @@ function mapEducationToSectionItem(education: Education): ExperienceSectionItem 
   return {
     description: education.description,
     endDate: education.endDate,
-    highlights: education.highlights,
+    highlights: education.highlights.map((highlight) => ({
+      includeInDownload: true,
+      value: typeof highlight === 'string' ? highlight : highlight.value,
+    })),
     id: education.id,
     location: education.location,
     skills: education.technologies,

@@ -25,6 +25,7 @@ import resumesJson from '../collections/resumes.json' with { type: 'json' }
 import skillCategoriesJson from '../collections/skillCategories.json' with { type: 'json' }
 import skillsJson from '../collections/skills.json' with { type: 'json' }
 import spokenLanguagesJson from '../collections/spokenLanguages.json' with { type: 'json' }
+import type { EditableCollections } from '../edit/collectionStore.ts'
 
 const educationDocuments = educationJson as EducationDocument[]
 const experienceDocuments = experiencesJson as ExperienceDocument[]
@@ -54,8 +55,20 @@ export const resumes: Record<string, ResumeDocument> = Object.fromEntries(
   ]),
 )
 
-export function getResume(resumeId: string = defaultResumeId): Resume {
-  const resume = resumes[resumeId] ?? resumes[defaultResumeId]
+export function getResume(
+  resumeId: string = defaultResumeId,
+  collections?: EditableCollections,
+): Resume {
+  const data = buildResumeData(collections)
+  const resumeLookup = Object.fromEntries(
+    data.resumeDocuments.flatMap((resume) => [
+      [resume.id, resume],
+      [resume.linkId, resume],
+    ]),
+  )
+  const resume = resumeLookup[resumeId] ?? resumeLookup[defaultResumeId]
+  const profilesById = mapById(data.profileDocuments)
+  const personalInfoById = mapById(data.personalInfoDocuments)
   const profile = getRequired(profilesById, resume.profileId, `Resume "${resume.id}" profileId`)
   const personalInfo = getRequired(
     personalInfoById,
@@ -69,15 +82,21 @@ export function getResume(resumeId: string = defaultResumeId): Resume {
     personalInfo,
     professionalSummary: profile.professionalSummary,
     experience: profile.experiences.map((profileExperience) =>
-      resolveExperience(profile.id, profileExperience),
+      resolveExperience(profile.id, profileExperience, data),
     ),
-    projects: profile.projectIds.map((projectId) => resolveProject(profile.id, projectId)),
+    projects: profile.projectIds.map((projectId) => resolveProject(profile.id, projectId, data)),
     skillCategories: profile.skillCategoryIds.map((categoryId) =>
-      resolveSkillCategory(profile.id, categoryId),
+      resolveSkillCategory(profile.id, categoryId, data),
     ),
-    education: profile.educationIds.map((educationId) => resolveEducation(profile.id, educationId)),
+    education: profile.educationIds.map((educationId) =>
+      resolveEducation(profile.id, educationId, data),
+    ),
     spokenLanguages: profile.spokenLanguageIds.map((languageId) =>
-      getRequired(spokenLanguagesById, languageId, `Profile "${profile.id}" spokenLanguageIds`),
+      getRequired(
+        mapById(data.spokenLanguageDocuments),
+        languageId,
+        `Profile "${profile.id}" spokenLanguageIds`,
+      ),
     ),
   }
 }
@@ -85,7 +104,9 @@ export function getResume(resumeId: string = defaultResumeId): Resume {
 function resolveExperience(
   profileId: Id,
   profileExperience: ProfileDocument['experiences'][number],
+  data = buildResumeData(),
 ): Experience {
+  const experiencesById = mapById(data.experienceDocuments)
   const experience = getRequired(
     experiencesById,
     profileExperience.experienceId,
@@ -101,7 +122,11 @@ function resolveExperience(
       profileExperience.highlightIds,
       profileExperience.downloadHighlightIds ?? profileExperience.highlightIds,
     ),
-    technologies: resolveSkillNames(experience.skillIds, `Experience "${experience.id}" skillIds`),
+    technologies: resolveSkillNames(
+      experience.skillIds,
+      `Experience "${experience.id}" skillIds`,
+      data,
+    ),
   }
 }
 
@@ -128,25 +153,36 @@ function resolveHighlights(
   })
 }
 
-function resolveProject(profileId: Id, projectId: Id): Project {
+function resolveProject(profileId: Id, projectId: Id, data = buildResumeData()): Project {
+  const projectsById = mapById(data.projectDocuments)
   const project = getRequired(projectsById, projectId, `Profile "${profileId}" projectIds`)
 
   return {
     ...project,
-    technologies: resolveSkillNames(project.skillIds, `Project "${project.id}" skillIds`),
+    technologies: resolveSkillNames(project.skillIds, `Project "${project.id}" skillIds`, data),
   }
 }
 
-function resolveEducation(profileId: Id, educationId: Id): Education {
+function resolveEducation(profileId: Id, educationId: Id, data = buildResumeData()): Education {
+  const educationById = mapById(data.educationDocuments)
   const education = getRequired(educationById, educationId, `Profile "${profileId}" educationIds`)
 
   return {
     ...education,
-    technologies: resolveSkillNames(education.skillIds, `Education "${education.id}" skillIds`),
+    technologies: resolveSkillNames(
+      education.skillIds,
+      `Education "${education.id}" skillIds`,
+      data,
+    ),
   }
 }
 
-function resolveSkillCategory(profileId: Id, categoryId: Id): SkillCategory {
+function resolveSkillCategory(
+  profileId: Id,
+  categoryId: Id,
+  data = buildResumeData(),
+): SkillCategory {
+  const skillCategoriesById = mapById(data.skillCategoryDocuments)
   const category = getRequired(
     skillCategoriesById,
     categoryId,
@@ -155,12 +191,27 @@ function resolveSkillCategory(profileId: Id, categoryId: Id): SkillCategory {
 
   return {
     ...category,
-    skills: resolveSkillNames(category.skillIds, `Skill category "${category.id}" skillIds`),
+    skills: resolveSkillNames(category.skillIds, `Skill category "${category.id}" skillIds`, data),
   }
 }
 
-function resolveSkillNames(skillIds: Id[], context: string): string[] {
-  return skillIds.map((skillId) => getRequired(skillsById, skillId, context).name)
+function resolveSkillNames(skillIds: Id[], context: string, data = buildResumeData()): string[] {
+  const skillsById = mapById(data.skillDocuments)
+  return skillIds.filter(Boolean).map((skillId) => getRequired(skillsById, skillId, context).name)
+}
+
+function buildResumeData(collections?: EditableCollections) {
+  return {
+    educationDocuments: collections?.education ?? educationDocuments,
+    experienceDocuments: collections?.experience ?? experienceDocuments,
+    personalInfoDocuments: collections?.details ?? personalInfoDocuments,
+    profileDocuments: collections?.profiles ?? profileDocuments,
+    projectDocuments: collections?.projects ?? projectDocuments,
+    resumeDocuments: collections?.resumes ?? resumeDocuments,
+    skillCategoryDocuments: collections?.skillCategories ?? skillCategoryDocuments,
+    skillDocuments: collections?.skills ?? skillDocuments,
+    spokenLanguageDocuments: collections?.languages ?? spokenLanguageDocuments,
+  }
 }
 
 function mapById<T extends { id: Id }>(documents: T[]): Map<Id, T> {

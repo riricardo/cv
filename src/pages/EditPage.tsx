@@ -1,15 +1,25 @@
 import { useEffect } from 'react'
 import { Redirect, useParams } from 'react-router-dom'
+import { EditActionsProvider } from '../components/edit/EditActionsContext.tsx'
 import EditDocumentDetail from '../components/edit/EditDocumentDetail.tsx'
 import EditHome from '../components/edit/EditHome.tsx'
 import EditSectionList from '../components/edit/EditSectionList.tsx'
 import EditSkillsList from '../components/edit/EditSkillsList.tsx'
 import { findDocument } from '../components/edit/documentHelpers.ts'
-import { editSections, editSectionsById } from '../data/edit/sections.ts'
+import { useEditActions } from '../components/edit/editActionsContextValue.ts'
 
 function EditPage() {
+  return (
+    <EditActionsProvider>
+      <EditPageContent />
+    </EditActionsProvider>
+  )
+}
+
+function EditPageContent() {
+  const { sections } = useEditActions()
   const { sectionId, documentId } = useParams<{ sectionId?: string; documentId?: string }>()
-  const section = sectionId ? editSectionsById.get(sectionId) : undefined
+  const section = sectionId ? sections.find((item) => item.id === sectionId) : undefined
   const selectedDocument = section && documentId ? findDocument(section, documentId) : undefined
 
   useEffect(() => {
@@ -17,7 +27,7 @@ function EditPage() {
   }, [section])
 
   if (!sectionId) {
-    return <EditHome sections={editSections} />
+    return <EditHome sections={sections} />
   }
 
   if (!section) {

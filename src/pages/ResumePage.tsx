@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   EducationSection,
   ProjectsSection,
@@ -11,6 +11,7 @@ import {
   WhyMeDialog,
 } from '../components/resume/index.ts'
 import { getRandomProfilePhotoUrl, resumeAssets } from '../constants/assets.ts'
+import { readEditableCollections } from '../data/edit/collectionStore.ts'
 import { getResume } from '../data/resumes/index.ts'
 import { defaultLocale, locales } from '../locales/index.ts'
 
@@ -19,10 +20,25 @@ type ResumePageProps = {
 }
 
 function ResumePage({ resumeId }: ResumePageProps) {
-  const resume = getResume(resumeId)
+  const [collections, setCollections] = useState(readEditableCollections)
+  const resume = getResume(resumeId, collections)
   const language = resume.language
   const whyMeDialogRef = useRef<HTMLDialogElement>(null)
   const profilePhotoUrlRef = useRef(getRandomProfilePhotoUrl())
+
+  useEffect(() => {
+    function refreshCollections() {
+      setCollections(readEditableCollections())
+    }
+
+    window.addEventListener('storage', refreshCollections)
+    window.addEventListener('cv-edit-collections-changed', refreshCollections)
+
+    return () => {
+      window.removeEventListener('storage', refreshCollections)
+      window.removeEventListener('cv-edit-collections-changed', refreshCollections)
+    }
+  }, [])
 
   useEffect(() => {
     document.documentElement.lang = language
