@@ -39,6 +39,9 @@ jobs:
         run: npm ci
 
       - name: Build website
+        env:
+          VITE_APP_VERSION: ${{ github.sha }}
+          VITE_MASTER_KEY: ${{ secrets.VITE_MASTER_KEY }}
         run: npm run build
 
       - name: Create SPA fallback
