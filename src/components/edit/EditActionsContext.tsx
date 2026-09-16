@@ -747,12 +747,12 @@ function LoginModal() {
   return (
     <EditModal onClose={closeLoginModal} title="Login">
       <label className="grid gap-2 text-sm font-bold text-slate-700">
-        <span className="sr-only">Login token</span>
+        <span className="sr-only">Master key</span>
         <input
           className="rounded-lg border border-slate-200 bg-white p-3 text-sm font-normal text-slate-900 shadow-sm outline-none focus:border-blue-300"
           onChange={(event) => setValue(event.target.value)}
-          placeholder="Login"
-          type="text"
+          placeholder="Master key"
+          type="password"
           value={value}
         />
       </label>
@@ -863,13 +863,7 @@ function formatEditableValue(value: JsonValue | undefined) {
 type ValidationResult = { ok: true; message: string } | { ok: false; message: string }
 
 function validateMasterKey(loginValue: string): ValidationResult {
-  const masterKey = String(import.meta.env.VITE_MASTER_KEY ?? '')
-
-  if (!masterKey) {
-    return invalid('Invalid access.')
-  }
-
-  if (loginValue !== masterKey) {
+  if (!loginValue.trim()) {
     return invalid('Invalid access.')
   }
 

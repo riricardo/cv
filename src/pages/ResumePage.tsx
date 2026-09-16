@@ -1,3 +1,4 @@
+import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import {
   EducationSection,
@@ -11,48 +12,87 @@ import {
   WhyMeDialog,
 } from '../components/resume/index.ts'
 import { getRandomProfilePhotoUrl, resumeAssets } from '../constants/assets.ts'
-import { readEditableCollections } from '../data/edit/collectionStore.ts'
-import { getResume } from '../data/resumes/index.ts'
 import { defaultLocale, locales } from '../locales/index.ts'
+import { fetchResumeByLink, hasApiBaseUrl } from '../services/api.ts'
+import type { Resume } from '../types/index.ts'
 
 type ResumePageProps = {
-  resumeId?: string
+  resumeId: string
 }
 
+type ApiResumeState =
+  { status: 'loading' } | { status: 'ready'; resume: Resume } | { status: 'error'; message: string }
+
 function ResumePage({ resumeId }: ResumePageProps) {
-  const [collections, setCollections] = useState(readEditableCollections)
-  const resume = getResume(resumeId, collections)
-  const language = resume.language
+  const [apiResumeState, setApiResumeState] = useState<ApiResumeState>({ status: 'loading' })
   const whyMeDialogRef = useRef<HTMLDialogElement>(null)
   const profilePhotoUrlRef = useRef(getRandomProfilePhotoUrl())
 
   useEffect(() => {
-    function refreshCollections() {
-      setCollections(readEditableCollections())
+    if (!hasApiBaseUrl()) {
+      setApiResumeState({
+        status: 'error',
+        message: 'VITE_API_BASE_URL is not configured.',
+      })
+      return
     }
 
-    window.addEventListener('storage', refreshCollections)
-    window.addEventListener('cv-edit-collections-changed', refreshCollections)
+    let isDisposed = false
+
+    setApiResumeState({ status: 'loading' })
+
+    fetchResumeByLink(resumeId)
+      .then((apiResume) => {
+        if (!isDisposed) {
+          setApiResumeState({ status: 'ready', resume: apiResume })
+        }
+      })
+      .catch((error: unknown) => {
+        if (!isDisposed) {
+          setApiResumeState({
+            status: 'error',
+            message: error instanceof Error ? error.message : 'Resume API request failed.',
+          })
+        }
+      })
 
     return () => {
-      window.removeEventListener('storage', refreshCollections)
-      window.removeEventListener('cv-edit-collections-changed', refreshCollections)
+      isDisposed = true
     }
-  }, [])
+  }, [resumeId])
 
   useEffect(() => {
-    document.documentElement.lang = language
-  }, [language])
+    if (apiResumeState.status !== 'ready') {
+      return
+    }
 
+    document.documentElement.lang = apiResumeState.resume.language
+    document.title = apiResumeState.resume.personalInfo.pageTitle
+  }, [apiResumeState])
+
+  if (apiResumeState.status === 'loading') {
+    return (
+      <ResumePageShell>
+        <StatusMessage tone="info" title="Loading resume from API..." />
+      </ResumePageShell>
+    )
+  }
+
+  if (apiResumeState.status === 'error') {
+    return (
+      <ResumePageShell>
+        <StatusMessage message={apiResumeState.message} tone="error" title="Resume unavailable" />
+      </ResumePageShell>
+    )
+  }
+
+  const resume = apiResumeState.resume
+  const language = resume.language
   const text = locales[language] ?? defaultLocale
   const personalInfo = resume.personalInfo
 
-  useEffect(() => {
-    document.title = personalInfo.pageTitle
-  }, [personalInfo.pageTitle])
-
   return (
-    <div className="resume-page min-h-screen overflow-x-hidden bg-[linear-gradient(135deg,#f8fafc_0%,#eef4ff_42%,#f7f8fb_100%)] px-2 py-3 text-slate-900 sm:px-6 sm:py-4 lg:px-8">
+    <ResumePageShell>
       <ResumeActionBar
         faviconUrl={resumeAssets.faviconUrl}
         onWhyClick={() => whyMeDialogRef.current?.showModal()}
@@ -102,7 +142,40 @@ function ResumePage({ resumeId }: ResumePageProps) {
         title={personalInfo.whyTitle}
         whyText={resume.whyText}
       />
+    </ResumePageShell>
+  )
+}
+
+function ResumePageShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="resume-page min-h-screen overflow-x-hidden bg-[linear-gradient(135deg,#f8fafc_0%,#eef4ff_42%,#f7f8fb_100%)] px-2 py-3 text-slate-900 sm:px-6 sm:py-4 lg:px-8">
+      {children}
     </div>
+  )
+}
+
+function StatusMessage({
+  message,
+  title,
+  tone,
+}: {
+  message?: string
+  title: string
+  tone: 'error' | 'info'
+}) {
+  const classes =
+    tone === 'error'
+      ? 'border-rose-200 bg-rose-50 text-rose-900'
+      : 'border-blue-100 bg-blue-50 text-blue-900'
+
+  return (
+    <main
+      className={`mx-auto mt-12 max-w-2xl rounded-lg border px-5 py-4 shadow-sm ${classes}`}
+      role={tone === 'error' ? 'alert' : 'status'}
+    >
+      <h1 className="text-base font-bold">{title}</h1>
+      {message ? <p className="mt-2 text-sm leading-6">{message}</p> : null}
+    </main>
   )
 }
 

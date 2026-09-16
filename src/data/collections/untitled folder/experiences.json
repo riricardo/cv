@@ -1,0 +1,721 @@
+[
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "bidvestNoonan-en",
+    "language": "en",
+    "company": "Bidvest Noonan",
+    "role": "Cleaning Operative",
+    "location": "Leixlip, County Kildare, Ireland",
+    "description": "Work in a controlled cleanroom environment, following site procedures, safety requirements and operational standards.",
+    "startDate": "2025-03",
+    "endDate": "Present",
+    "highlights": [
+      {
+        "id": "bidvestNoonan-en-highlight-01",
+        "category": "general",
+        "value": "Carry out cleaning and waste-management duties according to hygiene, quality and safety procedures."
+      }
+    ],
+    "translationGroupId": "experience-bidvestNoonan",
+    "skillIds": ["skill-workplace-safety", "skill-manual-handling", "skill-teamwork"]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "linx-en",
+    "language": "en",
+    "company": "Linx",
+    "role": "Junior Developer",
+    "location": "Remote · Bebedouro, São Paulo, Brazil",
+    "description": "Worked on a Delphi-based corporate ERP for the pharmaceutical sector and related business applications, contributing to maintenance, bug fixes, new features, business rules, reporting and integrations using Delphi, C#, ASP.NET and SQL Server.",
+    "startDate": "2021-09",
+    "endDate": "2024-09",
+    "highlights": [
+      {
+        "id": "linx-en-highlight-01",
+        "category": "enterprise",
+        "value": "Maintained and enhanced a corporate ERP covering operational management, billing-related workflows and pharmaceutical business processes."
+      },
+      {
+        "id": "linx-en-highlight-02",
+        "category": "enterprise",
+        "value": "Designed and delivered a white-label customisation feature across the database, API and presentation layers, including structured configuration, key-based retrieval and caching."
+      },
+      {
+        "id": "linx-en-highlight-03",
+        "category": "backend",
+        "value": "Built backend and service-layer components using Dependency Injection, interface-based design, CQRS, MediatR, Dapper, Entity Framework and LINQ."
+      },
+      {
+        "id": "linx-en-highlight-04",
+        "category": "backend",
+        "value": "Implemented a resilient address lookup service with fallback across multiple external providers."
+      },
+      {
+        "id": "linx-en-highlight-05",
+        "category": "backend",
+        "value": "Configured dependency injection registrations for interfaces, services and application components across ASP.NET projects."
+      },
+      {
+        "id": "linx-en-highlight-06",
+        "category": "backend",
+        "value": "Developed service-layer components and contributed to projects using CQRS and MediatR."
+      },
+      {
+        "id": "linx-en-highlight-07",
+        "category": "desktop",
+        "value": "Developed and maintained features across Delphi desktop applications, ASP.NET Web Forms, ASP.NET MVC, Windows Forms and C# services."
+      },
+      {
+        "id": "linx-en-highlight-08",
+        "category": "desktop",
+        "value": "Co-developed reusable C# components and native-compatible libraries to integrate modern services with legacy Delphi applications."
+      },
+      {
+        "id": "linx-en-highlight-09",
+        "category": "desktop",
+        "value": "Integrated Chromium-based WebView functionality into a Delphi 7 application, enabling communication between web interfaces and legacy desktop workflows."
+      },
+      {
+        "id": "linx-en-highlight-10",
+        "category": "desktop",
+        "value": "Used a C# class library with UnmanagedExports to expose functionality that could be consumed by Delphi applications."
+      },
+      {
+        "id": "linx-en-highlight-11",
+        "category": "desktop",
+        "value": "Developed reusable Delphi routines for consuming external APIs and organising integration-related functionality."
+      },
+      {
+        "id": "linx-en-highlight-12",
+        "category": "desktop",
+        "value": "Created components designed to work both in a standard browser and inside the Delphi application WebView."
+      },
+      {
+        "id": "linx-en-highlight-13",
+        "category": "database",
+        "value": "Improved SQL queries, reporting routines and database access security, including protection against SQL injection."
+      },
+      {
+        "id": "linx-en-highlight-14",
+        "category": "database",
+        "value": "Worked with data consolidation and reporting features across business applications."
+      },
+      {
+        "id": "linx-en-highlight-15",
+        "category": "database",
+        "value": "Created SQL scripts for database adjustments, updates and application releases."
+      },
+      {
+        "id": "linx-en-highlight-16",
+        "category": "team",
+        "value": "Planned, estimated, tested and documented feature work, delivering changes within the planned estimate."
+      },
+      {
+        "id": "linx-en-highlight-17",
+        "category": "team",
+        "value": "Worked with Git, Azure DevOps and Scrum practices, including feature branches, testing, release preparation, regression testing and technical documentation."
+      },
+      {
+        "id": "linx-en-highlight-18",
+        "category": "team",
+        "value": "Investigated and resolved issues involving debugging, merge conflicts, deployments, environments and system integrations."
+      },
+      {
+        "id": "linx-en-highlight-19",
+        "category": "team",
+        "value": "Participated in Scrum ceremonies including daily meetings, refinement, estimation, planning, reviews and retrospectives."
+      },
+      {
+        "id": "linx-en-highlight-20",
+        "category": "team",
+        "value": "Performed regression testing, environment configuration, release preparation and technical documentation."
+      },
+      {
+        "id": "linx-en-highlight-21",
+        "category": "team",
+        "value": "Produced clear technical documentation to support team understanding and future maintenance."
+      }
+    ],
+    "translationGroupId": "experience-linx",
+    "skillIds": [
+      "skill-csharp",
+      "skill-dot-net",
+      "skill-delphi-7",
+      "skill-asp-dot-net",
+      "skill-asp-dot-net-mvc",
+      "skill-asp-dot-net-web-forms",
+      "skill-windows-forms",
+      "skill-sql-server",
+      "skill-sql",
+      "skill-dapper",
+      "skill-entity-framework",
+      "skill-linq",
+      "skill-dependency-injection",
+      "skill-cqrs",
+      "skill-mediatr",
+      "skill-polly",
+      "skill-unmanagedexports",
+      "skill-rest-apis",
+      "skill-webview",
+      "skill-chromium",
+      "skill-tailwind-css",
+      "skill-daisyui",
+      "skill-git",
+      "skill-azure-devops",
+      "skill-jira",
+      "skill-scrum"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "syshouse-en",
+    "language": "en",
+    "company": "Syshouse Informática",
+    "role": "Software Developer",
+    "location": "Bebedouro, São Paulo, Brazil",
+    "description": "Worked across mobile, desktop, web and backend systems, contributing to ERP maintenance, new features, integrations, database access and performance improvements.",
+    "startDate": "2020-01",
+    "endDate": "2021-09",
+    "highlights": [
+      {
+        "id": "syshouse-en-highlight-01",
+        "category": "erp",
+        "value": "Maintained and enhanced the company’s main Delphi-based ERP system, delivering bug fixes, new features and performance improvements across business workflows."
+      },
+      {
+        "id": "syshouse-en-highlight-02",
+        "category": "erp",
+        "value": "Maintained a Delphi-based SMS solution that queried an API for pending messages and communicated directly with a modem."
+      },
+      {
+        "id": "syshouse-en-highlight-03",
+        "category": "mobile",
+        "value": "Maintained and enhanced a Xamarin-based waiter application using C#, XAML and MVVM, including bug fixes, UI adjustments, HTTP requests and new mobile features."
+      },
+      {
+        "id": "syshouse-en-highlight-04",
+        "category": "mobile",
+        "value": "Worked with push notifications, Firebase Cloud Messaging, SVG asset support and Google Play release support."
+      },
+      {
+        "id": "syshouse-en-highlight-05",
+        "category": "mobile",
+        "value": "Configured Firebase Cloud Messaging for mobile notifications."
+      },
+      {
+        "id": "syshouse-en-highlight-06",
+        "category": "mobile",
+        "value": "Added support for SVG assets through external Xamarin libraries."
+      },
+      {
+        "id": "syshouse-en-highlight-07",
+        "category": "backend",
+        "value": "Developed and maintained Delphi DataSnap APIs, including routes, database communication and application integrations."
+      },
+      {
+        "id": "syshouse-en-highlight-08",
+        "category": "backend",
+        "value": "Implemented synchronisation between SQL Server and Paradox through the Delphi DataSnap API."
+      },
+      {
+        "id": "syshouse-en-highlight-09",
+        "category": "backend",
+        "value": "Implemented token-based authentication, account-confirmation flows and e-mail delivery using MailKit."
+      },
+      {
+        "id": "syshouse-en-highlight-10",
+        "category": "backend",
+        "value": "Worked across the complete flow between mobile applications, backend APIs, SQL Server, Paradox and the Delphi ERP system."
+      },
+      {
+        "id": "syshouse-en-highlight-11",
+        "category": "database",
+        "value": "Resolved a concurrency issue by using a mutex to control simultaneous access to a Paradox database table."
+      },
+      {
+        "id": "syshouse-en-highlight-12",
+        "category": "database",
+        "value": "Implemented database access using SqlClient and integrated the application with the Delphi DataSnap API."
+      },
+      {
+        "id": "syshouse-en-highlight-13",
+        "category": "database",
+        "value": "Worked with secure file-based configuration storage and application integration."
+      },
+      {
+        "id": "syshouse-en-highlight-14",
+        "category": "web",
+        "value": "Contributed to a customer ordering web application built with ASP.NET and SQL Server, including SqlClient database access and integration with the Delphi DataSnap API."
+      },
+      {
+        "id": "syshouse-en-highlight-15",
+        "category": "web",
+        "value": "Contributed to login, confirmation and communication workflows involving e-mail and SMS."
+      }
+    ],
+    "translationGroupId": "experience-syshouse",
+    "skillIds": [
+      "skill-csharp",
+      "skill-delphi",
+      "skill-xamarin",
+      "skill-xaml",
+      "skill-mvvm",
+      "skill-asp-dot-net",
+      "skill-delphi-datasnap",
+      "skill-sql-server",
+      "skill-paradox",
+      "skill-ado-dot-net",
+      "skill-sqlclient",
+      "skill-rest-apis",
+      "skill-http",
+      "skill-firebase-cloud-messaging",
+      "skill-mailkit",
+      "skill-mutex",
+      "skill-google-play",
+      "skill-svg"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "japi-en",
+    "language": "en",
+    "company": "Japi S.A. Indústria e Comércio",
+    "role": "Intern",
+    "location": "Jundiaí, São Paulo, Brazil",
+    "description": "Supported inventory-control and production-related activities in an industrial environment.",
+    "startDate": "2019-01",
+    "endDate": "2019-03",
+    "highlights": [
+      {
+        "id": "japi-en-highlight-01",
+        "category": "general",
+        "value": "Assisted with stock checks, item counting and inventory records."
+      },
+      {
+        "id": "japi-en-highlight-02",
+        "category": "general",
+        "value": "Supported sampling and inspection of plastic components."
+      },
+      {
+        "id": "japi-en-highlight-03",
+        "category": "general",
+        "value": "Followed operational procedures and collaborated with the production team."
+      }
+    ],
+    "translationGroupId": "experience-japi",
+    "skillIds": [
+      "skill-inventory-control",
+      "skill-stock-management",
+      "skill-quality-inspection",
+      "skill-attention-to-detail",
+      "skill-teamwork"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "numericalAnalysisTutor-en",
+    "language": "en",
+    "company": "University of São Paulo · EESC",
+    "role": "Numerical Analysis Tutor",
+    "location": "São Carlos, São Paulo, Brazil",
+    "description": "Assisted undergraduate students in Numerical Analysis, helping them understand mathematical concepts and solve engineering problems.",
+    "startDate": "2018-08",
+    "endDate": "2018-12",
+    "highlights": [
+      {
+        "id": "numericalAnalysisTutor-en-highlight-01",
+        "category": "general",
+        "value": "Provided academic support during practical exercises and problem-solving sessions."
+      },
+      {
+        "id": "numericalAnalysisTutor-en-highlight-02",
+        "category": "general",
+        "value": "Helped students understand numerical methods and apply them to engineering problems."
+      },
+      {
+        "id": "numericalAnalysisTutor-en-highlight-03",
+        "category": "general",
+        "value": "Developed communication, analytical-thinking and technical-explanation skills."
+      }
+    ],
+    "translationGroupId": "experience-numericalAnalysisTutor",
+    "skillIds": [
+      "skill-numerical-analysis",
+      "skill-mathematics",
+      "skill-problem-solving",
+      "skill-technical-communication",
+      "skill-analytical-thinking",
+      "skill-mentoring"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "bidvestNoonan-pt",
+    "language": "pt",
+    "company": "Bidvest Noonan",
+    "role": "Operador de Limpeza",
+    "location": "Leixlip, County Kildare, Irlanda",
+    "description": "Atuo em ambiente controlado de cleanroom, seguindo procedimentos do local, requisitos de segurança e padrões operacionais.",
+    "startDate": "2025-03",
+    "endDate": "Atual",
+    "highlights": [
+      {
+        "id": "bidvestNoonan-pt-highlight-01",
+        "category": "general",
+        "value": "Realizo atividades de limpeza e gerenciamento de resíduos conforme procedimentos de higiene, qualidade e segurança."
+      }
+    ],
+    "translationGroupId": "experience-bidvestNoonan",
+    "skillIds": ["skill-seguranca-no-trabalho", "skill-manual-handling", "skill-trabalho-em-equipe"]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "linx-pt",
+    "language": "pt",
+    "company": "Linx",
+    "role": "Desenvolvedor Júnior",
+    "location": "Remoto · Bebedouro, São Paulo, Brasil",
+    "description": "Trabalhei em um ERP corporativo em Delphi para o setor farmacêutico e em aplicações de negócio relacionadas, contribuindo com manutenção, correção de bugs, novas funcionalidades, regras de negócio, relatórios e integrações utilizando Delphi, C#, ASP.NET e SQL Server.",
+    "startDate": "2021-09",
+    "endDate": "2024-09",
+    "highlights": [
+      {
+        "id": "linx-pt-highlight-01",
+        "category": "enterprise",
+        "value": "Mantive e evoluí um ERP corporativo com funcionalidades de gestão operacional, processos relacionados a faturamento/cobrança e regras de negócio do setor farmacêutico."
+      },
+      {
+        "id": "linx-pt-highlight-02",
+        "category": "enterprise",
+        "value": "Planejei e entreguei uma funcionalidade de personalização white-label envolvendo banco de dados, API e camada de apresentação, com configuração estruturada, recuperação por chave e cache."
+      },
+      {
+        "id": "linx-pt-highlight-03",
+        "category": "backend",
+        "value": "Desenvolvi componentes backend e de camada de serviços utilizando Injeção de Dependência, design baseado em interfaces, CQRS, MediatR, Dapper, Entity Framework e LINQ."
+      },
+      {
+        "id": "linx-pt-highlight-04",
+        "category": "backend",
+        "value": "Implementei um serviço resiliente de consulta de endereços com fallback entre múltiplos provedores externos."
+      },
+      {
+        "id": "linx-pt-highlight-05",
+        "category": "backend",
+        "value": "Configurei registros de Injeção de Dependência para interfaces, serviços e componentes de aplicações ASP.NET."
+      },
+      {
+        "id": "linx-pt-highlight-06",
+        "category": "backend",
+        "value": "Desenvolvi componentes da camada de serviços e contribuí para projetos utilizando CQRS e MediatR."
+      },
+      {
+        "id": "linx-pt-highlight-07",
+        "category": "desktop",
+        "value": "Desenvolvi e mantive funcionalidades em aplicações desktop Delphi, ASP.NET Web Forms, ASP.NET MVC, Windows Forms e serviços em C#."
+      },
+      {
+        "id": "linx-pt-highlight-08",
+        "category": "desktop",
+        "value": "Codesenvolvi componentes reutilizáveis em C# e bibliotecas compatíveis com código nativo para integrar serviços modernos a aplicações Delphi legadas."
+      },
+      {
+        "id": "linx-pt-highlight-09",
+        "category": "desktop",
+        "value": "Integrei uma WebView baseada em Chromium a uma aplicação Delphi 7, permitindo a comunicação entre interfaces web e fluxos do sistema desktop legado."
+      },
+      {
+        "id": "linx-pt-highlight-10",
+        "category": "desktop",
+        "value": "Utilizei uma Class Library em C# com UnmanagedExports para expor funcionalidades que pudessem ser consumidas por aplicações Delphi."
+      },
+      {
+        "id": "linx-pt-highlight-11",
+        "category": "desktop",
+        "value": "Desenvolvi rotinas reutilizáveis em Delphi para consumo de APIs externas e organização das funcionalidades de integração."
+      },
+      {
+        "id": "linx-pt-highlight-12",
+        "category": "desktop",
+        "value": "Criei componentes preparados para funcionar tanto no navegador quanto dentro da WebView da aplicação Delphi."
+      },
+      {
+        "id": "linx-pt-highlight-13",
+        "category": "database",
+        "value": "Otimizei consultas SQL, rotinas de relatórios e segurança de acesso ao banco de dados, incluindo proteção contra SQL injection."
+      },
+      {
+        "id": "linx-pt-highlight-14",
+        "category": "database",
+        "value": "Trabalhei com consolidação de dados e funcionalidades de relatórios em aplicações corporativas."
+      },
+      {
+        "id": "linx-pt-highlight-15",
+        "category": "database",
+        "value": "Criei scripts SQL para ajustes de banco, atualizações e releases das aplicações."
+      },
+      {
+        "id": "linx-pt-highlight-16",
+        "category": "team",
+        "value": "Planejei, estimei, testei e documentei funcionalidades, entregando mudanças dentro da estimativa planejada."
+      },
+      {
+        "id": "linx-pt-highlight-17",
+        "category": "team",
+        "value": "Trabalhei com Git, Azure DevOps e práticas Scrum, incluindo branches, testes, preparação de releases, testes regressivos e documentação técnica."
+      },
+      {
+        "id": "linx-pt-highlight-18",
+        "category": "team",
+        "value": "Investiguei e resolvi problemas relacionados a debugging, conflitos de merge, deployments, ambientes e integrações entre sistemas."
+      },
+      {
+        "id": "linx-pt-highlight-19",
+        "category": "team",
+        "value": "Participei de cerimônias Scrum, incluindo reuniões diárias, refinamentos, estimativas, planejamentos, reviews e retrospectivas."
+      },
+      {
+        "id": "linx-pt-highlight-20",
+        "category": "team",
+        "value": "Realizei testes regressivos, configuração de ambientes, preparação de releases e documentação técnica."
+      },
+      {
+        "id": "linx-pt-highlight-21",
+        "category": "team",
+        "value": "Produzi documentação técnica clara para apoiar o entendimento da equipe e a manutenção futura."
+      }
+    ],
+    "translationGroupId": "experience-linx",
+    "skillIds": [
+      "skill-csharp",
+      "skill-dot-net",
+      "skill-delphi",
+      "skill-delphi-7",
+      "skill-asp-dot-net",
+      "skill-asp-dot-net-mvc",
+      "skill-asp-dot-net-web-forms",
+      "skill-windows-forms",
+      "skill-sql-server",
+      "skill-sql",
+      "skill-dapper",
+      "skill-entity-framework",
+      "skill-linq",
+      "skill-dependency-injection",
+      "skill-cqrs",
+      "skill-mediatr",
+      "skill-polly",
+      "skill-unmanagedexports",
+      "skill-rest-apis",
+      "skill-webview",
+      "skill-chromium",
+      "skill-tailwind-css",
+      "skill-daisyui",
+      "skill-git",
+      "skill-azure-devops",
+      "skill-jira",
+      "skill-scrum"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "syshouse-pt",
+    "language": "pt",
+    "company": "Syshouse Informática",
+    "role": "Desenvolvedor de Software",
+    "location": "Bebedouro, São Paulo, Brasil",
+    "description": "Trabalhei em sistemas mobile, desktop, web e backend, contribuindo para manutenção de ERP, novas funcionalidades, integrações, acesso a banco de dados e melhorias de desempenho.",
+    "startDate": "2020-01",
+    "endDate": "2021-09",
+    "highlights": [
+      {
+        "id": "syshouse-pt-highlight-01",
+        "category": "erp",
+        "value": "Realizei manutenção e evolução do ERP principal da empresa em Delphi, desenvolvendo correções de bugs, novas funcionalidades e otimizações em diferentes fluxos de negócio."
+      },
+      {
+        "id": "syshouse-pt-highlight-02",
+        "category": "erp",
+        "value": "Mantive uma solução de envio de SMS em Delphi que consultava uma API para mensagens pendentes e se comunicava diretamente com um modem."
+      },
+      {
+        "id": "syshouse-pt-highlight-03",
+        "category": "mobile",
+        "value": "Realizei manutenção e evolução de um aplicativo para garçons desenvolvido em Xamarin, utilizando C#, XAML e MVVM, incluindo correções, ajustes de interface, requisições HTTP e novas funcionalidades."
+      },
+      {
+        "id": "syshouse-pt-highlight-04",
+        "category": "mobile",
+        "value": "Trabalhei com notificações push, Firebase Cloud Messaging, suporte a imagens SVG e publicações na Google Play."
+      },
+      {
+        "id": "syshouse-pt-highlight-05",
+        "category": "mobile",
+        "value": "Configurei o Firebase Cloud Messaging para notificações mobile."
+      },
+      {
+        "id": "syshouse-pt-highlight-06",
+        "category": "mobile",
+        "value": "Implementei suporte a imagens SVG utilizando bibliotecas externas para Xamarin."
+      },
+      {
+        "id": "syshouse-pt-highlight-07",
+        "category": "backend",
+        "value": "Desenvolvi e mantive APIs em Delphi DataSnap, incluindo rotas, comunicação com banco de dados e integrações entre aplicações."
+      },
+      {
+        "id": "syshouse-pt-highlight-08",
+        "category": "backend",
+        "value": "Implementei sincronização entre SQL Server e Paradox por meio da API Delphi DataSnap."
+      },
+      {
+        "id": "syshouse-pt-highlight-09",
+        "category": "backend",
+        "value": "Implementei autenticação baseada em token, confirmação de contas e envio de e-mails utilizando MailKit."
+      },
+      {
+        "id": "syshouse-pt-highlight-10",
+        "category": "backend",
+        "value": "Trabalhei no fluxo completo entre aplicações mobile, APIs backend, SQL Server, Paradox e o ERP em Delphi."
+      },
+      {
+        "id": "syshouse-pt-highlight-11",
+        "category": "database",
+        "value": "Resolvi um problema de concorrência utilizando Mutex para controlar o acesso simultâneo a uma tabela do banco Paradox."
+      },
+      {
+        "id": "syshouse-pt-highlight-12",
+        "category": "database",
+        "value": "Implementei acesso ao banco utilizando SqlClient e integrei a aplicação à API Delphi DataSnap."
+      },
+      {
+        "id": "syshouse-pt-highlight-13",
+        "category": "database",
+        "value": "Trabalhei com armazenamento seguro de configurações em arquivos e integração entre aplicações."
+      },
+      {
+        "id": "syshouse-pt-highlight-14",
+        "category": "web",
+        "value": "Contribuí para uma aplicação web de pedidos de clientes desenvolvida com ASP.NET e SQL Server, incluindo acesso ao banco com SqlClient e integração com a API Delphi DataSnap."
+      },
+      {
+        "id": "syshouse-pt-highlight-15",
+        "category": "web",
+        "value": "Contribuí para fluxos de login, confirmação e comunicação envolvendo e-mail e SMS."
+      }
+    ],
+    "translationGroupId": "experience-syshouse",
+    "skillIds": [
+      "skill-csharp",
+      "skill-delphi",
+      "skill-xamarin",
+      "skill-xaml",
+      "skill-mvvm",
+      "skill-asp-dot-net",
+      "skill-delphi-datasnap",
+      "skill-sql-server",
+      "skill-paradox",
+      "skill-ado-dot-net",
+      "skill-sqlclient",
+      "skill-rest-apis",
+      "skill-http",
+      "skill-firebase-cloud-messaging",
+      "skill-mailkit",
+      "skill-mutex",
+      "skill-google-play",
+      "skill-svg"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "japi-pt",
+    "language": "pt",
+    "company": "Japi S.A. Indústria e Comércio",
+    "role": "Estagiário",
+    "location": "Jundiaí, São Paulo, Brasil",
+    "description": "Supported inventory-control and production-related activities in an industrial environment.",
+    "startDate": "2019-01",
+    "endDate": "2019-03",
+    "highlights": [
+      {
+        "id": "japi-pt-highlight-01",
+        "category": "general",
+        "value": "Auxiliei na conferência de estoque, contagem de itens e atualização de registros."
+      },
+      {
+        "id": "japi-pt-highlight-02",
+        "category": "general",
+        "value": "Apoiei a amostragem e inspeção de componentes plásticos."
+      },
+      {
+        "id": "japi-pt-highlight-03",
+        "category": "general",
+        "value": "Segui procedimentos operacionais e trabalhei em conjunto com a equipe de produção."
+      }
+    ],
+    "translationGroupId": "experience-japi",
+    "skillIds": [
+      "skill-controle-de-estoque",
+      "skill-gestao-de-estoque",
+      "skill-inspecao-de-qualidade",
+      "skill-atencao-aos-detalhes",
+      "skill-trabalho-em-equipe"
+    ]
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "numericalAnalysisTutor-pt",
+    "language": "pt",
+    "company": "Universidade de São Paulo · EESC",
+    "role": "Monitor de Cálculo Numérico",
+    "location": "São Carlos, São Paulo, Brasil",
+    "description": "Atuei como monitor de Cálculo Numérico, auxiliando alunos de graduação na compreensão de conceitos matemáticos e na resolução de problemas de engenharia.",
+    "startDate": "2018-08",
+    "endDate": "2018-12",
+    "highlights": [
+      {
+        "id": "numericalAnalysisTutor-pt-highlight-01",
+        "category": "general",
+        "value": "Prestei suporte acadêmico durante exercícios práticos e atividades de resolução de problemas."
+      },
+      {
+        "id": "numericalAnalysisTutor-pt-highlight-02",
+        "category": "general",
+        "value": "Auxiliei alunos na compreensão de métodos numéricos e de sua aplicação em problemas de engenharia."
+      },
+      {
+        "id": "numericalAnalysisTutor-pt-highlight-03",
+        "category": "general",
+        "value": "Desenvolvi habilidades de comunicação, raciocínio analítico e explicação técnica."
+      }
+    ],
+    "translationGroupId": "experience-numericalAnalysisTutor",
+    "skillIds": [
+      "skill-calculo-numerico",
+      "skill-matematica",
+      "skill-resolucao-de-problemas",
+      "skill-comunicacao-tecnica",
+      "skill-pensamento-analitico",
+      "skill-mentoria"
+    ]
+  }
+]

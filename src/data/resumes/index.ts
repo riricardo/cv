@@ -26,6 +26,7 @@ import skillCategoriesJson from '../collections/skillCategories.json' with { typ
 import skillsJson from '../collections/skills.json' with { type: 'json' }
 import spokenLanguagesJson from '../collections/spokenLanguages.json' with { type: 'json' }
 import type { EditableCollections } from '../edit/collectionStore.ts'
+import { defaultResumeId } from '../../constants/resume.ts'
 
 const educationDocuments = educationJson as EducationDocument[]
 const experienceDocuments = experiencesJson as ExperienceDocument[]
@@ -46,7 +47,7 @@ const skillCategoriesById = mapById(skillCategoryDocuments)
 const skillsById = mapById(skillDocuments)
 const spokenLanguagesById = mapById(spokenLanguageDocuments)
 
-export const defaultResumeId = 'software-en'
+export { defaultResumeId }
 
 export const resumes: Record<string, ResumeDocument> = Object.fromEntries(
   resumeDocuments.flatMap((resume) => [

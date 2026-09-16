@@ -1,0 +1,42 @@
+[
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "spoken-language-english-en",
+    "translationGroupId": "spoken-language-english",
+    "language": "en",
+    "name": "English",
+    "proficiency": "Professional"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "spoken-language-portuguese-en",
+    "translationGroupId": "spoken-language-portuguese",
+    "language": "en",
+    "name": "Portuguese",
+    "proficiency": "Native"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "spoken-language-ingles-pt",
+    "translationGroupId": "spoken-language-english",
+    "language": "pt",
+    "name": "Inglês",
+    "proficiency": "Profissional"
+  },
+  {
+    "version": 1,
+    "createdAt": "2026-08-20T00:00:00.000Z",
+    "updatedAt": "2026-08-20T00:00:00.000Z",
+    "id": "spoken-language-portugues-pt",
+    "translationGroupId": "spoken-language-portuguese",
+    "language": "pt",
+    "name": "Português",
+    "proficiency": "Nativo"
+  }
+]
