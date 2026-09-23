@@ -12,6 +12,8 @@ import type {
   SkillCategory,
   SpokenLanguage,
 } from '../types/index.ts'
+import type { CollectionKey, EditableCollections } from '../data/edit/collectionStore.ts'
+import type { JsonObject } from '../types/edit.ts'
 
 type ApiDocumentMetadata = {
   id: Id
@@ -55,7 +57,7 @@ type ApiPersonalInfo = ApiDocumentMetadata & {
   professionalDescription: string
   pageTitle: string
   whyTitle: string
-  githubUrl: string
+  gitHubUrl: string
   linkedInUrl: string
   portfolioUrl: string
 }
@@ -123,17 +125,30 @@ type ApiResumeResponse = {
 
 const apiBaseUrl = String(import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/+$/, '')
 
+const collectionResources: Record<CollectionKey, string> = {
+  skillCategories: 'skill-categories',
+  skills: 'skills',
+  details: 'personal-info',
+  education: 'education',
+  experience: 'experiences',
+  languages: 'spoken-languages',
+  profiles: 'profiles',
+  projects: 'projects',
+  resumes: 'resumes',
+}
+
 export function hasApiBaseUrl() {
   return Boolean(apiBaseUrl)
 }
 
-export async function fetchResumeByLink(linkId: string): Promise<Resume> {
+export async function fetchResumeByLink(linkId: string, signal?: AbortSignal): Promise<Resume> {
   if (!apiBaseUrl) {
     throw new Error('VITE_API_BASE_URL is not configured.')
   }
 
   const response = await fetch(`${apiBaseUrl}/api/resumes/by-link/${encodeURIComponent(linkId)}`, {
     cache: 'no-store',
+    signal,
   })
 
   if (!response.ok) {
@@ -141,6 +156,152 @@ export async function fetchResumeByLink(linkId: string): Promise<Resume> {
   }
 
   return mapApiResume((await response.json()) as ApiResumeResponse)
+}
+
+export async function fetchEditableCollections(signal?: AbortSignal): Promise<EditableCollections> {
+  assertApiBaseUrl()
+
+  const entries = await Promise.all(
+    Object.entries(collectionResources).map(async ([collectionKey, resource]) => {
+      const response = await fetch(`${apiBaseUrl}/api/${resource}`, { cache: 'no-store', signal })
+      await assertSuccessfulResponse(response)
+      const documents = (await response.json()) as JsonObject[]
+
+      return [collectionKey, documents.map((document) => mapApiDocument(collectionKey, document))]
+    }),
+  )
+
+  return Object.fromEntries(entries) as EditableCollections
+}
+
+export async function syncEditableCollections(
+  previous: EditableCollections,
+  next: EditableCollections,
+  masterKey: string,
+) {
+  assertApiBaseUrl()
+
+  for (const collectionKey of Object.keys(collectionResources) as CollectionKey[]) {
+    const previousDocuments = previous[collectionKey] as unknown as JsonObject[]
+    const nextDocuments = next[collectionKey] as unknown as JsonObject[]
+    const previousById = new Map(
+      previousDocuments.map((document) => [String(document.id), document]),
+    )
+    const nextById = new Map(nextDocuments.map((document) => [String(document.id), document]))
+
+    for (const document of nextDocuments) {
+      const id = String(document.id ?? '')
+      const previousDocument = previousById.get(id)
+
+      if (!previousDocument) {
+        await writeEditableDocument(collectionKey, undefined, document, masterKey)
+      } else if (JSON.stringify(previousDocument) !== JSON.stringify(document)) {
+        await writeEditableDocument(collectionKey, id, document, masterKey)
+      }
+    }
+
+    for (const [id] of previousById) {
+      if (!nextById.has(id)) {
+        await requestAdmin(`${apiBaseUrl}/api/${collectionResources[collectionKey]}/${id}`, {
+          method: 'DELETE',
+          masterKey,
+        })
+      }
+    }
+  }
+}
+
+async function writeEditableDocument(
+  collectionKey: CollectionKey,
+  id: string | undefined,
+  document: JsonObject,
+  masterKey: string,
+) {
+  const resource = collectionResources[collectionKey]
+  const body = toApiDocument(collectionKey, document, Boolean(id))
+  const url = id
+    ? `${apiBaseUrl}/api/${resource}/${encodeURIComponent(id)}`
+    : `${apiBaseUrl}/api/${resource}`
+
+  await requestAdmin(url, {
+    body: JSON.stringify(body),
+    masterKey,
+    method: id ? 'PUT' : 'POST',
+  })
+}
+
+async function requestAdmin(
+  url: string,
+  options: { body?: string; masterKey: string; method: 'DELETE' | 'POST' | 'PUT' },
+) {
+  const response = await fetch(url, {
+    body: options.body,
+    headers: {
+      ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+      'X-MASTER-KEY': options.masterKey,
+    },
+    method: options.method,
+  })
+
+  await assertSuccessfulResponse(response)
+}
+
+async function assertSuccessfulResponse(response: Response) {
+  if (response.ok) {
+    return
+  }
+
+  let details = ''
+  const responseText = await response.text()
+
+  if (responseText) {
+    try {
+      const body = JSON.parse(responseText) as { message?: string }
+      details = ` ${body.message ?? JSON.stringify(body)}`
+    } catch {
+      details = ` ${responseText}`
+    }
+  }
+
+  throw new Error(`API request failed with status ${response.status}.${details}`)
+}
+
+function assertApiBaseUrl() {
+  if (!apiBaseUrl) {
+    throw new Error('VITE_API_BASE_URL is not configured.')
+  }
+}
+
+function mapApiDocument(collectionKey: string, document: JsonObject): JsonObject {
+  if (collectionKey !== 'details' || document.gitHubUrl === undefined) {
+    return document
+  }
+
+  const { gitHubUrl, ...rest } = document
+  return { ...rest, githubUrl: gitHubUrl }
+}
+
+function toApiDocument(collectionKey: string, document: JsonObject, includeId: boolean) {
+  const { createdAt: _createdAt, updatedAt: _updatedAt, version: _version, ...editable } = document
+  const body = includeId || isGuid(editable.id) ? editable : omitProperty(editable, 'id')
+
+  if (collectionKey !== 'details' || body.githubUrl === undefined) {
+    return body
+  }
+
+  const { githubUrl, ...rest } = body
+  return { ...rest, gitHubUrl: githubUrl }
+}
+
+function isGuid(value: JsonObject[string]) {
+  return (
+    typeof value === 'string' &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
+  )
+}
+
+function omitProperty(value: JsonObject, key: string): JsonObject {
+  return Object.fromEntries(Object.entries(value).filter(([entryKey]) => entryKey !== key))
 }
 
 function mapApiResume(payload: ApiResumeResponse): Resume {
@@ -191,8 +352,11 @@ function mapApiResume(payload: ApiResumeResponse): Resume {
 }
 
 function mapPersonalInfo(personalInfo: ApiPersonalInfo): PersonalInfo {
+  const { gitHubUrl, ...rest } = personalInfo
+
   return withVersion({
-    ...personalInfo,
+    ...rest,
+    githubUrl: gitHubUrl,
     language: normalizeLanguage(personalInfo.language),
     fullName: personalInfo.fullName ?? undefined,
     displayLocation: personalInfo.displayLocation ?? undefined,

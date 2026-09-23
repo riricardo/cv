@@ -1,13 +1,25 @@
 import { Link } from 'react-router-dom'
 import type { EditSection } from '../../types/edit.ts'
-import { groupSkillsByFixedType } from '../../data/edit/skillTypes.ts'
 import { useEditActions } from './editActionsContextValue.ts'
 import EditShell from './EditShell.tsx'
 import { getDocumentTitle } from './documentHelpers.ts'
 
 function EditSkillsList({ section }: { section: EditSection }) {
-  const { openActionModal } = useEditActions()
-  const groups = groupSkillsByFixedType(section.documents)
+  const { openActionModal, sections } = useEditActions()
+  const categories =
+    sections.find((candidate) => candidate.id === 'skillCategories')?.documents ?? []
+  const groups = categories.map((category) => ({
+    id: category.id,
+    skills: section.documents.filter((skill) => skill.categoryId === category.id),
+    title: String(category.name ?? category.id),
+  }))
+  const uncategorizedSkills = section.documents.filter(
+    (skill) => !categories.some((category) => category.id === skill.categoryId),
+  )
+
+  if (uncategorizedSkills.length > 0) {
+    groups.push({ id: 'uncategorized', skills: uncategorizedSkills, title: 'Uncategorized' })
+  }
 
   return (
     <EditShell

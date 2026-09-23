@@ -33,6 +33,11 @@ export const editSectionDefinitions: Omit<EditSection, 'documents'>[] = [
     description: 'Individual skills used across resumes.',
   },
   {
+    id: 'skillCategories',
+    title: 'Skill categories',
+    description: 'Categories used to organize skills.',
+  },
+  {
     id: 'languages',
     title: 'Languages',
     description: 'Spoken languages and proficiency levels.',

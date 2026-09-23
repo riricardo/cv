@@ -72,6 +72,20 @@ export function cloneCollections(collections: EditableCollections): EditableColl
   return structuredClone(collections)
 }
 
+export function createEmptyEditableCollections(): EditableCollections {
+  return {
+    details: [],
+    education: [],
+    experience: [],
+    languages: [],
+    profiles: [],
+    projects: [],
+    resumes: [],
+    skillCategories: [],
+    skills: [],
+  }
+}
+
 export function readEditableCollections(): EditableCollections {
   return cloneCollections(currentEditableCollections)
 }

@@ -23,8 +23,11 @@ type ResumePageProps = {
 type ApiResumeState =
   { status: 'loading' } | { status: 'ready'; resume: Resume } | { status: 'error'; message: string }
 
+const apiRequestTimeoutMs = 10_000
+
 function ResumePage({ resumeId }: ResumePageProps) {
   const [apiResumeState, setApiResumeState] = useState<ApiResumeState>({ status: 'loading' })
+  const [requestAttempt, setRequestAttempt] = useState(0)
   const whyMeDialogRef = useRef<HTMLDialogElement>(null)
   const profilePhotoUrlRef = useRef(getRandomProfilePhotoUrl())
 
@@ -38,10 +41,16 @@ function ResumePage({ resumeId }: ResumePageProps) {
     }
 
     let isDisposed = false
+    let didTimeout = false
+    const controller = new AbortController()
+    const timeoutId = window.setTimeout(() => {
+      didTimeout = true
+      controller.abort()
+    }, apiRequestTimeoutMs)
 
     setApiResumeState({ status: 'loading' })
 
-    fetchResumeByLink(resumeId)
+    fetchResumeByLink(resumeId, controller.signal)
       .then((apiResume) => {
         if (!isDisposed) {
           setApiResumeState({ status: 'ready', resume: apiResume })
@@ -51,15 +60,24 @@ function ResumePage({ resumeId }: ResumePageProps) {
         if (!isDisposed) {
           setApiResumeState({
             status: 'error',
-            message: error instanceof Error ? error.message : 'Resume API request failed.',
+            message: didTimeout
+              ? 'The API took too long to respond.'
+              : error instanceof Error
+                ? error.message
+                : 'Resume API request failed.',
           })
         }
+      })
+      .finally(() => {
+        window.clearTimeout(timeoutId)
       })
 
     return () => {
       isDisposed = true
+      window.clearTimeout(timeoutId)
+      controller.abort()
     }
-  }, [resumeId])
+  }, [requestAttempt, resumeId])
 
   useEffect(() => {
     if (apiResumeState.status !== 'ready') {
@@ -81,7 +99,19 @@ function ResumePage({ resumeId }: ResumePageProps) {
   if (apiResumeState.status === 'error') {
     return (
       <ResumePageShell>
-        <StatusMessage message={apiResumeState.message} tone="error" title="Resume unavailable" />
+        <StatusMessage
+          action={
+            <button
+              className="btn btn-sm mt-4"
+              onClick={() => setRequestAttempt((value) => value + 1)}
+            >
+              Try again
+            </button>
+          }
+          message={apiResumeState.message}
+          tone="error"
+          title="Resume unavailable"
+        />
       </ResumePageShell>
     )
   }
@@ -155,14 +185,17 @@ function ResumePageShell({ children }: { children: React.ReactNode }) {
 }
 
 function StatusMessage({
+  action,
   message,
   title,
   tone,
 }: {
+  action?: React.ReactNode
   message?: string
   title: string
   tone: 'error' | 'info'
 }) {
+  const [showDetails, setShowDetails] = useState(false)
   const classes =
     tone === 'error'
       ? 'border-rose-200 bg-rose-50 text-rose-900'
@@ -174,7 +207,20 @@ function StatusMessage({
       role={tone === 'error' ? 'alert' : 'status'}
     >
       <h1 className="text-base font-bold">{title}</h1>
-      {message ? <p className="mt-2 text-sm leading-6">{message}</p> : null}
+      {message ? (
+        <>
+          <button
+            aria-expanded={showDetails}
+            className="btn btn-ghost btn-xs mt-2 px-0"
+            onClick={() => setShowDetails((value) => !value)}
+            type="button"
+          >
+            {showDetails ? 'Hide details' : 'Details'}
+          </button>
+          {showDetails ? <p className="mt-2 text-sm leading-6">{message}</p> : null}
+        </>
+      ) : null}
+      {action ? <div>{action}</div> : null}
     </main>
   )
 }

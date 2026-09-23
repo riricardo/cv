@@ -17,7 +17,7 @@ function EditPage() {
 }
 
 function EditPageContent() {
-  const { sections } = useEditActions()
+  const { isLoading, loadError, retryLoad, sections } = useEditActions()
   const { sectionId, documentId } = useParams<{ sectionId?: string; documentId?: string }>()
   const section = sectionId ? sections.find((item) => item.id === sectionId) : undefined
   const selectedDocument = section && documentId ? findDocument(section, documentId) : undefined
@@ -25,6 +25,28 @@ function EditPageContent() {
   useEffect(() => {
     document.title = section ? `${section.title} | Edit CV` : 'Edit CV'
   }, [section])
+
+  if (isLoading) {
+    return (
+      <main className="grid min-h-screen place-items-center bg-slate-50 p-4 text-sm font-semibold text-slate-700">
+        Loading editor data...
+      </main>
+    )
+  }
+
+  if (loadError) {
+    return (
+      <main className="grid min-h-screen place-items-center bg-slate-50 p-4 text-slate-900">
+        <div className="w-full max-w-md rounded-lg border border-red-200 bg-white p-5 shadow-sm">
+          <h1 className="font-bold">Could not load editor data</h1>
+          <p className="mt-2 break-words text-sm leading-6 text-slate-600">{loadError}</p>
+          <button className="btn btn-sm mt-4" onClick={retryLoad} type="button">
+            Try again
+          </button>
+        </div>
+      </main>
+    )
+  }
 
   if (!sectionId) {
     return <EditHome sections={sections} />

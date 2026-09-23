@@ -61,3 +61,7 @@ GET /api/resumes/by-link/{linkId}
 The public resume page requires `VITE_API_BASE_URL`. If the API URL is not configured, or if the API request fails, the site shows an error state instead of loading local JSON data.
 
 Important: `VITE_API_BASE_URL` is a Vite build-time environment variable and is visible in the browser bundle. Do not store master keys or private secrets in `VITE_*` variables. The public resume request does not send `X-MASTER-KEY`; admin/write operations must be protected and validated by the API.
+
+The `/edit` area loads the editable collections from the API and sends `POST`, `PUT`, and `DELETE` requests with the master key entered by the user in the `X-MASTER-KEY` header. The key is kept only in browser session storage.
+
+When the site and API use different origins, the API must enable CORS for the site's origin and allow the `Content-Type` and `X-MASTER-KEY` headers together with the `GET`, `POST`, `PUT`, and `DELETE` methods.

@@ -10,6 +10,8 @@ export type EditActionsContextValue = {
   closeLoginModal: () => void
   confirmTarget?: EditActionTarget
   editTarget?: EditActionTarget
+  loadError?: string
+  isLoading: boolean
   sections: EditSection[]
   loginValue: string
   openActionModal: (target: EditActionTarget) => void
@@ -19,6 +21,7 @@ export type EditActionsContextValue = {
   openLoginModal: () => void
   runConfirmedDelete: () => void
   runEditSave: (value: JsonValue) => void
+  retryLoad: () => void
   saveLogin: (value: string) => void
   toast?: EditToast
 }

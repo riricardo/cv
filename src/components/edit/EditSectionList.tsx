@@ -7,7 +7,7 @@ import LanguageBadge from './LanguageBadge.tsx'
 
 function EditSectionList({ section }: { section: EditSection }) {
   const { openActionModal } = useEditActions()
-  const canEdit = section.id !== 'profiles'
+  const canEdit = true
 
   return (
     <EditShell

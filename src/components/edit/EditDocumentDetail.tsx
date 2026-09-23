@@ -14,7 +14,7 @@ function EditDocumentDetail({
 }) {
   const { openDeleteConfirmation, openEditModal } = useEditActions()
   const entries = getDisplayEntries(section, document)
-  const canEditDocument = section.id !== 'profiles'
+  const canEditDocument = true
 
   return (
     <EditShell
@@ -48,7 +48,7 @@ function EditDocumentDetail({
                       <span aria-hidden="true" className="fa-solid fa-plus" />
                     </button>
                   ) : null}
-                  {shouldShowFieldEditButton(key, value) ? (
+                  {shouldShowFieldEditButton(section.id, key, value) ? (
                     <button
                       aria-label={`Edit ${formatKey(key)}`}
                       className="edit-icon-button"
@@ -109,8 +109,8 @@ function shouldShowAddButton(sectionId: string, key: string, value: JsonValue | 
   return Array.isArray(value) && !(sectionId === 'resumes' && key === 'whyText')
 }
 
-function shouldShowFieldEditButton(key: string, value: JsonValue | undefined) {
-  return !Array.isArray(value) || key === 'whyText'
+function shouldShowFieldEditButton(sectionId: string, key: string, value: JsonValue | undefined) {
+  return !Array.isArray(value) || key === 'whyText' || sectionId === 'profiles'
 }
 
 function shouldShowFieldDeleteButton(key: string, value: JsonValue | undefined) {
