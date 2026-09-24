@@ -106,6 +106,13 @@ function EditDocumentDetail({
 }
 
 function shouldShowAddButton(sectionId: string, key: string, value: JsonValue | undefined) {
+  if (
+    sectionId === 'profiles' &&
+    ['experiences', 'educationIds', 'projectIds', 'skillIds', 'spokenLanguageIds'].includes(key)
+  ) {
+    return false
+  }
+
   return Array.isArray(value) && !(sectionId === 'resumes' && key === 'whyText')
 }
 

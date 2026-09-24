@@ -28,8 +28,15 @@ function EditPageContent() {
 
   if (isLoading) {
     return (
-      <main className="grid min-h-screen place-items-center bg-slate-50 p-4 text-sm font-semibold text-slate-700">
-        Loading editor data...
+      <main
+        aria-live="polite"
+        className="grid min-h-screen place-items-center bg-slate-50 p-4 text-slate-800"
+        role="status"
+      >
+        <div className="flex flex-col items-center gap-3">
+          <span aria-hidden="true" className="fa-solid fa-spinner fa-spin text-3xl text-blue-700" />
+          <p className="text-sm font-bold">Loading editor data...</p>
+        </div>
       </main>
     )
   }

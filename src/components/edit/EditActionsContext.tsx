@@ -1,5 +1,5 @@
 import type React from 'react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Children, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { editSectionDefinitions } from '../../data/edit/sections.ts'
 import {
@@ -47,6 +47,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
   const [editTarget, setEditTarget] = useState<EditActionTarget>()
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isMutating, setIsMutating] = useState(false)
   const [loadError, setLoadError] = useState<string>()
   const [loadAttempt, setLoadAttempt] = useState(0)
   const [loginValue, setLoginValue] = useState(readStoredLogin)
@@ -105,6 +106,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       confirmTarget,
       editTarget,
       isLoading,
+      isMutating,
       loadError,
       loginValue,
       openActionModal: setActiveTarget,
@@ -119,6 +121,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       },
       openLoginModal: () => setIsLoginOpen(true),
       runConfirmedDelete: async () => {
+        setIsMutating(true)
         try {
           if (confirmTarget) {
             const authValidation = validateMasterKey(loginValue)
@@ -144,9 +147,12 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
           showToast('success', 'Deleted successfully.')
         } catch (error: unknown) {
           showToast('error', getErrorMessage(error, 'Delete action failed.'))
+        } finally {
+          setIsMutating(false)
         }
       },
       runEditSave: async (nextValue) => {
+        setIsMutating(true)
         try {
           if (editTarget) {
             const authValidation = validateMasterKey(loginValue)
@@ -172,6 +178,8 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
           showToast('success', 'Saved successfully.')
         } catch (error: unknown) {
           showToast('error', getErrorMessage(error, 'Save action failed.'))
+        } finally {
+          setIsMutating(false)
         }
       },
       retryLoad: () => setLoadAttempt((value) => value + 1),
@@ -194,6 +202,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       confirmTarget,
       editTarget,
       isLoading,
+      isMutating,
       loadError,
       loginValue,
       sections,
@@ -206,6 +215,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
       {children}
       <EditActionModals isLoginOpen={isLoginOpen} />
       <EditToastMessage onDismiss={() => setToast(undefined)} toast={toast} />
+      {isMutating ? <EditLoadingOverlay label="Applying changes..." /> : null}
     </EditActionsContext.Provider>
   )
 }
@@ -260,7 +270,7 @@ function ItemActionModal() {
 }
 
 function EditValueModal() {
-  const { closeEditModal, editTarget, runEditSave } = useEditActions()
+  const { closeEditModal, editTarget, isMutating, runEditSave } = useEditActions()
   const initialValue = useMemo(() => buildEditableValue(editTarget), [editTarget])
   const formRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useState<JsonValue>(() => initialValue)
@@ -318,10 +328,14 @@ function EditValueModal() {
         <div className="mt-4 flex justify-end">
           <button
             className="edit-modal-button edit-modal-button-primary"
+            disabled={isMutating}
             onClick={() => runEditSave(value)}
             type="button"
           >
-            Save
+            {isMutating ? (
+              <span aria-hidden="true" className="fa-solid fa-spinner fa-spin" />
+            ) : null}
+            {isMutating ? 'Saving...' : 'Save'}
           </button>
         </div>
       </div>
@@ -330,7 +344,7 @@ function EditValueModal() {
 }
 
 function ConfirmDeleteModal() {
-  const { closeConfirmModal, confirmTarget, runConfirmedDelete } = useEditActions()
+  const { closeConfirmModal, confirmTarget, isMutating, runConfirmedDelete } = useEditActions()
 
   if (!confirmTarget) {
     return null
@@ -347,10 +361,12 @@ function ConfirmDeleteModal() {
         </button>
         <button
           className="edit-modal-button edit-modal-button-danger"
+          disabled={isMutating}
           onClick={runConfirmedDelete}
           type="button"
         >
-          Delete
+          {isMutating ? <span aria-hidden="true" className="fa-solid fa-spinner fa-spin" /> : null}
+          {isMutating ? 'Deleting...' : 'Delete'}
         </button>
       </div>
     </EditModal>
@@ -462,19 +478,12 @@ function FieldEditor({
     const sourceSectionId = sectionByField[fieldKey ?? '']
     const skillCategories =
       sections.find((section) => section.id === 'skillCategories')?.documents ?? []
+    const sourceDocuments =
+      sections.find((section) => section.id === sourceSectionId)?.documents ?? []
     const documents =
-      sections
-        .find((section) => section.id === sourceSectionId)
-        ?.documents.filter((document) => {
-          if (sourceSectionId === 'skills') {
-            const category = skillCategories.find(
-              (candidate) => candidate.id === document.categoryId,
-            )
-            return category?.language === profileLanguage
-          }
-
-          return document.language === profileLanguage
-        }) ?? []
+      sourceSectionId === 'skills'
+        ? getSkillsForProfileLanguage(sourceDocuments, skillCategories, profileLanguage)
+        : sourceDocuments.filter((document) => document.language === profileLanguage)
 
     return (
       <ProfileCheckboxGroup
@@ -535,36 +544,21 @@ function FieldEditor({
     const profileExperience =
       value && typeof value === 'object' && !Array.isArray(value) ? value : {}
     const experiences = sections.find((section) => section.id === 'experience')?.documents ?? []
+    const experience = experiences.find(
+      (candidate) => candidate.id === String(profileExperience.experienceId ?? ''),
+    )
 
-    return (
+    return experience ? (
       <div className="grid gap-3">
-        <FieldLabel label="Experience">
-          <select
-            className="edit-input"
-            onChange={(event) =>
-              onChange({ ...(profileExperience as JsonObject), experienceId: event.target.value })
-            }
-            value={String((profileExperience as JsonObject).experienceId ?? '')}
-          >
-            <option value="">Choose an experience</option>
-            {experiences.map((experience) => (
-              <option key={experience.id} value={experience.id}>
-                {String(experience.role ?? experience.company ?? experience.id)}
-              </option>
-            ))}
-          </select>
-        </FieldLabel>
-        <label className="flex items-center gap-2 text-sm font-bold text-slate-700">
-          <input
-            checked={(profileExperience as JsonObject).print !== false}
-            onChange={(event) =>
-              onChange({ ...(profileExperience as JsonObject), print: event.target.checked })
-            }
-            type="checkbox"
-          />
-          Include when printing
-        </label>
+        <p className="text-sm font-bold text-slate-900">{getRecordLabel(experience)}</p>
+        <ProfileExperienceEditor
+          experience={experience}
+          onChange={onChange}
+          value={profileExperience}
+        />
       </div>
+    ) : (
+      <p className="text-sm text-red-700">The selected experience could not be found.</p>
     )
   }
 
@@ -731,13 +725,8 @@ function ProfileRecordEditor({
       ?.documents.filter(matchesProfileLanguage) ?? []
   const skillCategories =
     sections.find((section) => section.id === 'skillCategories')?.documents ?? []
-  const skills =
-    sections
-      .find((section) => section.id === 'skills')
-      ?.documents.filter((skill) => {
-        const category = skillCategories.find((candidate) => candidate.id === skill.categoryId)
-        return category?.language === profileLanguage
-      }) ?? []
+  const allSkills = sections.find((section) => section.id === 'skills')?.documents ?? []
+  const skills = getSkillsForProfileLanguage(allSkills, skillCategories, profileLanguage)
   const profileExperiences = Array.isArray(value.experiences)
     ? value.experiences.filter(
         (entry): entry is JsonObject =>
@@ -963,54 +952,146 @@ function ProfileCheckboxGroup({
   selectedIds: string[]
   title: string
 }) {
+  const [draggedId, setDraggedId] = useState<string>()
   const documentsById = new Map(documents.map((document) => [document.id, document]))
-  const orderedDocuments = [
-    ...selectedIds.flatMap((id) => {
-      const document = documentsById.get(id)
-      return document ? [document] : []
-    }),
-    ...documents.filter((document) => !selectedIds.includes(document.id)),
-  ]
+  const selectedDocuments = selectedIds.flatMap((id) => {
+    const document = documentsById.get(id)
+    return document ? [document] : []
+  })
+  const availableDocuments = documents
+    .filter((document) => !selectedIds.includes(document.id))
+    .sort(compareRecordsByLabel)
+
+  function moveDraggedBefore(targetId?: string) {
+    if (!draggedId) return
+
+    const sourceIndex = selectedIds.indexOf(draggedId)
+    const targetIndex = targetId ? selectedIds.indexOf(targetId) : selectedIds.length - 1
+    if (sourceIndex < 0 || sourceIndex === targetIndex) return
+
+    const nextIds = [...selectedIds]
+    const [draggedItem] = nextIds.splice(sourceIndex, 1)
+    nextIds.splice(targetIndex, 0, draggedItem)
+
+    if (nextIds.some((id, index) => id !== selectedIds[index])) {
+      onChange(nextIds)
+    }
+  }
 
   return (
-    <fieldset className="grid gap-2 rounded-lg border border-slate-200 p-3">
+    <fieldset className="grid gap-3">
       <legend className="px-1 text-sm font-bold text-slate-800">{title}</legend>
-      <div className="grid max-h-56 gap-2 overflow-y-auto">
-        {orderedDocuments.map((document) => {
-          const selectedIndex = selectedIds.indexOf(document.id)
-          const isSelected = selectedIndex >= 0
-
-          return (
-            <div className="flex items-start gap-2 text-sm text-slate-700" key={document.id}>
-              <label className="flex min-w-0 flex-1 items-start gap-2">
-                <input
-                  checked={isSelected}
-                  className="mt-1"
-                  onChange={(event) =>
-                    onChange(
-                      event.target.checked
-                        ? [...selectedIds, document.id]
-                        : selectedIds.filter((id) => id !== document.id),
-                    )
-                  }
-                  type="checkbox"
-                />
-                <span className="break-anywhere">{getRecordLabel(document)}</span>
-              </label>
-              {isSelected ? (
-                <OrderButtons
-                  canMoveDown={selectedIndex < selectedIds.length - 1}
-                  canMoveUp={selectedIndex > 0}
-                  label={getRecordLabel(document)}
-                  onMoveDown={() => onChange(moveItem(selectedIds, selectedIndex, 1))}
-                  onMoveUp={() => onChange(moveItem(selectedIds, selectedIndex, -1))}
-                />
-              ) : null}
-            </div>
-          )
-        })}
-      </div>
+      <SelectionPanel
+        emptyMessage="No selected items"
+        onDragOver={(event) => {
+          event.preventDefault()
+          if (event.target === event.currentTarget) moveDraggedBefore()
+        }}
+        onDrop={() => setDraggedId(undefined)}
+        title="Selected"
+      >
+        {selectedDocuments.map((document) => (
+          <div
+            className={`flex items-start gap-2 rounded-md border border-slate-200/80 bg-white/80 p-2 text-sm text-slate-700 ${draggedId === document.id ? 'opacity-50' : ''}`}
+            key={document.id}
+            onDragEnter={() => moveDraggedBefore(document.id)}
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              setDraggedId(undefined)
+            }}
+          >
+            <DragHandle
+              label={getRecordLabel(document)}
+              onDragEnd={() => setDraggedId(undefined)}
+              onDragStart={() => setDraggedId(document.id)}
+            />
+            <label className="flex min-w-0 flex-1 items-start gap-2">
+              <input
+                checked
+                className="mt-1"
+                onChange={() => onChange(selectedIds.filter((id) => id !== document.id))}
+                type="checkbox"
+              />
+              <span className="break-anywhere">{getRecordLabel(document)}</span>
+            </label>
+          </div>
+        ))}
+      </SelectionPanel>
+      <SelectionPanel emptyMessage="No available items" title="Not selected">
+        {availableDocuments.map((document) => (
+          <label
+            className="flex items-start gap-2 rounded-md border border-slate-200/80 bg-white/80 p-2 text-sm text-slate-700"
+            key={document.id}
+          >
+            <input
+              className="mt-1"
+              onChange={() => onChange([...selectedIds, document.id])}
+              type="checkbox"
+            />
+            <span className="break-anywhere">{getRecordLabel(document)}</span>
+          </label>
+        ))}
+      </SelectionPanel>
     </fieldset>
+  )
+}
+
+function SelectionPanel({
+  children,
+  emptyMessage,
+  onDragOver,
+  onDrop,
+  title,
+}: {
+  children: React.ReactNode
+  emptyMessage: string
+  onDragOver?: React.DragEventHandler<HTMLDivElement>
+  onDrop?: React.DragEventHandler<HTMLDivElement>
+  title: string
+}) {
+  const hasChildren = Children.count(children) > 0
+
+  return (
+    <section className="rounded-md border border-slate-200/80 bg-slate-50/45 p-2.5">
+      <h3 className="mb-2 text-xs font-semibold text-slate-500">{title}</h3>
+      <div
+        className="grid max-h-72 min-h-12 gap-2 overflow-y-auto"
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+      >
+        {hasChildren ? children : <p className="py-2 text-sm text-slate-500">{emptyMessage}</p>}
+      </div>
+    </section>
+  )
+}
+
+function DragHandle({
+  label,
+  onDragEnd,
+  onDragStart,
+}: {
+  label: string
+  onDragEnd: () => void
+  onDragStart: () => void
+}) {
+  return (
+    <button
+      aria-label={`Drag to reorder ${label}`}
+      className="edit-icon-button h-7 w-7 shrink-0 cursor-grab active:cursor-grabbing"
+      draggable
+      onDragEnd={onDragEnd}
+      onDragStart={(event) => {
+        event.dataTransfer.effectAllowed = 'move'
+        event.dataTransfer.setData('text/plain', label)
+        onDragStart()
+      }}
+      title="Drag to reorder"
+      type="button"
+    >
+      <span aria-hidden="true" className="fa-solid fa-grip-vertical" />
+    </button>
   )
 }
 
@@ -1060,20 +1141,21 @@ function ProfileExperiencesEditor({
   onChange: (value: JsonValue) => void
   value: JsonValue[]
 }) {
+  const [draggedId, setDraggedId] = useState<string>()
   const profileExperiences = value.filter(
     (entry): entry is JsonObject =>
       Boolean(entry) && typeof entry === 'object' && !Array.isArray(entry),
   )
   const experiencesById = new Map(experiences.map((experience) => [experience.id, experience]))
-  const orderedExperiences = [
-    ...profileExperiences.flatMap((entry) => {
-      const experience = experiencesById.get(String(entry.experienceId ?? ''))
-      return experience ? [experience] : []
-    }),
-    ...experiences.filter(
+  const selectedExperiences = profileExperiences.flatMap((entry) => {
+    const experience = experiencesById.get(String(entry.experienceId ?? ''))
+    return experience ? [{ experience, profileExperience: entry }] : []
+  })
+  const availableExperiences = experiences
+    .filter(
       (experience) => !profileExperiences.some((entry) => entry.experienceId === experience.id),
-    ),
-  ]
+    )
+    .sort(compareRecordsByLabel)
 
   function toggleExperience(experience: EditableRecord, checked: boolean) {
     if (!checked) {
@@ -1103,54 +1185,86 @@ function ProfileExperiencesEditor({
     ])
   }
 
-  return (
-    <fieldset className="grid gap-2 rounded-lg border border-slate-200 p-3">
-      <legend className="px-1 text-sm font-bold text-slate-800">Experiences</legend>
-      {orderedExperiences.map((experience) => {
-        const selectedIndex = profileExperiences.findIndex(
-          (entry) => entry.experienceId === experience.id,
-        )
-        const profileExperience = profileExperiences[selectedIndex]
+  function moveDraggedBefore(targetId?: string) {
+    if (!draggedId) return
 
-        return (
-          <div className="rounded-md bg-slate-50 p-3" key={experience.id}>
+    const sourceIndex = profileExperiences.findIndex((entry) => entry.experienceId === draggedId)
+    const targetIndex = targetId
+      ? profileExperiences.findIndex((entry) => entry.experienceId === targetId)
+      : profileExperiences.length - 1
+    if (sourceIndex < 0 || sourceIndex === targetIndex) return
+
+    const nextEntries = [...profileExperiences]
+    const [draggedEntry] = nextEntries.splice(sourceIndex, 1)
+    nextEntries.splice(targetIndex, 0, draggedEntry)
+
+    if (
+      nextEntries.some(
+        (entry, index) => entry.experienceId !== profileExperiences[index]?.experienceId,
+      )
+    ) {
+      onChange(nextEntries)
+    }
+  }
+
+  return (
+    <div className="grid gap-3">
+      <SelectionPanel
+        emptyMessage="No selected experiences"
+        onDragOver={(event) => {
+          event.preventDefault()
+          if (event.target === event.currentTarget) moveDraggedBefore()
+        }}
+        onDrop={() => setDraggedId(undefined)}
+        title="Selected"
+      >
+        {selectedExperiences.map(({ experience }) => (
+          <div
+            className={`rounded-md border border-slate-200/80 bg-white/80 p-2.5 ${draggedId === experience.id ? 'opacity-50' : ''}`}
+            key={experience.id}
+            onDragEnter={() => moveDraggedBefore(experience.id)}
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
+              setDraggedId(undefined)
+            }}
+          >
             <div className="flex items-start gap-2">
+              <DragHandle
+                label={getRecordLabel(experience)}
+                onDragEnd={() => setDraggedId(undefined)}
+                onDragStart={() => setDraggedId(experience.id)}
+              />
               <label className="flex min-w-0 flex-1 items-start gap-2 text-sm font-semibold text-slate-800">
                 <input
-                  checked={Boolean(profileExperience)}
+                  checked
                   className="mt-1"
-                  onChange={(event) => toggleExperience(experience, event.target.checked)}
+                  onChange={() => toggleExperience(experience, false)}
                   type="checkbox"
                 />
                 <span>{getRecordLabel(experience)}</span>
               </label>
-              {profileExperience ? (
-                <OrderButtons
-                  canMoveDown={selectedIndex < profileExperiences.length - 1}
-                  canMoveUp={selectedIndex > 0}
-                  label={getRecordLabel(experience)}
-                  onMoveDown={() => onChange(moveItem(profileExperiences, selectedIndex, 1))}
-                  onMoveUp={() => onChange(moveItem(profileExperiences, selectedIndex, -1))}
-                />
-              ) : null}
             </div>
-            {profileExperience ? (
-              <ProfileExperienceEditor
-                experience={experience}
-                onChange={(nextEntry) =>
-                  onChange(
-                    profileExperiences.map((entry, index) =>
-                      index === selectedIndex ? nextEntry : entry,
-                    ),
-                  )
-                }
-                value={profileExperience}
-              />
-            ) : null}
           </div>
-        )
-      })}
-    </fieldset>
+        ))}
+      </SelectionPanel>
+      <SelectionPanel emptyMessage="No available experiences" title="Not selected">
+        {availableExperiences.map((experience) => (
+          <label
+            className="flex items-start gap-2 rounded-md border border-slate-200/80 bg-white/80 p-2 text-sm font-medium text-slate-700"
+            key={experience.id}
+          >
+            <input
+              className="mt-1"
+              onChange={() => toggleExperience(experience, true)}
+              type="checkbox"
+            />
+            <span>{getRecordLabel(experience)}</span>
+          </label>
+        ))}
+      </SelectionPanel>
+    </div>
   )
 }
 
@@ -1304,6 +1418,36 @@ function getRecordLabel(document: EditableRecord) {
   }
 
   return String(document.name ?? document.professionalDescription ?? document.id)
+}
+
+function compareRecordsByLabel(left: EditableRecord, right: EditableRecord) {
+  return getRecordLabel(left).localeCompare(getRecordLabel(right), undefined, {
+    sensitivity: 'base',
+  })
+}
+
+function getSkillsForProfileLanguage(
+  skills: EditableRecord[],
+  categories: EditableRecord[],
+  profileLanguage: string,
+) {
+  const normalizedProfileLanguage = profileLanguage.toLowerCase()
+
+  return skills.filter((skill) => {
+    const directCategory = categories.find((category) => category.id === skill.categoryId)
+    const owningCategories = categories.filter(
+      (category) => Array.isArray(category.skillIds) && category.skillIds.includes(skill.id),
+    )
+    const relatedCategories = directCategory ? [directCategory] : owningCategories
+
+    if (!relatedCategories.length) return true
+
+    return relatedCategories.some((category) => {
+      const categoryLanguage =
+        typeof category.language === 'string' ? category.language.trim().toLowerCase() : ''
+      return !categoryLanguage || categoryLanguage === normalizedProfileLanguage
+    })
+  })
 }
 
 function RecordFieldsEditor({
@@ -1631,6 +1775,21 @@ function EditModal({
           </button>
         </div>
         {children}
+      </div>
+    </div>
+  )
+}
+
+function EditLoadingOverlay({ label }: { label: string }) {
+  return (
+    <div
+      aria-live="polite"
+      className="fixed inset-0 z-[70] grid place-items-center bg-slate-950/30 p-4 backdrop-blur-[2px]"
+      role="status"
+    >
+      <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 text-sm font-bold text-slate-800 shadow-2xl">
+        <span aria-hidden="true" className="fa-solid fa-spinner fa-spin text-lg text-blue-700" />
+        <span>{label}</span>
       </div>
     </div>
   )

@@ -12,6 +12,7 @@ export type EditActionsContextValue = {
   editTarget?: EditActionTarget
   loadError?: string
   isLoading: boolean
+  isMutating: boolean
   sections: EditSection[]
   loginValue: string
   openActionModal: (target: EditActionTarget) => void

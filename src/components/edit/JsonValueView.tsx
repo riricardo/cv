@@ -1,6 +1,6 @@
 import type React from 'react'
 import { Link } from 'react-router-dom'
-import type { JsonValue } from '../../types/edit.ts'
+import type { EditableRecord, JsonObject, JsonValue } from '../../types/edit.ts'
 import {
   getReferencedRecord,
   getReferenceSubtitle,
@@ -31,6 +31,23 @@ function JsonValueView({
 
   if (fieldKey === 'whyText' && Array.isArray(value)) {
     return <span className="break-anywhere whitespace-pre-line">{value.join('\n\n')}</span>
+  }
+
+  if (sectionId === 'profiles' && Array.isArray(value)) {
+    if (fieldKey === 'experiences') {
+      return (
+        <ProfileExperiencesValue
+          canEdit={canEdit}
+          documentId={documentId}
+          experiences={value}
+          sections={sections}
+        />
+      )
+    }
+
+    if (['educationIds', 'projectIds', 'skillIds', 'spokenLanguageIds'].includes(fieldKey ?? '')) {
+      return <ProfileReferencesValue ids={value} sections={sections} />
+    }
   }
 
   if (Array.isArray(value)) {
@@ -129,6 +146,114 @@ function JsonValueView({
   }
 
   return <span className="break-anywhere">{value}</span>
+}
+
+function ProfileReferencesValue({
+  ids,
+  sections,
+}: {
+  ids: JsonValue[]
+  sections: ReturnType<typeof useEditActions>['sections']
+}) {
+  const records = sections.flatMap((section) => section.documents)
+
+  if (!ids.length) return <span className="text-slate-400">None selected</span>
+
+  return (
+    <ul className="space-y-2">
+      {ids.map((id) => {
+        const record = records.find((candidate) => candidate.id === id)
+        return record ? (
+          <li key={String(id)}>
+            <ReferenceCard record={record} />
+          </li>
+        ) : null
+      })}
+    </ul>
+  )
+}
+
+function ProfileExperiencesValue({
+  canEdit,
+  documentId,
+  experiences,
+  sections,
+}: {
+  canEdit: boolean
+  documentId?: string
+  experiences: JsonValue[]
+  sections: ReturnType<typeof useEditActions>['sections']
+}) {
+  const records = sections.find((section) => section.id === 'experience')?.documents ?? []
+
+  if (!experiences.length) return <span className="text-slate-400">None selected</span>
+
+  return (
+    <ul className="space-y-2">
+      {experiences.map((item, index) => {
+        if (!item || typeof item !== 'object' || Array.isArray(item)) return null
+
+        const profileExperience = item as JsonObject
+        const experience = records.find(
+          (candidate) => candidate.id === String(profileExperience.experienceId ?? ''),
+        )
+        if (!experience) return null
+
+        const highlights = getSelectedHighlightLabels(experience, profileExperience)
+
+        return (
+          <li className="rounded-md bg-slate-50 p-3" key={experience.id}>
+            <div className="flex items-start gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="font-bold text-slate-900">{getReferenceTitle(experience)}</p>
+                {highlights.length ? (
+                  <ul className="mt-2 list-disc space-y-1 pl-5 text-xs text-slate-600">
+                    {highlights.map(({ id, value }) => (
+                      <li className="break-anywhere" key={id}>
+                        {value}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-1 text-xs text-slate-500">No highlights selected</p>
+                )}
+              </div>
+              {canEdit ? (
+                <ItemInlineActions
+                  documentId={documentId}
+                  fieldKey="experiences"
+                  index={index}
+                  sectionId="profiles"
+                  value={item}
+                />
+              ) : null}
+            </div>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+function getSelectedHighlightLabels(experience: EditableRecord, profileExperience: JsonObject) {
+  const selectedIds = Array.isArray(profileExperience.highlightIds)
+    ? profileExperience.highlightIds.filter((id): id is string => typeof id === 'string')
+    : []
+  const highlights = Array.isArray(experience.highlights) ? experience.highlights : []
+
+  return selectedIds.flatMap((id) => {
+    const highlight = highlights.find(
+      (candidate) =>
+        candidate &&
+        typeof candidate === 'object' &&
+        !Array.isArray(candidate) &&
+        candidate.id === id,
+    )
+
+    return highlight && typeof highlight === 'object' && !Array.isArray(highlight)
+      ? [{ id, value: String(highlight.value ?? id) }]
+      : []
+  })
 }
 
 function ItemInlineActions({

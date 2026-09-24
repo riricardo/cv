@@ -58,10 +58,8 @@ export function shouldDisplayField(key: string) {
   return !['id', 'translationGroupId'].includes(key)
 }
 
-export function canEditField(sectionId: string, key: string) {
-  return (
-    sectionId !== 'profiles' && !['version', 'createdAt', 'updatedAt', 'publicLink'].includes(key)
-  )
+export function canEditField(_sectionId: string, key: string) {
+  return !['version', 'createdAt', 'updatedAt', 'publicLink'].includes(key)
 }
 
 function hasUniqueLanguageRoute(section: EditSection, document: EditableRecord) {
