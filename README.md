@@ -40,10 +40,16 @@ The project is automatically deployed to GitHub Pages through GitHub Actions.
 
 ## 🔌 API integration
 
-The public resume page loads data from an ASP.NET Core Web API:
+The public resume page loads data from an ASP.NET Core Web API. Local development uses `.env.development.local`:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5255
+```
+
+Production builds use `.env.production`:
+
+```env
+VITE_API_BASE_URL=https://cv-api-16d04e27f09a.herokuapp.com
 ```
 
 Run the API locally, then start the site:
