@@ -69,7 +69,9 @@ function ContactList({ personalInfo }: ContactListProps) {
               target={item.href.startsWith('http') ? '_blank' : undefined}
             >
               <span aria-hidden="true" className={`${item.icon} text-center text-blue-800`} />
-              <span className="contact-label min-w-0 break-anywhere">{item.label}</span>
+              <span className="contact-label min-w-0 truncate whitespace-nowrap text-xs sm:text-sm">
+                {item.label}
+              </span>
               <span className="contact-print-label min-w-0 break-anywhere">
                 {item.printLabel ?? item.label}
               </span>
@@ -77,7 +79,9 @@ function ContactList({ personalInfo }: ContactListProps) {
           ) : (
             <div className="contact-link grid grid-cols-[1.5rem_minmax(0,1fr)] items-center gap-2 rounded-2xl border border-base-300/70 bg-base-100/65 px-3 py-2 text-slate-700 shadow-sm">
               <span aria-hidden="true" className={`${item.icon} text-center text-blue-800`} />
-              <span className="contact-label min-w-0 break-anywhere">{item.label}</span>
+              <span className="contact-label min-w-0 truncate whitespace-nowrap text-xs sm:text-sm">
+                {item.label}
+              </span>
               <span className="contact-print-label min-w-0 break-anywhere">
                 {item.printLabel ?? item.label}
               </span>

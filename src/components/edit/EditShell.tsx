@@ -8,10 +8,19 @@ type EditShellProps = {
   backTo: string
   children: React.ReactNode
   eyebrow: string
+  showLogin?: boolean
   title: string
 }
 
-function EditShell({ addLabel, addSectionId, backTo, children, eyebrow, title }: EditShellProps) {
+function EditShell({
+  addLabel,
+  addSectionId,
+  backTo,
+  children,
+  eyebrow,
+  showLogin = false,
+  title,
+}: EditShellProps) {
   const { openAddModal, openLoginModal } = useEditActions()
 
   return (
@@ -35,14 +44,16 @@ function EditShell({ addLabel, addSectionId, backTo, children, eyebrow, title }:
                 Add
               </button>
             ) : null}
-            <button
-              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white/88 px-3 text-sm font-bold text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-800"
-              onClick={openLoginModal}
-              type="button"
-            >
-              <span aria-hidden="true" className="fa-solid fa-right-to-bracket" />
-              Login
-            </button>
+            {showLogin ? (
+              <button
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white/88 px-3 text-sm font-bold text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-800"
+                onClick={openLoginModal}
+                type="button"
+              >
+                <span aria-hidden="true" className="fa-solid fa-right-to-bracket" />
+                Login
+              </button>
+            ) : null}
             <Link
               className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white/88 px-3 text-sm font-bold text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-800"
               to={backTo}

@@ -52,6 +52,8 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
   const [loadAttempt, setLoadAttempt] = useState(0)
   const [loginValue, setLoginValue] = useState(readStoredLogin)
   const [toast, setToast] = useState<EditToast>()
+  const hasOpenModal = Boolean(activeTarget || confirmTarget || editTarget || isLoginOpen)
+  const hadOpenModalRef = useRef(false)
   const sections = useMemo(
     () =>
       editSectionDefinitions.map((section) => ({
@@ -64,6 +66,39 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
   function showToast(type: EditToast['type'], message: string) {
     setToast({ id: Date.now(), message, type })
   }
+
+  function removeModalHistoryEntry() {
+    if (window.history.state?.cvEditModal) {
+      window.history.back()
+    }
+  }
+
+  function closeModal(setter: () => void) {
+    setter()
+    removeModalHistoryEntry()
+  }
+
+  useEffect(() => {
+    if (hasOpenModal && !hadOpenModalRef.current) {
+      window.history.pushState({ ...window.history.state, cvEditModal: true }, '')
+    }
+
+    hadOpenModalRef.current = hasOpenModal
+  }, [hasOpenModal])
+
+  useEffect(() => {
+    function handlePopState() {
+      if (!hadOpenModalRef.current) return
+
+      setActiveTarget(undefined)
+      setConfirmTarget(undefined)
+      setEditTarget(undefined)
+      setIsLoginOpen(false)
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   useEffect(() => {
     if (!toast) {
@@ -99,10 +134,10 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
   const value = useMemo<EditActionsContextValue>(
     () => ({
       activeTarget,
-      closeActionModal: () => setActiveTarget(undefined),
-      closeConfirmModal: () => setConfirmTarget(undefined),
-      closeEditModal: () => setEditTarget(undefined),
-      closeLoginModal: () => setIsLoginOpen(false),
+      closeActionModal: () => closeModal(() => setActiveTarget(undefined)),
+      closeConfirmModal: () => closeModal(() => setConfirmTarget(undefined)),
+      closeEditModal: () => closeModal(() => setEditTarget(undefined)),
+      closeLoginModal: () => closeModal(() => setIsLoginOpen(false)),
       confirmTarget,
       editTarget,
       isLoading,
@@ -144,6 +179,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
             setCollections(await fetchEditableCollections())
           }
           setConfirmTarget(undefined)
+          removeModalHistoryEntry()
           showToast('success', 'Deleted successfully.')
         } catch (error: unknown) {
           showToast('error', getErrorMessage(error, 'Delete action failed.'))
@@ -175,6 +211,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
             setCollections(await fetchEditableCollections())
           }
           setEditTarget(undefined)
+          removeModalHistoryEntry()
           showToast('success', 'Saved successfully.')
         } catch (error: unknown) {
           showToast('error', getErrorMessage(error, 'Save action failed.'))
@@ -188,6 +225,7 @@ export function EditActionsProvider({ children }: { children: React.ReactNode })
           writeStoredLogin(nextLoginValue)
           setLoginValue(nextLoginValue)
           setIsLoginOpen(false)
+          removeModalHistoryEntry()
           showToast('success', 'Login saved in this browser session.')
         } catch {
           showToast('error', 'Login could not be saved.')
@@ -993,6 +1031,7 @@ function ProfileCheckboxGroup({
         {selectedDocuments.map((document) => (
           <div
             className={`flex items-start gap-2 rounded-md border border-slate-200/80 bg-white/80 p-2 text-sm text-slate-700 ${draggedId === document.id ? 'opacity-50' : ''}`}
+            data-sort-id={document.id}
             key={document.id}
             onDragEnter={() => moveDraggedBefore(document.id)}
             onDragOver={(event) => event.preventDefault()}
@@ -1006,6 +1045,7 @@ function ProfileCheckboxGroup({
               label={getRecordLabel(document)}
               onDragEnd={() => setDraggedId(undefined)}
               onDragStart={() => setDraggedId(document.id)}
+              onMoveOver={moveDraggedBefore}
             />
             <label className="flex min-w-0 flex-1 items-start gap-2">
               <input
@@ -1071,15 +1111,27 @@ function DragHandle({
   label,
   onDragEnd,
   onDragStart,
+  onMoveOver,
 }: {
   label: string
   onDragEnd: () => void
   onDragStart: () => void
+  onMoveOver: (targetId?: string) => void
 }) {
+  function handleTouchMove(event: React.TouchEvent<HTMLButtonElement>) {
+    const touch = event.touches[0]
+    if (!touch) return
+
+    const target = document
+      .elementFromPoint(touch.clientX, touch.clientY)
+      ?.closest<HTMLElement>('[data-sort-id]')
+    onMoveOver(target?.dataset.sortId)
+  }
+
   return (
     <button
       aria-label={`Drag to reorder ${label}`}
-      className="edit-icon-button h-7 w-7 shrink-0 cursor-grab active:cursor-grabbing"
+      className="edit-icon-button h-7 w-7 shrink-0 cursor-grab touch-none active:cursor-grabbing"
       draggable
       onDragEnd={onDragEnd}
       onDragStart={(event) => {
@@ -1087,6 +1139,9 @@ function DragHandle({
         event.dataTransfer.setData('text/plain', label)
         onDragStart()
       }}
+      onTouchEnd={onDragEnd}
+      onTouchMove={handleTouchMove}
+      onTouchStart={onDragStart}
       title="Drag to reorder"
       type="button"
     >
@@ -1221,6 +1276,7 @@ function ProfileExperiencesEditor({
         {selectedExperiences.map(({ experience }) => (
           <div
             className={`rounded-md border border-slate-200/80 bg-white/80 p-2.5 ${draggedId === experience.id ? 'opacity-50' : ''}`}
+            data-sort-id={experience.id}
             key={experience.id}
             onDragEnter={() => moveDraggedBefore(experience.id)}
             onDragOver={(event) => event.preventDefault()}
@@ -1235,6 +1291,7 @@ function ProfileExperiencesEditor({
                 label={getRecordLabel(experience)}
                 onDragEnd={() => setDraggedId(undefined)}
                 onDragStart={() => setDraggedId(experience.id)}
+                onMoveOver={moveDraggedBefore}
               />
               <label className="flex min-w-0 flex-1 items-start gap-2 text-sm font-semibold text-slate-800">
                 <input

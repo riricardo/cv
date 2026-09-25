@@ -15,6 +15,7 @@ import { getRandomProfilePhotoUrl, resumeAssets } from '../constants/assets.ts'
 import { defaultLocale, locales } from '../locales/index.ts'
 import { fetchResumeByLink, hasApiBaseUrl } from '../services/api.ts'
 import type { Resume } from '../types/index.ts'
+import LoadingState from '../components/LoadingState.tsx'
 
 type ResumePageProps = {
   resumeId: string
@@ -91,7 +92,7 @@ function ResumePage({ resumeId }: ResumePageProps) {
   if (apiResumeState.status === 'loading') {
     return (
       <ResumePageShell>
-        <StatusMessage tone="info" title="Loading resume from API..." />
+        <LoadingState label="Loading..." />
       </ResumePageShell>
     )
   }
@@ -125,6 +126,7 @@ function ResumePage({ resumeId }: ResumePageProps) {
     <ResumePageShell>
       <ResumeActionBar
         faviconUrl={resumeAssets.faviconUrl}
+        fileName={`${personalInfo.fullName ?? personalInfo.name}-CV`}
         onWhyClick={() => whyMeDialogRef.current?.showModal()}
         portfolioUrl={personalInfo.portfolioUrl}
         text={text}

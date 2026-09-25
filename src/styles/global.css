@@ -656,6 +656,64 @@ body::before {
   }
 }
 
+.pdf-exporting .download-hidden,
+.pdf-exporting .interactive-only,
+.pdf-exporting .modal {
+  display: none !important;
+}
+
+.pdf-exporting .resume-document {
+  background: white !important;
+  backdrop-filter: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #0f172a !important;
+  max-width: none !important;
+  outline: 0 !important;
+  overflow: visible !important;
+  width: 794px !important;
+}
+
+.pdf-exporting .resume-document,
+.pdf-exporting .resume-document * {
+  transform: none !important;
+  transition: none !important;
+}
+
+.pdf-exporting .resume-document-content {
+  padding: 20px 28px !important;
+}
+
+.pdf-exporting .resume-section {
+  break-inside: auto !important;
+  margin-top: 1.4rem !important;
+  page-break-inside: auto !important;
+}
+
+.pdf-exporting .resume-document article,
+.pdf-exporting .resume-document .card {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+.pdf-exporting .contact-label,
+.pdf-exporting .location-screen-label,
+.pdf-exporting .screen-name {
+  display: none !important;
+}
+
+.pdf-exporting .contact-print-label,
+.pdf-exporting .location-print-label,
+.pdf-exporting .print-name,
+.pdf-exporting .project-link-print-label {
+  display: inline !important;
+}
+
+.pdf-exporting .project-link-label {
+  display: none !important;
+}
+
 @media print {
   @page {
     margin: 14mm;

@@ -4,7 +4,7 @@ import EditShell from './EditShell.tsx'
 
 function EditHome({ sections }: { sections: EditSection[] }) {
   return (
-    <EditShell eyebrow="Configuration" title="Edit CV" backTo="/">
+    <EditShell eyebrow="Configuration" title="Edit CV" backTo="/" showLogin>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {sections.map((section) => (
           <Link

@@ -5,6 +5,7 @@ import EditDocumentDetail from '../components/edit/EditDocumentDetail.tsx'
 import EditHome from '../components/edit/EditHome.tsx'
 import EditSectionList from '../components/edit/EditSectionList.tsx'
 import EditSkillsList from '../components/edit/EditSkillsList.tsx'
+import LoadingState from '../components/LoadingState.tsx'
 import { findDocument } from '../components/edit/documentHelpers.ts'
 import { useEditActions } from '../components/edit/editActionsContextValue.ts'
 
@@ -17,7 +18,7 @@ function EditPage() {
 }
 
 function EditPageContent() {
-  const { isLoading, loadError, retryLoad, sections } = useEditActions()
+  const { isLoading, loadError, loginValue, openLoginModal, retryLoad, sections } = useEditActions()
   const { sectionId, documentId } = useParams<{ sectionId?: string; documentId?: string }>()
   const section = sectionId ? sections.find((item) => item.id === sectionId) : undefined
   const selectedDocument = section && documentId ? findDocument(section, documentId) : undefined
@@ -26,19 +27,23 @@ function EditPageContent() {
     document.title = section ? `${section.title} | Edit CV` : 'Edit CV'
   }, [section])
 
-  if (isLoading) {
+  if (!loginValue.trim()) {
     return (
-      <main
-        aria-live="polite"
-        className="grid min-h-screen place-items-center bg-slate-50 p-4 text-slate-800"
-        role="status"
-      >
-        <div className="flex flex-col items-center gap-3">
-          <span aria-hidden="true" className="fa-solid fa-spinner fa-spin text-3xl text-blue-700" />
-          <p className="text-sm font-bold">Loading editor data...</p>
-        </div>
+      <main className="grid min-h-screen place-items-center bg-slate-50 p-4">
+        <button
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 text-sm font-bold text-white shadow-md hover:bg-blue-800"
+          onClick={openLoginModal}
+          type="button"
+        >
+          <span aria-hidden="true" className="fa-solid fa-right-to-bracket" />
+          Login
+        </button>
       </main>
     )
+  }
+
+  if (isLoading) {
+    return <LoadingState fullScreen label="Loading..." />
   }
 
   if (loadError) {
