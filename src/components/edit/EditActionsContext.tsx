@@ -990,7 +990,6 @@ function ProfileCheckboxGroup({
   selectedIds: string[]
   title: string
 }) {
-  const [draggedId, setDraggedId] = useState<string>()
   const documentsById = new Map(documents.map((document) => [document.id, document]))
   const selectedDocuments = selectedIds.flatMap((id) => {
     const document = documentsById.get(id)
@@ -1000,53 +999,15 @@ function ProfileCheckboxGroup({
     .filter((document) => !selectedIds.includes(document.id))
     .sort(compareRecordsByLabel)
 
-  function moveDraggedBefore(targetId?: string) {
-    if (!draggedId) return
-
-    const sourceIndex = selectedIds.indexOf(draggedId)
-    const targetIndex = targetId ? selectedIds.indexOf(targetId) : selectedIds.length - 1
-    if (sourceIndex < 0 || sourceIndex === targetIndex) return
-
-    const nextIds = [...selectedIds]
-    const [draggedItem] = nextIds.splice(sourceIndex, 1)
-    nextIds.splice(targetIndex, 0, draggedItem)
-
-    if (nextIds.some((id, index) => id !== selectedIds[index])) {
-      onChange(nextIds)
-    }
-  }
-
   return (
     <fieldset className="grid gap-3">
       <legend className="px-1 text-sm font-bold text-slate-800">{title}</legend>
-      <SelectionPanel
-        emptyMessage="No selected items"
-        onDragOver={(event) => {
-          event.preventDefault()
-          if (event.target === event.currentTarget) moveDraggedBefore()
-        }}
-        onDrop={() => setDraggedId(undefined)}
-        title="Selected"
-      >
-        {selectedDocuments.map((document) => (
+      <SelectionPanel emptyMessage="No selected items" title="Selected">
+        {selectedDocuments.map((document, selectedIndex) => (
           <div
-            className={`flex items-start gap-2 rounded-md border border-slate-200/80 bg-white/80 p-2 text-sm text-slate-700 ${draggedId === document.id ? 'opacity-50' : ''}`}
-            data-sort-id={document.id}
+            className="flex items-start gap-2 rounded-md border border-slate-200/80 bg-white/80 p-2 text-sm text-slate-700"
             key={document.id}
-            onDragEnter={() => moveDraggedBefore(document.id)}
-            onDragOver={(event) => event.preventDefault()}
-            onDrop={(event) => {
-              event.preventDefault()
-              event.stopPropagation()
-              setDraggedId(undefined)
-            }}
           >
-            <DragHandle
-              label={getRecordLabel(document)}
-              onDragEnd={() => setDraggedId(undefined)}
-              onDragStart={() => setDraggedId(document.id)}
-              onMoveOver={moveDraggedBefore}
-            />
             <label className="flex min-w-0 flex-1 items-start gap-2">
               <input
                 checked
@@ -1056,6 +1017,13 @@ function ProfileCheckboxGroup({
               />
               <span className="break-anywhere">{getRecordLabel(document)}</span>
             </label>
+            <OrderButtons
+              canMoveDown={selectedIndex < selectedIds.length - 1}
+              canMoveUp={selectedIndex > 0}
+              label={getRecordLabel(document)}
+              onMoveDown={() => onChange(moveItem(selectedIds, selectedIndex, 1))}
+              onMoveUp={() => onChange(moveItem(selectedIds, selectedIndex, -1))}
+            />
           </div>
         ))}
       </SelectionPanel>
@@ -1081,14 +1049,10 @@ function ProfileCheckboxGroup({
 function SelectionPanel({
   children,
   emptyMessage,
-  onDragOver,
-  onDrop,
   title,
 }: {
   children: React.ReactNode
   emptyMessage: string
-  onDragOver?: React.DragEventHandler<HTMLDivElement>
-  onDrop?: React.DragEventHandler<HTMLDivElement>
   title: string
 }) {
   const hasChildren = Children.count(children) > 0
@@ -1096,57 +1060,10 @@ function SelectionPanel({
   return (
     <section className="rounded-md border border-slate-200/80 bg-slate-50/45 p-2.5">
       <h3 className="mb-2 text-xs font-semibold text-slate-500">{title}</h3>
-      <div
-        className="grid max-h-72 min-h-12 gap-2 overflow-y-auto"
-        onDragOver={onDragOver}
-        onDrop={onDrop}
-      >
+      <div className="grid max-h-72 min-h-12 gap-2 overflow-y-auto">
         {hasChildren ? children : <p className="py-2 text-sm text-slate-500">{emptyMessage}</p>}
       </div>
     </section>
-  )
-}
-
-function DragHandle({
-  label,
-  onDragEnd,
-  onDragStart,
-  onMoveOver,
-}: {
-  label: string
-  onDragEnd: () => void
-  onDragStart: () => void
-  onMoveOver: (targetId?: string) => void
-}) {
-  function handleTouchMove(event: React.TouchEvent<HTMLButtonElement>) {
-    const touch = event.touches[0]
-    if (!touch) return
-
-    const target = document
-      .elementFromPoint(touch.clientX, touch.clientY)
-      ?.closest<HTMLElement>('[data-sort-id]')
-    onMoveOver(target?.dataset.sortId)
-  }
-
-  return (
-    <button
-      aria-label={`Drag to reorder ${label}`}
-      className="edit-icon-button h-7 w-7 shrink-0 cursor-grab touch-none active:cursor-grabbing"
-      draggable
-      onDragEnd={onDragEnd}
-      onDragStart={(event) => {
-        event.dataTransfer.effectAllowed = 'move'
-        event.dataTransfer.setData('text/plain', label)
-        onDragStart()
-      }}
-      onTouchEnd={onDragEnd}
-      onTouchMove={handleTouchMove}
-      onTouchStart={onDragStart}
-      title="Drag to reorder"
-      type="button"
-    >
-      <span aria-hidden="true" className="fa-solid fa-grip-vertical" />
-    </button>
   )
 }
 
@@ -1196,7 +1113,6 @@ function ProfileExperiencesEditor({
   onChange: (value: JsonValue) => void
   value: JsonValue[]
 }) {
-  const [draggedId, setDraggedId] = useState<string>()
   const profileExperiences = value.filter(
     (entry): entry is JsonObject =>
       Boolean(entry) && typeof entry === 'object' && !Array.isArray(entry),
@@ -1240,59 +1156,15 @@ function ProfileExperiencesEditor({
     ])
   }
 
-  function moveDraggedBefore(targetId?: string) {
-    if (!draggedId) return
-
-    const sourceIndex = profileExperiences.findIndex((entry) => entry.experienceId === draggedId)
-    const targetIndex = targetId
-      ? profileExperiences.findIndex((entry) => entry.experienceId === targetId)
-      : profileExperiences.length - 1
-    if (sourceIndex < 0 || sourceIndex === targetIndex) return
-
-    const nextEntries = [...profileExperiences]
-    const [draggedEntry] = nextEntries.splice(sourceIndex, 1)
-    nextEntries.splice(targetIndex, 0, draggedEntry)
-
-    if (
-      nextEntries.some(
-        (entry, index) => entry.experienceId !== profileExperiences[index]?.experienceId,
-      )
-    ) {
-      onChange(nextEntries)
-    }
-  }
-
   return (
     <div className="grid gap-3">
-      <SelectionPanel
-        emptyMessage="No selected experiences"
-        onDragOver={(event) => {
-          event.preventDefault()
-          if (event.target === event.currentTarget) moveDraggedBefore()
-        }}
-        onDrop={() => setDraggedId(undefined)}
-        title="Selected"
-      >
-        {selectedExperiences.map(({ experience }) => (
+      <SelectionPanel emptyMessage="No selected experiences" title="Selected">
+        {selectedExperiences.map(({ experience }, selectedIndex) => (
           <div
-            className={`rounded-md border border-slate-200/80 bg-white/80 p-2.5 ${draggedId === experience.id ? 'opacity-50' : ''}`}
-            data-sort-id={experience.id}
+            className="rounded-md border border-slate-200/80 bg-white/80 p-2.5"
             key={experience.id}
-            onDragEnter={() => moveDraggedBefore(experience.id)}
-            onDragOver={(event) => event.preventDefault()}
-            onDrop={(event) => {
-              event.preventDefault()
-              event.stopPropagation()
-              setDraggedId(undefined)
-            }}
           >
             <div className="flex items-start gap-2">
-              <DragHandle
-                label={getRecordLabel(experience)}
-                onDragEnd={() => setDraggedId(undefined)}
-                onDragStart={() => setDraggedId(experience.id)}
-                onMoveOver={moveDraggedBefore}
-              />
               <label className="flex min-w-0 flex-1 items-start gap-2 text-sm font-semibold text-slate-800">
                 <input
                   checked
@@ -1302,6 +1174,13 @@ function ProfileExperiencesEditor({
                 />
                 <span>{getRecordLabel(experience)}</span>
               </label>
+              <OrderButtons
+                canMoveDown={selectedIndex < profileExperiences.length - 1}
+                canMoveUp={selectedIndex > 0}
+                label={getRecordLabel(experience)}
+                onMoveDown={() => onChange(moveItem(profileExperiences, selectedIndex, 1))}
+                onMoveUp={() => onChange(moveItem(profileExperiences, selectedIndex, -1))}
+              />
             </div>
           </div>
         ))}
@@ -1817,9 +1696,21 @@ function EditModal({
   onClose: () => void
   title: string
 }) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    const previousOverscrollBehavior = document.body.style.overscrollBehavior
+    document.body.style.overflow = 'hidden'
+    document.body.style.overscrollBehavior = 'none'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.body.style.overscrollBehavior = previousOverscrollBehavior
+    }
+  }, [])
+
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/35 p-3">
-      <div className="max-h-[calc(100vh-1.5rem)] w-full max-w-3xl overflow-y-auto rounded-xl bg-white p-4 shadow-2xl">
+      <div className="max-h-[calc(100vh-1.5rem)] w-full max-w-3xl overscroll-contain overflow-y-auto rounded-xl bg-white p-4 shadow-2xl">
         <div className="mb-4 flex items-start justify-between gap-4">
           <h2 className="break-anywhere text-lg font-bold text-slate-950">{title}</h2>
           <button

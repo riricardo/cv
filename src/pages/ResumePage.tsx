@@ -126,7 +126,6 @@ function ResumePage({ resumeId }: ResumePageProps) {
     <ResumePageShell>
       <ResumeActionBar
         faviconUrl={resumeAssets.faviconUrl}
-        fileName={`${personalInfo.fullName ?? personalInfo.name}-CV`}
         onWhyClick={() => whyMeDialogRef.current?.showModal()}
         portfolioUrl={personalInfo.portfolioUrl}
         text={text}
